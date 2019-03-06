@@ -20,7 +20,8 @@ import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 
-import TrapManagementServerTests.ftpTests.FtpUploadDownloadUtilTest;
+
+import trapManagementServer.ftp.model.HoneyFtpUtils;
 
 
 
@@ -56,7 +57,7 @@ public class Main {
 
 		
 		
-		FtpUploadDownloadUtilTest.startFtpServer();
+		HoneyFtpUtils.startFtpServer();
 		System.out.println("server is up!");
 		System.out.println("Test the server:");
 //		listenToFtp();

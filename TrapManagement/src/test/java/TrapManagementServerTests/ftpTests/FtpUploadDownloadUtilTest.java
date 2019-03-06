@@ -56,44 +56,7 @@ public class FtpUploadDownloadUtilTest {
 	   {
 		   ftpServer = HoneyFtpConfigure.createFtpServer (FTP_PORT, FTP_HOME_DIR,
 	            READ_USER_NAME, READ_USER_PWD, WRITE_USER_NAME, WRITE_USER_PWD, FTPUSERSPROPS_FILE, 0);
-		   ftpServer.start();
-//		   FtpSession
-//		   
-//		   
-//		   
-//		   
-//		   
-//		   
-		   /*
-		    * FTP
-		    * FTPCmd
-		    * DefaultFtpServerContext
-		    * DefaultMessageResource
-		    * DefaultFtpHandler
-		    */
-		   
-		   
-		   
-//		   IoAcceptor acceptor = new NioSocketAcceptor();
-//			acceptor.getSessionConfig().setReadBufferSize(2048);
-//			acceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, 10);
-//			
-//			acceptor.getFilterChain().addLast("codec", new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("UTF-8"))));
-//			
-//			ListenerFactory lf = new ListenerFactory();
-//			FtpHandler handler = new DefaultFtpHandler();
-//			FtpServerContext context = new DefaultFtpServerContext();
-//			
-//			handler.init(context, FtpTestUtil.getListener()/*lf.createListener()*/);
-//			
-//			acceptor.setHandler(new FtpHandlerAdapter(context, handler));
-//
-//			acceptor.bind(new InetSocketAddress(21));
-//
-//			acceptor.bind();
-//		   
-
-			
+		   ftpServer.start();			
 			
 	   }
 	   
