@@ -61,7 +61,33 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId> commons-net </groupId>
+			<artifactId> commons-net </artifactId>
+			<version> 3.3 </version>
+		</dependency>
+		<dependency>
+			<groupId> org.apache.ftpserver </groupId>
+			<artifactId> ftpserver-core	</artifactId>
+			<version> 1.0.6 </version>
+		</dependency>
+		<dependency>
+			<groupId> org.slf4j </groupId>
+			<artifactId> slf4j-api </artifactId>
+			<version> 1.7.12 </version>
+		</dependency>
+		<dependency>
+			<groupId> org.slf4j </groupId>
+			<artifactId> slf4j-log4j12 </artifactId>
+			<version> 1.7.12 </version>
+		</dependency>
 
+<dependency>
+    <groupId>com.google.code.gson</groupId>
+    <artifactId>gson</artifactId>
+    </dependency>
+    
 	</dependencies>
 
 	<build>
