@@ -9,7 +9,7 @@
 </head>
 <body>
 	
-	<img id="image1" class="img-responsive" src="Images/topAfeka.jpg">
+	<img id="image1" class="img-responsive" src="Images/topAfeka.jpg" width="100%">
  		<link type="text/css" rel="stylesheet" href="Images/logo.css" /><br>
  		
 	<form action="login" method="post">

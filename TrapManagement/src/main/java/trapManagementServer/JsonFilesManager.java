@@ -10,18 +10,27 @@ import java.nio.file.FileSystems;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import com.google.gson.Gson;
 
 import trapManagementServer.http.logging.HttpRequestsInterceptor;
 
-public class JsonFilesManager {
+public class JsonFilesManager implements JsonObserver {
 	private ArrayList<RequestFormat> reqArrList;
 	private Gson gson;
-	//private JsonSave httpInterceptor;
 	private String jsonPath;
+	private ExecutorService executorService = Executors.newSingleThreadExecutor();
+	private static JsonFilesManager jsonFileManager = null;
 	
-	public JsonFilesManager() {
+	public static JsonFilesManager getInstance() {
+		if(jsonFileManager == null)
+			jsonFileManager = new JsonFilesManager();
+		return jsonFileManager;
+	}
+	
+	private JsonFilesManager() {
 		reqArrList = new ArrayList<RequestFormat>();
 		gson = new Gson();
 		//httpInterceptor = HttpRequestsInterceptor.getInstance();
@@ -69,5 +78,10 @@ public class JsonFilesManager {
 		}
 	}
 	
+	@Override
+	public void notifyJsonSaved() {
+		System.out.println("In Manager- Saved!!");
+		
+	}
 	
 }

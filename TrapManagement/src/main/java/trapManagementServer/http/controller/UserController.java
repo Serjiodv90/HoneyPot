@@ -1,6 +1,10 @@
 package trapManagementServer.http.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,10 +42,10 @@ public class UserController {
 	}
 
 	@RequestMapping(value="/Home")
-	public String press() {
-		System.out.println("in press!!!!!!!!!!!!!");
+	public String press(HttpServletRequest request) {
 		return "Home.jsp";
 	}
+	
 
 	//	@RequestMapping("/addUser")
 	//	public String addUser(User user) {
@@ -53,4 +57,5 @@ public class UserController {
 	public String login(User user) {
 		return service.login(user);
 	}
+
 }

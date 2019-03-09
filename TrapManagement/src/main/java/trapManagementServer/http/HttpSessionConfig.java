@@ -18,9 +18,8 @@ public class HttpSessionConfig {
 	@Autowired
 	HttpRequestsInterceptor httpRequestInterceptor;
 	
-    @Bean                           // bean for http session listener
+    @Bean // bean for http session listener
     public HttpSessionListener httpSessionListener() {
-    	System.out.println("HELL");
         return new HttpSessionListener() {
             @Override
             public void sessionCreated(HttpSessionEvent se) {               // This method will be called when session created

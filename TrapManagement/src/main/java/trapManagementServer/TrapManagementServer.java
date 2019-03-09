@@ -25,7 +25,7 @@ import trapManagementServer.http.HttpServerApplication;
 public class TrapManagementServer {
 
 	public static void main(String[] args) {
-		JsonFilesManager manager = new JsonFilesManager();
+
 		HttpServerApplication.main(args);
 		try {
 			Main.main(args);
@@ -33,16 +33,7 @@ public class TrapManagementServer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-//		ctx.register(ApplicationSessionConfiguration.class);
-//		ctx.refresh();
-//		ServletListenerRegistrationBean<SessionCounter> myBean = ctx.getBean(ServletListenerRegistrationBean.class);
 		
-		manager.manage();
-
-
-
-
 	}
 
 }
