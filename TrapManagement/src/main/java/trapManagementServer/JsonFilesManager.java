@@ -16,8 +16,12 @@ import java.util.concurrent.Executors;
 import com.google.gson.Gson;
 
 import trapManagementServer.http.logging.HttpRequestsInterceptor;
+import trapManagementServer.monitorInterface.MonitorConnection;
+
 
 public class JsonFilesManager implements JsonObserver {
+	
+	private MonitorConnection jsonToMonitorServer;
 	private ArrayList<RequestFormat> reqArrList;
 	private Gson gson;
 	private String jsonPath;
@@ -36,7 +40,7 @@ public class JsonFilesManager implements JsonObserver {
 		//httpInterceptor = HttpRequestsInterceptor.getInstance();
 		System.out.println("In c'tor");
  	}
-	
+	 
 	public void manage() {
 		jsonPath = JsonSave.JSON_PATH;
 //		File file = new File(httpJson);

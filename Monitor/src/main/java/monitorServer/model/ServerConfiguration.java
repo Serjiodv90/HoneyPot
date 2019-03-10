@@ -10,12 +10,15 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import monitorServer.parser.JsonToReportParser;
+
 
 public class ServerConfiguration extends Thread{
 	
 	private Socket socket;
 	private BufferedOutputStream bos;
 	private String fileToStoreLocation = "D:/java/Udemy/EchoServer";
+	private JsonToReportParser parser;
 	
 	
 	public ServerConfiguration (Socket socket) {
@@ -73,6 +76,12 @@ public class ServerConfiguration extends Thread{
 				//oh well...
 			}
 		}
+	}
+	
+	
+	//for class diagram, this method should store files from run method, invoke to parser according to the protocol
+	private void storeFile(String protocol, BufferedOutputStream file) {
+		
 	}
 
 }

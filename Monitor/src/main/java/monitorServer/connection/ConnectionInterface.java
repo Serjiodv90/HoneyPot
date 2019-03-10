@@ -8,6 +8,9 @@ public class ConnectionInterface {
 	
 	private final int SOCKET = 5000;
 	
+	
+	
+	
 	public void startServer() {
 		
 		try (ServerSocket serverSocket = new ServerSocket(this.SOCKET)) {

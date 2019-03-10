@@ -15,7 +15,7 @@ public class MonitorConnection {
 	
 	private static final String FILETOSEND = "D:/java/Udemy/EchoClient/HTTPLog.json";
 
-	
+	//TODO: change the method so it can get JSON file to send
 	public void sendJsonLogToMonitor() {
 		
 		//create socket in client side

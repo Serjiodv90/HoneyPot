@@ -1,5 +1,18 @@
 package monitorServer.parser;
 
-public class FTP_Parser {
+public class FTP_Parser extends JsonToReportParser{
+
+	
+	@Override
+	public void parse() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void storeReport() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
