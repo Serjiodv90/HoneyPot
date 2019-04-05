@@ -83,8 +83,10 @@ public class JsonFilesManager implements JsonObserver {
 	}
 	
 	@Override
-	public void notifyJsonSaved() {
+	public void notifyJsonSaved(ArrayList<RequestFormat> reqArrList) {
 		System.out.println("In Manager- Saved!!");
+		MonitorConnection connection = new MonitorConnection();
+		connection.sendJson(reqArrList);
 		
 	}
 	

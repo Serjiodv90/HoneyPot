@@ -9,19 +9,13 @@
 <body>
 		<img id="image1" class="img-responsive" src="Images/topAfeka.jpg" width="100%">
  		
- 		<form name="AddForm" method="Get" action="Home">
-  	  		<input type="submit" style="float:right" name="press" value="Add/Delete Teacher"><br>
-		</form>
-		<form method="Get" action="Home">
-  	  		<input type="submit" style="float:right" name="press" value="Students"><br>
-		</form>
-		<form method="Get" action="Home">
-  	  		<input type="submit" style="float:right" name="press" value="Finance Department"><br>
-		</form>
+ 		<form name="AddForm" method="Get" action="Home" style="float:right;">
+ 		<br>
+  	  		<input type="submit" style="float:right;" name="press" value="Add/Delete Teacher"><br><br>
 		
-		<form method="Get" action="Home">
-			<input type="hidden" name="press" value="ADD">
-			<a href="/Home">Add/Delete Teacher</a>
+  	  		<input type="submit" style="float:right;" name="press" value="Students"><br><br>
+
+  	  		<input type="submit" style="float:right;" name="press" value="Finance Department"><br><br>
 		</form>
 
 </body>

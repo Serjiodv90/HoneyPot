@@ -1,4 +1,4 @@
-package trapManagementServer;
+package monitorServer;
 
 public class RequestFormat {
 	

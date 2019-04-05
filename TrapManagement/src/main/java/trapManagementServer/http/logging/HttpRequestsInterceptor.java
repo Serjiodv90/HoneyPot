@@ -104,7 +104,7 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 		System.out.println("notifyall");
 		for(JsonObserver obs : observers) {
 			System.out.println("in loop obs");
-			obs.notifyJsonSaved();
+			obs.notifyJsonSaved(reqArrList);
 		}
 		
 	}
