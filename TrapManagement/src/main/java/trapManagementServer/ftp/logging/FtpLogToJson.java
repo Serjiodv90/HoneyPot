@@ -22,7 +22,6 @@ public class FtpLogToJson implements JsonSave {
 	@Override
 	public void notifyAllRegistered() {
 		// TODO Auto-generated method stub
-		
 	}
 
 }
