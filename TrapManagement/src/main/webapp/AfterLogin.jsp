@@ -7,21 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<img id="image1" class="img-responsive" src="Images/topAfeka.jpg">
- 		<link type="text/css" rel="stylesheet" href="Images/logo.css" /><br>
+		<img id="image1" class="img-responsive" src="Images/topAfeka.jpg" width="100%">
  		
- 		<form method="Get" action="Home">
-  	  		<input type="submit" value="הוספת/מחיקת מרצה"><br>
-		</form>
-		<form method="Get" action="Home">
-  	  		<input type="submit" value="סטודנטים"><br>
-		</form>
-		<form method="Get" action="Home">
-  	  		<input type="submit" value="מדור שכר"><br>
-		</form>
+ 		<form name="AddForm" method="Get" action="Home" style="float:right;">
+ 		<br>
+  	  		<input type="submit" style="float:right;" name="press" value="Add/Delete Teacher"><br><br>
 		
-	<!--<a href="Home.jsp">הוספת/מחיקת מרצה</a><br>
-		<a href="Home.jsp">סטודנטים</a><br>
-		<a href="Home.jsp">מדור שכר</a><br> -->
+  	  		<input type="submit" style="float:right;" name="press" value="Students"><br><br>
+
+  	  		<input type="submit" style="float:right;" name="press" value="Finance Department"><br><br>
+		</form>
+
 </body>
 </html>

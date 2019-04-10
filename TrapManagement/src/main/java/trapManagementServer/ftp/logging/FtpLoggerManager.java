@@ -75,7 +75,7 @@ public class FtpLoggerManager {
 	
 	public void onLogin(String userName, String userPwd) {
 		//TODO : optional, check weather the user is one of the FTP users in DB and print a log msg accordingly 
-		String action = "The user :" + userName + ", is trying to connect to FTP server, with password: " + userPwd;
+		String action = "The user: " + userName + ", is trying to connect to FTP server, with password: " + userPwd;
 		addActionToList(action);
 		
 

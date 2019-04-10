@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import trapManagementServer.JsonFilesManager;
+
 @Configuration
 public class HTTP_ServerMVCConfig implements WebMvcConfigurer {
 	
@@ -15,6 +17,9 @@ public class HTTP_ServerMVCConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 //		System.out.println("Config");
 		registry.addInterceptor(httpReqInterceptor).addPathPatterns("/**/");
+		
+		JsonFilesManager jsonManager = JsonFilesManager.getInstance();
+		httpReqInterceptor.registerObserver(jsonManager);
 	}
 
 }

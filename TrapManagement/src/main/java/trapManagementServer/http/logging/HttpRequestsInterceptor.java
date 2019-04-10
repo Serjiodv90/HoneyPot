@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import trapManagementServer.JsonObserver;
 import trapManagementServer.JsonSave;
 import trapManagementServer.RequestFormat;
 
@@ -28,21 +30,14 @@ import trapManagementServer.RequestFormat;
 @Component
 public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implements JsonSave {
 
-	private final String LOGGER_PATH = "C:\\Users\\DELL\\Documents\\workspace-sts-3.9.7.RELEASE\\TrapManagement\\src\\logFiles\\";
+	private final String LOGGER_PATH = "C:\\Users\\DELL\\Documents\\Honeypot\\projects\\HoneyPot\\TrapManagement\\src\\logFiles\\";
 	private final static Logger LOGGER = Logger.getLogger("HTTP Log");
 //	private final static String JSON_PATH ="C:\\Users\\DELL\\Documents\\workspace-sts-3.9.7.RELEASE\\TrapManagement\\src\\JsonFiles";
 	private final static String JSON_FILE_NAME = "\\HTTPLog.json";
 	ArrayList<RequestFormat> reqArrList = new ArrayList<RequestFormat>();
 	private static Handler fileHandler;
-	//private static LoggerManager loggerManager = new LoggerManager();
-
-	private static HttpRequestsInterceptor httpRequestInterceptor = null;
-
-	public static HttpRequestsInterceptor getInstance() {
-		if(httpRequestInterceptor == null)
-			httpRequestInterceptor = new HttpRequestsInterceptor();
-		return httpRequestInterceptor;
-	}
+	
+	private List<JsonObserver> observers = new ArrayList<JsonObserver>();
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, 
@@ -50,17 +45,9 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 		StringBuffer requestBody = new StringBuffer();
 
 		System.out.println("in preHandle");
-		if(fileHandler == null)
-			try {
-				LOGGER.setUseParentHandlers(false);
-				fileHandler = new FileHandler(LOGGER_PATH + "httpRequests.log");
-				fileHandler.setFormatter(new LoggerFormatter());
-				LOGGER.addHandler(fileHandler);
-			} catch (SecurityException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+		setLogger();
+		
+		requestBody.append("HTTP - ");
 		requestBody.append(request.getMethod() + " ");
 
 		Map<String, String> params = new HashMap<>();
@@ -80,18 +67,45 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 
 		return true;
 	}
+	
+	private void setLogger() {
+		if(fileHandler == null)
+			try {
+				LOGGER.setUseParentHandlers(false);
+				fileHandler = new FileHandler(LOGGER_PATH + "httpRequests.log");
+				fileHandler.setFormatter(new LoggerFormatter());
+				LOGGER.addHandler(fileHandler);
+			} catch (SecurityException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
 
 	public void logToJson() {
 		try (Writer writer = new FileWriter(JSON_PATH + JSON_FILE_NAME)) {
 			Gson gson = new GsonBuilder().create();
 			gson.toJson(reqArrList, writer);
+			notifyAllRegistered();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	public void registerObserver(JsonObserver obs) {
+		System.out.println("in httptequestinter- register");
+		observers.add(obs);
+		
+	}
 
-//	public String getJsonPath() {
-//		return JSON_PATH;
-//	}
+	@Override
+	public void notifyAllRegistered() {
+		System.out.println("notifyall");
+		for(JsonObserver obs : observers) {
+			System.out.println("in loop obs");
+			obs.notifyJsonSaved(reqArrList);
+		}
+		
+	}
 }

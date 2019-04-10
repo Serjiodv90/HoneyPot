@@ -5,12 +5,14 @@ import java.util.logging.LogRecord;
 
 import trapManagementServer.DateFormatter;
 
-public class FtpLogFormatter extends Formatter {
 
+public class FtpLogFormatter extends Formatter {
+	
 	@Override
 	public String format(LogRecord record) {
 		StringBuffer buf = new StringBuffer(1000);
 		String date = DateFormatter.getCurrentDateTimeForLog();
+
 		
 		buf.append("[ " + date + " ]");
 		buf.append(" " + record.getLevel());

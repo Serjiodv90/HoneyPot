@@ -1,19 +1,27 @@
 package trapManagementServer.monitorInterface;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.net.SocketTimeoutException;
+import java.util.ArrayList;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
+import trapManagementServer.RequestFormat;
 
 public class MonitorConnection {
 	
-	private static final String FILETOSEND = "D:/java/Udemy/EchoClient/HTTPLog.json";
+	private RestTemplate rest = new RestTemplate();
+	private String url = "http://localhost:8085/getJson";
+	
+	private ArrayList<RequestFormat> arr = new ArrayList<RequestFormat>();
+	
+	public void sendJson(ArrayList<RequestFormat> reqArrList) {
+		//arr.add(new RequestFormat("date", "request"));
+		//RequestFormat m = new RequestFormat("date", "request");
+		System.out.println("In try to connect");
+		rest.postForObject(url, reqArrList, ResponseEntity.class);
+	}
+	
+	/*private static final String FILETOSEND = "D:/java/Udemy/EchoClient/HTTPLog.json";
 
 	//TODO: change the method so it can get JSON file to send
 	public void sendJsonLogToMonitor() {
@@ -63,6 +71,6 @@ public class MonitorConnection {
 				} catch (IOException e) {
 					System.out.println("Client Error: " + e.getMessage());
 				}
-	}
+	}*/
 
 }

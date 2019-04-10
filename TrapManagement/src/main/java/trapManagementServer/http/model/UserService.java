@@ -16,11 +16,9 @@ public class UserService {
 		User theUser = dao.findById(username).orElse(null);
 		if(theUser != null)
 			if(theUser.getPassword().toString().equals(user.getPassword())) {
-				System.out.println("in if");
 				return "AfterLogin.jsp";
 			}
-		System.out.println("after if");
+		
 		return "Home.jsp";
-	
 	}
 }
