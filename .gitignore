@@ -15,6 +15,9 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+*.txt
+*.txt.lck
+
 
 # External tool builders
 .externalToolBuilders/
@@ -99,3 +102,7 @@ local.properties
 /.nb-gradle/
 
 # End of https://www.gitignore.io/api/eclipse
+TrapManagement/Logs/FTP_tmpLog/[ 13-04-2019_17-59-35 ]_127.0.0.1.txt
+TrapManagement/Logs/FTP_tmpLog/[ 13-04-2019_17-59-35 ]_127.0.0.1.txt.lck
+TrapManagement/Logs/FTP_tmpLog/[ 13-04-2019_17-59-35 ]_127.0.0.1.txt
+TrapManagement/Logs/FTP_tmpLog/[ 13-04-2019_17-59-35 ]_127.0.0.1.txt.lck

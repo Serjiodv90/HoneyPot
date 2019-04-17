@@ -1,7 +1,7 @@
 package trapManagementServer;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface JsonObserver {
-	public abstract void notifyJsonSaved(ArrayList<RequestFormat> reqArrList);
+	public void notifyJsonSaved(List<RequestFormat> reqArrList);
 }

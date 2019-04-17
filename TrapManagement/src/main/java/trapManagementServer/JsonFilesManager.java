@@ -9,6 +9,7 @@ import java.nio.file.WatchService;
 import java.nio.file.FileSystems;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -83,7 +84,7 @@ public class JsonFilesManager implements JsonObserver {
 	}
 	
 	@Override
-	public void notifyJsonSaved(ArrayList<RequestFormat> reqArrList) {
+	public void notifyJsonSaved(List<RequestFormat> reqArrList) {
 		System.out.println("In Manager- Saved!!");
 		MonitorConnection connection = new MonitorConnection();
 		connection.sendJson(reqArrList);
