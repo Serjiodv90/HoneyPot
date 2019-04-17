@@ -50,6 +50,8 @@ public class ReportStorage {
 			serverReqType = typeMatcher.group();
 		}
 		
+		System.out.println("ReportStorage.setParser()\nType: " + serverReqType);
+		
 		if(serverReqType.equalsIgnoreCase(ServerType.HTTP.name()))
 			this.parser = new HTTP_Parser();
 		else if(serverReqType.equalsIgnoreCase(ServerType.FTP.name()))

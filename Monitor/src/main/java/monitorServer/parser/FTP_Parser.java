@@ -56,6 +56,7 @@ public class FTP_Parser implements JsonToReportParser{
 
 		this.report = new Report(/*reqArrList.get(0).getDate(), */ServerType.FTP.name());
 
+		//headline!
 		String content = reqArrList.get(0).getDate().replaceAll("[\\[|\\]]", " ").replace("_", "\t").trim() + "\t" + this.report.getType() + "\n\n";
 		Matcher ipMatcher = ipPattern.matcher(reqArrList.get(0).getRequest());
 		String ipAddress = ""/*= matcher.group()*/;
