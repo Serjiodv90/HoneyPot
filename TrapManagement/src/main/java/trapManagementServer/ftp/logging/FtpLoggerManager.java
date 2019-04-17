@@ -9,6 +9,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import trapManagementServer.DateFormatter;
+import trapManagementServer.JsonObserver;
 import trapManagementServer.RequestFormat;
 
 
@@ -20,6 +21,7 @@ public class FtpLoggerManager {
 	private final Logger logger = Logger.getLogger(FtpLoggerManager.class.getName());
 	private final String LOGGERFILEPATH = "D:\\java\\HoneyPot\\TrapManagement\\Logs\\FTP_tmpLog\\";
 	private List<RequestFormat> actionsToStore;
+	private List<JsonObserver> jsonObservers;
 	
 	
 	//TODO: add constructor, that creates new log file on each connection - for onLogin
@@ -28,8 +30,13 @@ public class FtpLoggerManager {
 	public FtpLoggerManager() {
 			
 			logger.setUseParentHandlers(false); 	//don't print to console
+			this.jsonObservers = new ArrayList<>();
 			
 		
+	}
+	
+	public void registerJsonObserver(JsonObserver observer) {
+		this.jsonObservers.add(observer);
 	}
 	
 	private void setLoggerFile(String filePath) {
@@ -52,7 +59,7 @@ public class FtpLoggerManager {
 	
 	private void addActionToList(String action) {
 		System.out.println("\nWriting to log\n");
-		this.actionsToStore.add(new RequestFormat(DateFormatter.getCurrentDateTimeForFile(), action));
+		this.actionsToStore.add(new RequestFormat(DateFormatter.getCurrentDateTimeForLog(), action));
 		logger.info(action);
 	}
 	
@@ -61,7 +68,7 @@ public class FtpLoggerManager {
 		String logFileName = DateFormatter.getCurrentDateTimeForFile().concat("_" + clientIP + ".txt");
 		setLoggerFile(logFileName);
 		this.actionsToStore = new ArrayList<>();
-		String action = "New connection request from client: " + clientIP;
+		String action = "New FTP connection request from client: " + clientIP;
 		addActionToList(action);
 		
 	}
@@ -69,6 +76,7 @@ public class FtpLoggerManager {
 	public void onDisconnect(String clientIp) {
 		String action = "Client with ip address: " + clientIp + ", has disconnected from the server";
 		addActionToList(action);
+		notifyJsonObservers();
 		
 		//TODO: send the list to trapManager so it can send it to monitor
 	}
@@ -97,6 +105,12 @@ public class FtpLoggerManager {
 		String action = "command: " + actions;
 		addActionToList(action);
 //		logger.info(action);
+	}
+	
+	private void notifyJsonObservers() {
+		for (JsonObserver observer : this.jsonObservers) {
+			observer.notifyJsonSaved(this.actionsToStore);
+		}
 	}
 	
 

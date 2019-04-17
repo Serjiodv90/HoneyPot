@@ -1,24 +1,28 @@
 package monitorServer.parser;
 
+import java.util.ArrayList;
+
+import monitorServer.RequestFormat;
+import monitorServer.storage.Report;
 import monitorServer.storage.ReportStorage;
 
-public abstract class JsonToReportParser {
+public interface JsonToReportParser {
 
-	ReportStorage reportStorage;
-	private String jsonDirectoryPath;
-	private String reportDirectoryPath;
+//	ReportStorage reportStorage;
+//	private final String JSONDIRECTORTYPATH = "target/Json_recieved";
+//	private String reportDirectoryPath;
 
 
-	public abstract void parse();
-	public abstract void storeReport();
+	public Report parse(ArrayList<RequestFormat> reqArrList);
+	public void storeReport();
 	
-	public String getJsonDirectoryPath() {
-		return this.jsonDirectoryPath;
-	}
-	
-	public String getReportDirectoryPath() {
-		return this.reportDirectoryPath;
-	}
+//	public String getJsonDirectoryPath() {
+//		return this.JSONDIRECTORTYPATH;
+//	}
+//	
+//	public String getReportDirectoryPath() {
+//		return this.reportDirectoryPath;
+//	}
 
 
 }

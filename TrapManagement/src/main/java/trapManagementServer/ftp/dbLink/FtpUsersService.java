@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import trapManagementServer.ftp.dal.FtpUserDao;
 
 @Service
@@ -26,6 +27,10 @@ public class FtpUsersService {
 	
 	public Optional<FtpUser> getUserByName(String name) {
 		return this.ftpUserDao.findById(name);
+	}
+	
+	public FtpUser insertFrpUser(FtpUser user) {
+		return this.ftpUserDao.save(user);
 	}
 	
 	

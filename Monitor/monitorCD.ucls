@@ -47,16 +47,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="monitorServer.parser.JsonToReportParser" project="Monitor" 
-    file="/Monitor/src/main/java/monitorServer/parser/JsonToReportParser.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="698" y="609"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="7" language="java" name="monitorServer.model.ServerConfiguration" project="Monitor" 
+  <class id="6" language="java" name="monitorServer.model.ServerConfiguration" project="Monitor" 
     file="/Monitor/src/main/java/monitorServer/model/ServerConfiguration.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="733" y="383"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -65,7 +56,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="monitorServer.parser.FTP_Parser" project="Monitor" 
+  <class id="7" language="java" name="monitorServer.parser.FTP_Parser" project="Monitor" 
     file="/Monitor/src/main/java/monitorServer/parser/FTP_Parser.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="880" y="848"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -74,7 +65,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="monitorServer.storage.ReportStorage" project="Monitor" 
+  <class id="8" language="java" name="monitorServer.storage.ReportStorage" project="Monitor" 
     file="/Monitor/src/main/java/monitorServer/storage/ReportStorage.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="343" y="630"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -83,7 +74,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="monitorServer.connection.ConnectionInterface" project="Monitor" 
+  <class id="9" language="java" name="monitorServer.connection.ConnectionInterface" project="Monitor" 
     file="/Monitor/src/main/java/monitorServer/connection/ConnectionInterface.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="432" y="356"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -92,7 +83,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="monitorServer.parser.HTTP_Parser" project="Monitor" 
+  <class id="10" language="java" name="monitorServer.parser.HTTP_Parser" project="Monitor" 
     file="/Monitor/src/main/java/monitorServer/parser/HTTP_Parser.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="536" y="853"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -101,7 +92,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="monitorServer.parser.SMTP_Parser" project="Monitor" 
+  <class id="11" language="java" name="monitorServer.parser.SMTP_Parser" project="Monitor" 
     file="/Monitor/src/main/java/monitorServer/parser/SMTP_Parser.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="710" y="850"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -110,7 +101,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="monitorServer.parser.JsonToReportParser" project="Monitor" 
+  <class id="12" language="java" name="monitorServer.parser.JsonToReportParser" project="Monitor" 
     file="/Monitor/src/main/java/monitorServer/parser/JsonToReportParser.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="698" y="609"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -119,7 +110,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="monitorServer.model.ServerConfiguration" project="Monitor" 
+  <class id="13" language="java" name="monitorServer.model.ServerConfiguration" project="Monitor" 
     file="/Monitor/src/main/java/monitorServer/model/ServerConfiguration.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="733" y="383"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -128,34 +119,6 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <generalization id="15">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <generalization id="16">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <association id="17">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="18" name="reportStorage"/>      
-      <multiplicity id="19" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="20">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="21" name="parser"/>      
-      <multiplicity id="22" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="23">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

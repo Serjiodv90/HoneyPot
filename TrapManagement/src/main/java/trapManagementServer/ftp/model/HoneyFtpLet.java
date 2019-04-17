@@ -10,6 +10,7 @@ import org.apache.ftpserver.ftplet.FtpRequest;
 import org.apache.ftpserver.ftplet.FtpSession;
 import org.apache.ftpserver.ftplet.FtpletResult;
 
+import trapManagementServer.JsonFilesManager;
 import trapManagementServer.ftp.logging.FtpLoggerManager;
 
 //http://javadox.com/org.apache.ftpserver/ftplet-api/1.0.5/org/apache/ftpserver/ftplet/package-summary.html
@@ -34,7 +35,10 @@ public class HoneyFtpLet extends DefaultFtplet{
 		if(!this.currentConnectedClients.contains(clientIp)) {
 			logMan = new FtpLoggerManager();
 			logMan.onConnect(clientIp);
+			logMan.registerJsonObserver(JsonFilesManager.getInstance());
 		}
+		
+		
 			
 		
 		return null;

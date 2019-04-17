@@ -19,51 +19,22 @@ import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
-
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Component;
 
 import trapManagementServer.ftp.model.HoneyFtpUtils;
 
-
-
-
-
-public class Main {
+@SpringBootApplication
+public class FtpServerApplication {
 
 	public static void main(String[] args) throws FtpException, IOException {
-//		System.setProperty("javax.net.debug", "all");
-//		
-//		PropertiesUserManagerFactory userManagerFactory = new PropertiesUserManagerFactory();
-//		UserManager userManager = userManagerFactory.createUserManager();
-//
-//		
-//		
-//		
-//		BaseUser user = new BaseUser();
-//		user.setName("username");
-//		user.setPassword("password");
-//		user.setHomeDirectory("/tmp");
-//		userManager.save(user);
-//
-//		ListenerFactory listenerFactory = new ListenerFactory();
-//		listenerFactory.setPort(2221);
-//		
-//
-//		FtpServerFactory factory = new FtpServerFactory();
-//		factory.setUserManager(userManager);
-//		factory.addListener("default", listenerFactory.createListener());
-//
-//		FtpServer server = factory.createServer();
-//		server.start();
 
-		
+//		SpringApplication.run(FtpServerApplication.class, args);
 		
 		HoneyFtpUtils.startFtpServer();
 		System.out.println("server is up!");
 		System.out.println("Test the server:");
-//		listenToFtp();
-		
-//		FtpUploadDownloadUtilTest.testFtp();
-//		FtpUploadDownloadUtilTest.close();
 
 	}
 	

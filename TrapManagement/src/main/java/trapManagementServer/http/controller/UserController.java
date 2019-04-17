@@ -19,8 +19,8 @@ import trapManagementServer.http.model.UserService;
 @Controller
 public class UserController {
 
-	@Autowired
-	UserDao dao;
+//	@Autowired
+//	UserDao dao;
 	@Autowired
 	UserService service;
 

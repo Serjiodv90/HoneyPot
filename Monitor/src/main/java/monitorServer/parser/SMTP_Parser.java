@@ -1,12 +1,17 @@
 package monitorServer.parser;
 
-public class SMTP_Parser extends JsonToReportParser{
+import java.util.ArrayList;
+
+import monitorServer.RequestFormat;
+import monitorServer.storage.Report;
+
+public class SMTP_Parser implements JsonToReportParser{
 
 	
 	
 	@Override
-	public void parse() {
-		// TODO Auto-generated method stub
+	public Report parse(ArrayList<RequestFormat> reqArrList) {
+		return null;
 		
 	}
 
