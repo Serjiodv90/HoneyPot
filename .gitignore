@@ -17,6 +17,7 @@ local.properties
 .recommenders
 *.txt
 *.txt.lck
+TrapManagement/Logs/
 
 
 # External tool builders
@@ -106,3 +107,4 @@ TrapManagement/Logs/FTP_tmpLog/[ 13-04-2019_17-59-35 ]_127.0.0.1.txt
 TrapManagement/Logs/FTP_tmpLog/[ 13-04-2019_17-59-35 ]_127.0.0.1.txt.lck
 TrapManagement/Logs/FTP_tmpLog/[ 13-04-2019_17-59-35 ]_127.0.0.1.txt
 TrapManagement/Logs/FTP_tmpLog/[ 13-04-2019_17-59-35 ]_127.0.0.1.txt.lck
+*.24
