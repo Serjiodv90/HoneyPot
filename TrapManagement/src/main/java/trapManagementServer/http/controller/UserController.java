@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import trapManagementServer.http.dal.UserDao;
+import trapManagementServer.http.logging.HttpRequestsInterceptor;
 import trapManagementServer.http.model.User;
 import trapManagementServer.http.model.UserService;
 
@@ -23,6 +24,8 @@ public class UserController {
 //	UserDao dao;
 	@Autowired
 	UserService service;
+	@Autowired
+	HttpRequestsInterceptor httpRequestInterceptor;
 
 	@GetMapping(value="/")
 	public String home(HttpServletRequest request) {
@@ -31,7 +34,7 @@ public class UserController {
 		if (integer == null) {
 			integer = new Integer(0);
 			integer++;
-			request.getSession().setAttribute("sessionNumber", integer);           // replace session attribute
+			request.getSession().setAttribute("sessionNumber", integer);           // replace session attribute			
 		} else {
 			integer++;
 			request.getSession().setAttribute("sessionNumber", integer);            // replace session attribute

@@ -37,16 +37,11 @@ public class HoneyFtpLet extends DefaultFtplet{
 			logMan.onConnect(clientIp);
 			logMan.registerJsonObserver(JsonFilesManager.getInstance());
 		}
-		
-		
-			
-		
 		return null;
 	}
 	
 	@Override
 	 public FtpletResult onLogin(FtpSession session, FtpRequest request) throws FtpException, IOException {
-		
 		
 		System.out.println("\n\nUser loging in: " + request.getCommand() + ", " + request.getArgument() + "\n\n");
 		System.out.println("is user name empty? : " + this.userName );

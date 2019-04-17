@@ -65,7 +65,7 @@ public class FtpLoggerManager {
 	
 	//first method to be invoked 
 	public void onConnect(String clientIP) {
-		String logFileName = DateFormatter.getCurrentDateTimeForFile().concat("_" + clientIP + ".txt");
+		String logFileName = DateFormatter.getCurrentDateTimeForFile().concat("_" + clientIP + ".log");
 		setLoggerFile(logFileName);
 		this.actionsToStore = new ArrayList<>();
 		String action = "New FTP connection request from client: " + clientIP;
@@ -85,8 +85,6 @@ public class FtpLoggerManager {
 		//TODO : optional, check weather the user is one of the FTP users in DB and print a log msg accordingly 
 		String action = "The user: " + userName + ", is trying to connect to FTP server, with password: " + userPwd;
 		addActionToList(action);
-		
-
 	}
 	
 	public void onDownload(String actions) {

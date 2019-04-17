@@ -19,6 +19,6 @@ public class UserService {
 				return "AfterLogin.jsp";
 			}
 		
-		return "Home.jsp";
+		return "afekaLogin.jsp";
 	}
 }

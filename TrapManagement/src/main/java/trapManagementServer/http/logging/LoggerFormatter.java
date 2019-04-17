@@ -14,10 +14,14 @@ public class LoggerFormatter extends Formatter {
 	@Override
 	public String format(LogRecord record) {
 		StringBuilder sb = new StringBuilder();
-        sb.append(DateFormatter.getCurrentDateTimeForLog());
-        sb.append(" ");
-        sb.append(record.getMessage());
-        sb.append("\n");
+//        sb.append(DateFormatter.getCurrentDateTimeForLog());
+		sb.append("[ " + DateFormatter.getCurrentDateTimeForLog() + " ]");
+//        sb.append(" ");
+		sb.append(" " + record.getLevel());
+//        sb.append(record.getMessage());
+//		sb.append("\tHTTP --> ");
+		sb.append(formatMessage(record));
+		sb.append("\n");
         return sb.toString();
 	}
 	

@@ -22,13 +22,13 @@ public class HttpSessionConfig {
     public HttpSessionListener httpSessionListener() {
         return new HttpSessionListener() {
             @Override
-            public void sessionCreated(HttpSessionEvent se) {               // This method will be called when session created
+            public void sessionCreated(HttpSessionEvent se) {           // This method will be called when session created
                 System.out.println("Session Created with session id+" + se.getSession().getId());
             }
             @Override
             public void sessionDestroyed(HttpSessionEvent se) {         // This method will be automatically called when session destroyed
                 System.out.println("Session Destroyed, Session id:" + se.getSession().getId());
-                httpRequestInterceptor.logToJson();
+                httpRequestInterceptor.notifyAllRegistered();/*logToJson();*/
             }
         };
     }

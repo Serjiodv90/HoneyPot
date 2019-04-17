@@ -11,14 +11,14 @@
  		
  		<form name="AddForm" method="Get" action="Home" style="float:right;">
  		<br>
-  	  		<input type="submit" style="float:right;" name="press" value="десу/озч ошцд">
-			<input type="hidden" style="float:right;" name="press" value="add/delete teacher"><br><br>
+  	  	<!--	<input type="submit" style="float:right;" name="press" value="пїЅпїЅпїЅпїЅ/пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ"> -->
+			<input type="submit" style="float:right;" name="press" value="add/delete teacher"><br><br>
 			
-  	  		<input type="submit" style="float:right;" name="press" value="сиегрийн">
-  	  		<input type="hidden" style="float:right;" name="press" value="students"><br><br>
+  	  		<!-- <input type="submit" style="float:right;" name="press" value="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"> -->
+  	  		<input type="submit" style="float:right;" name="press" value="students"><br><br>
 
-  	  		<input type="submit" style="float:right;" name="press" value="огеш щлш">
-  	  		<input type="hidden" style="float:right;" name="press" value="finance department"><br><br>
+  	  		<!-- <input type="submit" style="float:right;" name="press" value="пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ"> -->
+  	  		<input type="submit" style="float:right;" name="press" value="finance department"><br><br>
 		</form>
 
 </body>

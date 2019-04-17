@@ -7,11 +7,11 @@ public class FtpLogToJson implements JsonSave {
 
 	
 	
-	@Override
-	public void logToJson() {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public void logToJson() {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 	@Override
 	public void registerObserver(JsonObserver obs) {

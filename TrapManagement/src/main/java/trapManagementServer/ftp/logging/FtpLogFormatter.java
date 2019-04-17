@@ -16,7 +16,7 @@ public class FtpLogFormatter extends Formatter {
 		
 		buf.append("[ " + date + " ]");
 		buf.append(" " + record.getLevel());
-		buf.append("\tFTP --> ");
+//		buf.append("\tFTP --> ");
 		buf.append(formatMessage(record));
 		buf.append("\n");
 		

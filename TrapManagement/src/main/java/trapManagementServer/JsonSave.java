@@ -7,7 +7,7 @@ public interface JsonSave {
 		return JSON_PATH;
 	}
 	
-	public abstract void logToJson();
+//	public abstract void logToJson();
 	
 	public abstract void registerObserver(JsonObserver obs);
 	public abstract void notifyAllRegistered();
