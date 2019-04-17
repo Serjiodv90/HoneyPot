@@ -38,12 +38,12 @@ public class UserController {
 		}
 //		java.util.Map<String, Integer> hitCounter = new HashMap<>();
 //		hitCounter.put("Hit Counter", integer);
-		return "Home.jsp";
+		return "afekaLogin.jsp";
 	}
 
 	@RequestMapping(value="/Home")
 	public String press(HttpServletRequest request) {
-		return "Home.jsp";
+		return "afekaLogin.jsp";
 	}
 	
 
