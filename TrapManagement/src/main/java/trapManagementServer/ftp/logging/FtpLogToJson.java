@@ -5,6 +5,8 @@ import trapManagementServer.JsonSave;
 
 public class FtpLogToJson implements JsonSave {
 
+	
+	
 	@Override
 	public void logToJson() {
 		// TODO Auto-generated method stub
@@ -20,7 +22,6 @@ public class FtpLogToJson implements JsonSave {
 	@Override
 	public void notifyAllRegistered() {
 		// TODO Auto-generated method stub
-		
 	}
 
 }

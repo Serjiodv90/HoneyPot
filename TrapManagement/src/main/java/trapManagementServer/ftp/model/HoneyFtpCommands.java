@@ -25,6 +25,7 @@ public enum HoneyFtpCommands {
 		this.cmdDescription = description;
 	}
 	
+	
 	public boolean equals(String cmd) {
 		if(this.cmdName.equalsIgnoreCase(cmd))
 			return true;

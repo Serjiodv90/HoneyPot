@@ -17,7 +17,7 @@ import trapManagementServer.ftp.logging.FtpLoggerManager;
 public class HoneyFtpLet extends DefaultFtplet{
 
 	
-	private FtpLoggerManager logMan = new FtpLoggerManager();
+	private FtpLoggerManager logMan;
 	private String userName;
 	private String userPassword;
 	private List<String> currentConnectedClients = new ArrayList<>();
@@ -31,8 +31,11 @@ public class HoneyFtpLet extends DefaultFtplet{
 		String clientIp = session.getClientAddress().getHostString();
 		
 		//if the same client (by its ip address) tries to connect with different userName or something like that, don't create another log fo it
-		if(!this.currentConnectedClients.contains(clientIp))
+		if(!this.currentConnectedClients.contains(clientIp)) {
+			logMan = new FtpLoggerManager();
 			logMan.onConnect(clientIp);
+		}
+			
 		
 		return null;
 	}
@@ -42,7 +45,7 @@ public class HoneyFtpLet extends DefaultFtplet{
 		
 		
 		System.out.println("\n\nUser loging in: " + request.getCommand() + ", " + request.getArgument() + "\n\n");
-		
+		System.out.println("is user name empty? : " + this.userName );
 		if (request.getCommand().equals("PASS") && !this.userName.isEmpty()) {
 			this.userPassword = request.getArgument();
 			logMan.onLogin(this.userName, this.userPassword);

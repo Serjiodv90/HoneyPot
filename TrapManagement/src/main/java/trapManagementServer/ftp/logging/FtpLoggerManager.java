@@ -2,9 +2,14 @@ package trapManagementServer.ftp.logging;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
+
+import trapManagementServer.DateFormatter;
+import trapManagementServer.RequestFormat;
 
 
 
@@ -14,6 +19,7 @@ public class FtpLoggerManager {
 	
 	private final Logger logger = Logger.getLogger(FtpLoggerManager.class.getName());
 	private final String LOGGERFILEPATH = "D:\\java\\HoneyPot\\TrapManagement\\Logs\\FTP_tmpLog\\";
+	private List<RequestFormat> actionsToStore;
 	
 	
 	//TODO: add constructor, that creates new log file on each connection - for onLogin
@@ -39,25 +45,40 @@ public class FtpLoggerManager {
 		
 	}
 	
-	private String getCurrentDateTime() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy__HH-mm-ss__");
-		return  dateFormat.format(new Date());
+//	private String getCurrentDateTime() {
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy__HH-mm-ss__");
+//		return  dateFormat.format(new Date());
+//	}
+	
+	private void addActionToList(String action) {
+		System.out.println("\nWriting to log\n");
+		this.actionsToStore.add(new RequestFormat(DateFormatter.getCurrentDateTimeForFile(), action));
+		logger.info(action);
 	}
 	
+	//first method to be invoked 
 	public void onConnect(String clientIP) {
-		String logFileName = getCurrentDateTime().concat(clientIP + ".txt");
+		String logFileName = DateFormatter.getCurrentDateTimeForFile().concat("_" + clientIP + ".txt");
 		setLoggerFile(logFileName);
-		logger.info("New connection established from client: " + clientIP);
+		this.actionsToStore = new ArrayList<>();
+		String action = "New connection request from client: " + clientIP;
+		addActionToList(action);
+		
 	}
 	
 	public void onDisconnect(String clientIp) {
-		logger.info("Client with ip address: " + clientIp + ", has disconnected from the server");
+		String action = "Client with ip address: " + clientIp + ", has disconnected from the server";
+		addActionToList(action);
+		
+		//TODO: send the list to trapManager so it can send it to monitor
 	}
 	
 	public void onLogin(String userName, String userPwd) {
 		//TODO : optional, check weather the user is one of the FTP users in DB and print a log msg accordingly 
+		String action = "The user: " + userName + ", is trying to connect to FTP server, with password: " + userPwd;
+		addActionToList(action);
 		
-		logger.info("The user :" + userName + ", is trying to connect to FTP server, with password: " + userPwd);
+
 	}
 	
 	public void onDownload(String actions) {
@@ -73,7 +94,9 @@ public class FtpLoggerManager {
 	}
 	
 	public void onCommand(String actions) {
-		logger.info("command: " + actions);
+		String action = "command: " + actions;
+		addActionToList(action);
+//		logger.info(action);
 	}
 	
 
