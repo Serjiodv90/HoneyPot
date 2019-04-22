@@ -22,7 +22,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import net.bytebuddy.asm.Advice.This;
 import trapManagementServer.DateFormatter;
 import trapManagementServer.JsonObserver;
 import trapManagementServer.JsonSave;
