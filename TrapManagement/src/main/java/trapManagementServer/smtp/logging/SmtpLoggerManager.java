@@ -1,6 +1,7 @@
 package trapManagementServer.smtp.logging;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.FileHandler;
@@ -10,6 +11,7 @@ import java.util.logging.Logger;
 import trapManagementServer.DateFormatter;
 import trapManagementServer.JsonObserver;
 import trapManagementServer.RequestFormat;
+import trapManagementServer.ftp.logging.FtpLogFormatter;
 
 public class SmtpLoggerManager {
 	
@@ -34,14 +36,22 @@ public class SmtpLoggerManager {
 		this.LOGGER.info(action);
 	}
 	
-	public void onConnect(String clientIp) {
-		String logFileName = DateFormatter.getCurrentDateTimeForFile().concat("_" + clientIp + ".log");
+	private void setLoggerFile(String filePath) {
+		FileHandler fileHandler;
 		try {
-			this.LOGGER.addHandler(new FileHandler(LOGGERFILEPATH.concat(logFileName)));
+			fileHandler = new FileHandler(LOGGERFILEPATH.concat(filePath));
+			fileHandler.setFormatter(new FtpLogFormatter());
+			this.LOGGER.addHandler(fileHandler);
 		} catch (SecurityException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+	
+	public void onConnect(String clientIp) {
+		String logFileName = DateFormatter.getCurrentDateTimeForFile().concat("_" + clientIp + ".log");
+		setLoggerFile(logFileName);
 		
 		this.actionsToStore = new ArrayList<>();
 		String action = "New SMTP connection request from client: " + clientIp;
@@ -54,6 +64,10 @@ public class SmtpLoggerManager {
 	
 	public void rcptTo(String recipientAddr) { 
 		addActionToList("TO: " + recipientAddr); 
+	}
+	
+	public void data(InputStream data) {
+		
 	}
 	
 

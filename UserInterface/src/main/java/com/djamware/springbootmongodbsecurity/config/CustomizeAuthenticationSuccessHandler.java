@@ -26,9 +26,12 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
             HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
         System.out.println("CustomizeAuthenticationSuccessHandler.onAuthenticationSuccess()");
-    	//set our response to OK status
+    	
+        //set our response to OK status
         response.setStatus(HttpServletResponse.SC_OK);
 
+        System.out.println(authentication.getAuthorities());
+        
         for (GrantedAuthority auth : authentication.getAuthorities()) {
             if ("ADMIN".equals(auth.getAuthority())) {
                 response.sendRedirect("/dashboard");

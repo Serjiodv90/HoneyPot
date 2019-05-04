@@ -7,6 +7,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+
+/*
+ *https://careydevelopment.us/2017/05/24/implement-form-field-validation-spring-boot-thymeleaf/ - example for validation 
+ * 
+ */
+
+
 @SpringBootApplication
 public class SpringbootMongodbSecurityApplication {
 

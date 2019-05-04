@@ -37,18 +37,25 @@ public class LoginController {
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public ModelAndView signup() {
+    	System.out.println("LoginController.signup()");
+    	
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
-        modelAndView.addObject("user", user);
+//        modelAndView.addObject("user", user);
         modelAndView.setViewName("signup");
         return modelAndView;
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
+    	System.out.println("LoginController.createNewUser()");
+    	
         ModelAndView modelAndView = new ModelAndView();
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {
+        	
+        	System.out.println("user already exists!");
+        	
             bindingResult
                     .rejectValue("email", "error.user",
                             "There is already a user registered with the username provided");
@@ -56,6 +63,8 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("signup");
         } else {
+        	System.out.println("user doesn't exist");
+        	
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
             modelAndView.addObject("user", new User());
@@ -81,7 +90,7 @@ public class LoginController {
     public ModelAndView home() {
     	System.out.println("LoginController.home()");
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("home");
+        modelAndView.setViewName("stam");	// the name of the html FILE!!!!!
         return modelAndView;
     }
 
