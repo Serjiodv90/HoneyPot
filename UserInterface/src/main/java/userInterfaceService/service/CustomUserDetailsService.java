@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.djamware.springbootmongodbsecurity.service;
+package userInterfaceService.service;
 
-import com.djamware.springbootmongodbsecurity.domain.Role;
-import com.djamware.springbootmongodbsecurity.domain.User;
-import com.djamware.springbootmongodbsecurity.repository.RoleRepository;
-import com.djamware.springbootmongodbsecurity.repository.UserRepository;
+import userInterfaceService.domain.OrganizationUser;
+import userInterfaceService.domain.Role;
+import userInterfaceService.repository.RoleRepository;
+import userInterfaceService.repository.UserRepository;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -23,10 +24,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author didin
- */
+
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
@@ -37,25 +35,29 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public User findUserByEmail(String email) {
+    public OrganizationUser findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+    
+    public OrganizationUser findUserByOrganization(String organization) {
+    	return userRepository.findByOrganization(organization);
+    }
 
-    public void saveUser(User user) {
+    public void saveUser(OrganizationUser user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setEnabled(true);
-        Role userRole = roleRepository.findByRole("ADMIN");
-        user.setRoles(new HashSet<>(Arrays.asList(userRole, roleRepository.findByRole("USER"))));
+//        user.setEnabled(true);
+        Role userRole = roleRepository.findByRole("USER");
+        user.setRoles(new HashSet<>(Arrays.asList(userRole)));
         userRepository.save(user);
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
     	System.out.println("CustomUserDetailsService.loadUserByUsername()\nEmail: " + email);
-        User user = userRepository.findByEmail(email);  
+        OrganizationUser user = userRepository.findByEmail(email);  
         if(user != null) {
-            List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
-            return buildUserForAuthentication(user, authorities);
+        	List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
+        	return buildUserForAuthentication(user, authorities);
         } else {
             throw new UsernameNotFoundException("username not found");
         }
@@ -70,8 +72,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>(roles);
         return grantedAuthorities;
     }
-
-    private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
+    
+    private UserDetails buildUserForAuthentication(OrganizationUser user, List<GrantedAuthority> authorities) {
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
     }
 

@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.djamware.springbootmongodbsecurity.controller;
+package userInterfaceService.controller;
 
-import com.djamware.springbootmongodbsecurity.domain.User;
-import com.djamware.springbootmongodbsecurity.service.CustomUserDetailsService;
+import userInterfaceService.domain.OrganizationUser;
+import userInterfaceService.service.CustomUserDetailsService;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -17,10 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- *
- * @author didin
- */
 @Controller
 public class LoginController {
 
@@ -40,25 +37,29 @@ public class LoginController {
     	System.out.println("LoginController.signup()");
     	
         ModelAndView modelAndView = new ModelAndView();
-        User user = new User();
-//        modelAndView.addObject("user", user);
+        OrganizationUser user = new OrganizationUser();
+        modelAndView.addObject("organizationUser", user);	// can be used in the HTML as th:object
         modelAndView.setViewName("signup");
         return modelAndView;
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
+    public ModelAndView createNewUser(@Valid OrganizationUser user, BindingResult bindingResult) {
     	System.out.println("LoginController.createNewUser()");
     	
         ModelAndView modelAndView = new ModelAndView();
-        User userExists = userService.findUserByEmail(user.getEmail());
-        if (userExists != null) {
+        
+        OrganizationUser organizationExists = userService.findUserByOrganization(user.getOrganization());
+        
+        
+        if (organizationExists != null) {
         	
-        	System.out.println("user already exists!");
+        	System.out.println("Organization already exists!");
         	
             bindingResult
-                    .rejectValue("email", "error.user",
-                            "There is already a user registered with the username provided");
+                    .rejectValue("organization", "error.user",
+                            "There is already a user registered with the username provided");	//by the name of the field, access to errors 
+            
         }
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("signup");
@@ -67,8 +68,8 @@ public class LoginController {
         	
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
-            modelAndView.addObject("user", new User());
-            modelAndView.setViewName("login");
+            modelAndView.addObject("user", new OrganizationUser());
+            modelAndView.setViewName("signup");
 
         }
         return modelAndView;
@@ -78,9 +79,9 @@ public class LoginController {
     public ModelAndView dashboard() {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
+        OrganizationUser user = userService.findUserByEmail(auth.getName());
         modelAndView.addObject("currentUser", user);
-        modelAndView.addObject("fullName", "Welcome " + user.getFullname());
+//        modelAndView.addObject("fullName", "Welcome " + user.getFullname());
         modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
         modelAndView.setViewName("dashboard");
         return modelAndView;

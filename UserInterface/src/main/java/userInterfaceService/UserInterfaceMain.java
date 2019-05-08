@@ -1,7 +1,8 @@
-package com.djamware.springbootmongodbsecurity;
+package userInterfaceService;
 
-import com.djamware.springbootmongodbsecurity.domain.Role;
-import com.djamware.springbootmongodbsecurity.repository.RoleRepository;
+import userInterfaceService.domain.Role;
+import userInterfaceService.repository.RoleRepository;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,10 +16,10 @@ import org.springframework.context.annotation.Bean;
 
 
 @SpringBootApplication
-public class SpringbootMongodbSecurityApplication {
+public class UserInterfaceMain {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringbootMongodbSecurityApplication.class, args);
+        SpringApplication.run(UserInterfaceMain.class, args);
     }
     
     @Bean

@@ -3,17 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.djamware.springbootmongodbsecurity.repository;
+package userInterfaceService.repository;
 
-import com.djamware.springbootmongodbsecurity.domain.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-/**
- *
- * @author didin
- */
-public interface UserRepository extends MongoRepository<User, String> {
+import userInterfaceService.domain.Role;
+
+public interface RoleRepository extends MongoRepository<Role, String> {
     
-    User findByEmail(String email);
-    
+    Role findByRole(String role);
 }

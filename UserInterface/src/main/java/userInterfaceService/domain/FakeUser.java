@@ -1,10 +1,7 @@
-package trapManagementServer.traps.fakeTrapUsers;
+package userInterfaceService.domain;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
-//@Document(collection="Fake_Users")
 public class FakeUser {
-	
+
 	private String id;	//generated for DB
 	private String firstName; 
 	private String lastname;
@@ -55,6 +52,4 @@ public class FakeUser {
 		this.password = password;
 	}
 	
-	
-
 }

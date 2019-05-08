@@ -1,7 +1,8 @@
 $(document).ready(function () {
     $("#nextBtn").click(function () {
-//function registration() {
-    	alert("in function");
+    	$("#nextBtn").attr("disable", "true");
+    	
+    	
         var org = $("#org").val();
         var email = $("#email").val();
         var password = $("#password").val();
@@ -18,8 +19,14 @@ $(document).ready(function () {
         else if (!(password).match(cpassword)) {
             alert("Your passwords don't match. Try again?");
         }
-        else if(!(emailReg.test(email))) {
+        else if (!(emailReg.test(email))) {
             alert("Wrong email address");
         }
+        else {
+   
+        	$("#userRegistrationFirst").css("display", "none");
+        	$("#userRegistrationSecond").css("display", "block");
+         }
+
     });
 });

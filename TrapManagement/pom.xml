@@ -62,8 +62,8 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-rest-hal-browser</artifactId>
 		</dependency>
-		
-		
+
+
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-jasper</artifactId>
@@ -82,7 +82,7 @@
 			<scope>compile</scope>
 		</dependency>
 
-		
+
 		<dependency>
 			<groupId> commons-net </groupId>
 			<artifactId> commons-net </artifactId>
@@ -103,13 +103,8 @@
 			<artifactId> slf4j-log4j12 </artifactId>
 			<version> 1.7.12 </version>
 		</dependency>
-		
+
 		<!-- SMTP -->
-		<dependency>
-			<groupId> javax.mail </groupId>
-			<artifactId> javax.mail-api </artifactId>
-			<version> 1.6.2 </version>
-		</dependency>
 		<dependency>
 			<groupId> javax.activation </groupId>
 			<artifactId> activation </artifactId>
@@ -120,13 +115,25 @@
 			<artifactId> subethasmtp </artifactId>
 			<version> 3.1.7 </version>
 		</dependency>
-		
+		<!-- For SMTP, read inputStream -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
+		</dependency>
 
-<dependency>
-    <groupId>com.google.code.gson</groupId>
-    <artifactId>gson</artifactId>
-    </dependency>
-    
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>

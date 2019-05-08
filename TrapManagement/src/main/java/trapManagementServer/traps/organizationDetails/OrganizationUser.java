@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Reference;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Deprecated
 @Document(collection="Organization_Users")
 public class OrganizationUser {
 	
@@ -14,7 +15,7 @@ public class OrganizationUser {
 	private OrganizationDetails details;
 	
 	public OrganizationUser() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Id

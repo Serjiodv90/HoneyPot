@@ -8,10 +8,13 @@ import org.subethamail.smtp.MessageHandler;
 import org.subethamail.smtp.RejectException;
 import org.subethamail.smtp.TooMuchDataException;
 
+import trapManagementServer.smtp.logging.SmtpLoggerManager;
+
 public class MessageHandlerImpl implements MessageHandler {
 
 	
 private MessageContext messageContext;
+private SmtpLoggerManager loggerManager;
 	
 	public MessageHandlerImpl() {
 		// TODO Auto-generated constructor stub
@@ -19,8 +22,11 @@ private MessageContext messageContext;
 
 	public MessageHandlerImpl (MessageContext context) {
 		System.out.println("MessageHandlerImpl.MessageHandlerImpl()");
-		this.messageContext = context;
-		System.out.println("Sender addrs: " + this.messageContext.getRemoteAddress());
+		this.messageContext = context; 
+		String clientIp = this.messageContext.getRemoteAddress().toString();
+		System.out.println("Sender addrs: " + clientIp);
+		this.loggerManager = new SmtpLoggerManager();
+		this.loggerManager.onConnect(clientIp);
 	}
 	
 	@Override
@@ -37,7 +43,10 @@ private MessageContext messageContext;
 
 	@Override
 	public void data(InputStream data) throws RejectException, TooMuchDataException, IOException {
-		System.out.println("Data: " + data);
+//		System.out.println("Data: " + data);
+		
+		this.loggerManager.data(data);
+		
 	}
 
 	@Override
