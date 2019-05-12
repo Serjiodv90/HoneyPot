@@ -30,3 +30,73 @@ $(document).ready(function () {
 
     });
 });
+
+
+
+
+$(document).ready(function () {
+    var counter = 0;
+    var minNames = 1;
+
+    $("#addrow").on("click", function () {
+
+        var reqlength = $('.required').length;
+        
+        var value = $('.required').filter(function () {
+            return this.value != '';
+        });
+
+        console.log("value.length = " + value.length);
+        console.log("value = " + value);
+        console.log("reqlength: " +  reqlength);
+        console.log("all required fields: " + $('.required')[0].value);
+        console.log("value.length !== reqlength: " + (value.length !== reqlength));
+
+        if (value.length >= 0 && (value.length !== reqlength)) {
+            alert('Please fill out all required fields.');
+
+        } else {
+            var rowCount = $('#myTable >tbody >tr').length + 1;
+            var newRow = $("<tr>");
+            var cols = "";
+
+            cols += '<td>' + rowCount + '</td>';
+            cols += '<td><input type="text" class="form-control required" name="fname' + counter + '"/></td>';
+            cols += '<td><input type="text" class="form-control required" name="lname' + counter + '"/></td>';
+
+            cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
+            newRow.append(cols);
+            $("table.order-list").append(newRow);
+            counter++;
+            if (rowCount > 1)
+                $("#nextBtnAfterFillingNames").prop('disabled', false);
+        }
+    });
+
+
+
+    $("table.order-list").on("click", ".ibtnDel", function (event) {
+        $(this).closest("tr").remove();
+        counter -= 1
+        var rowCount = $('#myTable >tbody >tr').length;
+        if (rowCount <= 1)
+            $("#nextBtnAfterFillingNames").prop('disabled', true);
+    });
+
+
+});
+
+
+
+// function calculateRow(row) {
+//     var price = +row.find('input[name^="price"]').val();
+
+// }
+
+// function calculateGrandTotal() {
+//     var grandTotal = 0;
+//     $("table.order-list").find('input[name^="price"]').each(function () {
+//         grandTotal += +$(this).val();
+//     });
+//     $("#grandtotal").text(grandTotal.toFixed(2));
+// }

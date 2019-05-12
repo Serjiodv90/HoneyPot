@@ -24,11 +24,14 @@ public class OrganizationUser {
 	@Indexed(unique = true, direction = IndexDirection.DESCENDING)
 //	@Pattern(regexp="^([\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4})?$", message="Wrong email")
 	private String email;
-	
 	private String password;
+	
 	@DBRef
 	private Set<Role> roles;
 
+	
+	
+	
 	@Id
 	public String getOrganization() {
 		return organization;
@@ -60,6 +63,15 @@ public class OrganizationUser {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "Organization User:\nOrganization name: " + this.organization + 
+				"\nEmail: " + this.email +
+				"\nRoles: " + this.roles;
+				
 	}
 
 }

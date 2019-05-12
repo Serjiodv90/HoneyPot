@@ -5,10 +5,14 @@
  */
 package userInterfaceService.controller;
 
+import userInterfaceService.domain.FakeUser;
+import userInterfaceService.domain.OrganizationDetails;
 import userInterfaceService.domain.OrganizationUser;
 import userInterfaceService.service.CustomUserDetailsService;
 
 import javax.validation.Valid;
+
+import org.hibernate.validator.internal.util.privilegedactions.NewInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,6 +43,8 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         OrganizationUser user = new OrganizationUser();
         modelAndView.addObject("organizationUser", user);	// can be used in the HTML as th:object
+        modelAndView.addObject("organizationDetails", new OrganizationDetails());
+
         modelAndView.setViewName("signup");
         return modelAndView;
     }
@@ -64,15 +70,32 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("signup");
         } else {
-        	System.out.println("user doesn't exist");
+        	System.out.println("user doesn't exist: \n" + user);
         	
-            userService.saveUser(user);
+     //       userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
-            modelAndView.addObject("user", new OrganizationUser());
+            modelAndView.addObject("organizationUser", user);
+            OrganizationDetails details = new OrganizationDetails();
+            for(int i = 0; i < 20; i++) {
+            	details.addFakeUser(new FakeUser());
+            }
+            modelAndView.addObject("organizationDetails", details);
+
+            System.out.println("\nModel map: \n" + modelAndView.getModelMap().get("organizationDetails"));
             modelAndView.setViewName("signup");
 
         }
         return modelAndView;
+    }
+    
+    @RequestMapping(value="/storeDetails", method=RequestMethod.POST)
+    public ModelAndView setOrganizationDetails(OrganizationDetails details, BindingResult bindingResult) {
+    	System.out.println("LoginController.setOrganizationDetails()");
+    	
+    	System.out.println("\nDetails: \n" + details);
+    	
+    	return new ModelAndView();
+    	
     }
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
