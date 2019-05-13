@@ -56,6 +56,6 @@ public class FakeUser {
 @Override
 	public String toString() {
 		return "First name: " + this.firstName + 
-				"Last name: " + this.lastname;
+				"\tLast name: " + this.lastname;
 	}
 }

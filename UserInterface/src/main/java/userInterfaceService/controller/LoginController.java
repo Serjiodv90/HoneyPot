@@ -76,9 +76,8 @@ public class LoginController {
             modelAndView.addObject("successMessage", "User has been registered successfully");
             modelAndView.addObject("organizationUser", user);
             OrganizationDetails details = new OrganizationDetails();
-            for(int i = 0; i < 20; i++) {
-            	details.addFakeUser(new FakeUser());
-            }
+           
+            details.addFakeUser(new FakeUser());
             modelAndView.addObject("organizationDetails", details);
 
             System.out.println("\nModel map: \n" + modelAndView.getModelMap().get("organizationDetails"));
@@ -94,7 +93,7 @@ public class LoginController {
     	
     	System.out.println("\nDetails: \n" + details);
     	
-    	return new ModelAndView();
+    	return new ModelAndView("login");
     	
     }
 
