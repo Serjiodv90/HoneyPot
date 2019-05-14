@@ -1,116 +1,124 @@
-$(document).ready(function () {
-    $("#nextBtn").on('click', function () {
-//    	$("#nextBtn").attr("disable", "true");
-    	
-    	$("#nextBtn").prop('disabled', true);
-    	
-        var org = $("#org").val();
-        var email = $("#email").val();
-        var password = $("#password").val();
-        var cpassword = $("#rPass").val();
 
-        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+function validateReg() {
 
-        if (org == '' || email == '' || password == '' || cpassword == '') {
-            alert("Please fill all fields!!!!!!");
-        }
-        else if ((password.length) < 8) {
-            alert("Password should atleast 8 character in length!!!!!!");
-        }
-        else if (!(password).match(cpassword)) {
-            alert("Your passwords don't match. Try again?");
-        }
-        else if (!(emailReg.test(email))) {
-            alert("Wrong email address");
-        }
-        else {
-        	$("#nextBtn").prop('disabled', false);
-         }
+	var org = $("#org").val();
+	var email = $("#email").val();
+	var password = $("#password").val();
+	var cpassword = $("#rPass").val();
 
-    });
-});
+	var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
 
+	if (org == '' || email == '' || password == '' || cpassword == '') {
+		alert("Please fill all fields!!!!!!");
+	}
+	else if ((password.length) < 8) {
+		alert("Password should atleast 8 character in length!!!!!!");
+	}
+	else if (!(password).match(cpassword)) {
+		alert("Your passwords don't match. Try again?");
+	}
+	else if (!(emailReg.test(email))) {
+		alert("Wrong email address");
+	}
+	else 
+		return true;
 
-function stopRedirection() {
-    $("#nextBtn").prop('disabled', true);
-}
-
-function enableRedirection() {
-	$("#nextBtn").prop('disabled', false);
+	return false;
 }
 
 
 
-
+var minNames = 1;
 
 $(document).ready(function () {
-    var counter = 0;
-    var minNames = 1;
+	var counter = 0;
+	
 
-    $("#addrow").on("click", function () {
+	$("#addrow").on("click", function () {
 
-        var reqlength = $('.required').length;
-        
-        var value = $('.required').filter(function () {
-            return this.value != '';
-        });
+		$("#nextBtnAfterFillingNames").prop('disabled', true);
 
-        console.log("value.length = " + value.length);
-        console.log("value = " + value);
-        console.log("reqlength: " +  reqlength);
-        console.log("all required fields: " + $('.required')[0].value);
-        console.log("value.length !== reqlength: " + (value.length !== reqlength));
+		var reqlength = $('.required').length;
 
-        if (value.length >= 0 && (value.length !== reqlength)) {
-            alert('Please fill out all required fields.');
+		var value = $('.required').filter(function () {
+			return this.value != '';
+		});
 
-        } else {
-            var rowCount = $('#myTable >tbody >tr').length + 1;
-            var newRow = $("<tr>");
-            var cols = "";
+		console.log("value.length = " + value.length);
+		console.log("value = " + value);
+		console.log("reqlength: " +  reqlength);
+		console.log("all required fields: " + $('.required')[0].value);
+		console.log("value.length !== reqlength: " + (value.length !== reqlength));
 
-            cols += '<td>' + rowCount + '</td>';
-//            cols += '<td><input type="text" class="form-control required" name="fname' + counter + '"/></td>';
-//            cols += '<td><input type="text" class="form-control required" name="lname' + counter + '"/></td>';
+		if (value.length >= 0 && (value.length !== reqlength)) {
+			alert('Please fill out all required fields.');
 
-//            cols += '<td class="col-sm-2" th:text="${stat.index}+1"></td>';
-            cols += '<td class="col-sm-4"> <input name="fakeUsers[' + (rowCount-1) + '].firstName" id="fakeUsers' + (rowCount-1) + '.firstName" type="text"  class="form-control required" /> </td>';
-            cols += '<td class="col-sm-3"> <input name="fakeUsers[' + (rowCount-1) + '].lastName"  id="fakeUsers' + (rowCount-1) + '.lastName" type="text" class="form-control required" /> </td>';
-            
-            cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td></tr>';
-            newRow.append(cols);
-            $("table.order-list").append(newRow);
-            counter++;
-            if (rowCount > minNames)
-            	if (value.length >= 0 && (value.length !== reqlength))
-            		$("#nextBtnAfterFillingNames").prop('disabled', false);
-        }
-    });
+		} else {
+			var rowCount = $('#myTable >tbody >tr').length + 1;
+			var newRow = $("<tr>");
+			var cols = "";
+
+			cols += '<td>' + rowCount + '</td>';
+			cols += '<td class="col-sm-4"> <input name="fakeUsers[' + (rowCount-1) + '].firstName" id="fakeUsers' + (rowCount-1) + '.firstName" type="text"  class="form-control required" /> </td>';
+			cols += '<td class="col-sm-3"> <input name="fakeUsers[' + (rowCount-1) + '].lastName"  id="fakeUsers' + (rowCount-1) + '.lastName" type="text" class="form-control required" /> </td>';
+
+			cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td></tr>';
+			newRow.append(cols);
+			$("table.order-list").append(newRow);
+			counter++;
+
+			if (rowCount > minNames) {
+				console.log("if 1");
+				if (value.length >= 0 && (value.length == reqlength)) {
+					console.log("if 2");
+					$("#nextBtnAfterFillingNames").prop('disabled', false);
+				}
+			}
+		}
+	});
 
 
 
-    $("table.order-list").on("click", ".ibtnDel", function (event) {
-        $(this).closest("tr").remove();
-        counter -= 1
-        var rowCount = $('#myTable >tbody >tr').length;
-        if (rowCount <= 1)
-            $("#nextBtnAfterFillingNames").prop('disabled', true);
-    });
+
+	$("table.order-list").on("click", ".ibtnDel", function (event) {
+		$(this).closest("tr").remove();
+		counter -= 1
+		var rowCount = $('#myTable >tbody >tr').length;
+		if (rowCount <= 1)
+			$("#nextBtnAfterFillingNames").prop('disabled', true);
+	});
 
 
 });
 
+function signUpAction() {
+
+	var reqlength = $('.required').length;
+	var values = $('.required').filter(function () {
+		return this.value != '';
+	});
+	
+	if((reqlength / 2) > minNames) {
+		if(values.length === reqlength) {
+//			$("#nextBtnAfterFillingNames").prop('disabled', false);
+			return true;
+		}
+	}
+//	$("#nextBtnAfterFillingNames").prop('disabled', true);
+	return false;
+}
 
 
-// function calculateRow(row) {
-//     var price = +row.find('input[name^="price"]').val();
 
-// }
+//function calculateRow(row) {
+//var price = +row.find('input[name^="price"]').val();
 
-// function calculateGrandTotal() {
-//     var grandTotal = 0;
-//     $("table.order-list").find('input[name^="price"]').each(function () {
-//         grandTotal += +$(this).val();
-//     });
-//     $("#grandtotal").text(grandTotal.toFixed(2));
-// }
+//}
+
+//function calculateGrandTotal() {
+//var grandTotal = 0;
+//$("table.order-list").find('input[name^="price"]').each(function () {
+//grandTotal += +$(this).val();
+//});
+//$("#grandtotal").text(grandTotal.toFixed(2));
+//}
