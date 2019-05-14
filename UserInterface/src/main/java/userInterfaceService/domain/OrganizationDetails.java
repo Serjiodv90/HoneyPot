@@ -28,20 +28,20 @@ public class OrganizationDetails {
 	//		this.organization = organization;
 	//	}
 
+	public List<FakeUser> getFakeUsers() {
+		return fakeUsers;
+	}
+
+	public void setFakeUsers(List<FakeUser> fakeUsers) {
+		this.fakeUsers = fakeUsers;
+	}
+
 	public String getEmailPostfix() {
 		return emailPostfix;
 	}
 
 	public void setEmailPostfix(String emailPostfix) {
 		this.emailPostfix = emailPostfix;
-	}
-
-	public List<FakeUser> getCredentialsForTraps() {
-		return fakeUsers;
-	}
-
-	public void setCredentialsForTraps(List<FakeUser> credentialsForTraps) {
-		this.fakeUsers = credentialsForTraps;
 	}
 	
 	public void addFakeUser(FakeUser user) {

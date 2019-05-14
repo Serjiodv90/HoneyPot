@@ -1,7 +1,8 @@
 $(document).ready(function () {
-    $("#nextBtn").click(function () {
-    	$("#nextBtn").attr("disable", "true");
+    $("#nextBtn").on('click', function () {
+//    	$("#nextBtn").attr("disable", "true");
     	
+    	$("#nextBtn").prop('disabled', true);
     	
         var org = $("#org").val();
         var email = $("#email").val();
@@ -23,13 +24,21 @@ $(document).ready(function () {
             alert("Wrong email address");
         }
         else {
-   
-        	$("#userRegistrationFirst").css("display", "none");
-        	$("#userRegistrationSecond").css("display", "block");
+        	$("#nextBtn").prop('disabled', false);
          }
 
     });
 });
+
+
+function stopRedirection() {
+    $("#nextBtn").prop('disabled', true);
+}
+
+function enableRedirection() {
+	$("#nextBtn").prop('disabled', false);
+}
+
 
 
 
@@ -65,15 +74,16 @@ $(document).ready(function () {
 //            cols += '<td><input type="text" class="form-control required" name="lname' + counter + '"/></td>';
 
 //            cols += '<td class="col-sm-2" th:text="${stat.index}+1"></td>';
-            cols += '<td class="col-sm-4"> <input name="credentialsForTraps[' + (rowCount-1) + '].firstName" id="credentialsForTraps' + (rowCount-1) + '.firstName" type="text"  class="form-control required" /> </td>';
-            cols += '<td class="col-sm-3"> <input name="credentialsForTraps[' + (rowCount-1) + '].lastName"  id="credentialsForTraps' + (rowCount-1) + '.lastName" type="text" class="form-control required" /> </td>';
+            cols += '<td class="col-sm-4"> <input name="fakeUsers[' + (rowCount-1) + '].firstName" id="fakeUsers' + (rowCount-1) + '.firstName" type="text"  class="form-control required" /> </td>';
+            cols += '<td class="col-sm-3"> <input name="fakeUsers[' + (rowCount-1) + '].lastName"  id="fakeUsers' + (rowCount-1) + '.lastName" type="text" class="form-control required" /> </td>';
             
             cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td></tr>';
             newRow.append(cols);
             $("table.order-list").append(newRow);
             counter++;
-            if (rowCount > 1)
-                $("#nextBtnAfterFillingNames").prop('disabled', false);
+            if (rowCount > minNames)
+            	if (value.length >= 0 && (value.length !== reqlength))
+            		$("#nextBtnAfterFillingNames").prop('disabled', false);
         }
     });
 

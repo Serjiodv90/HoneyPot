@@ -177,7 +177,7 @@ a {
 
 
 				
-				<button id="nextBtn" class="registerbtn nextReg">Next</button>
+				<button id="nextBtn" type="submit" class="registerbtn nextReg">Next</button>
 				
 				
 				
@@ -201,6 +201,7 @@ a {
 		
 	</div>
 	
+	<div th:if="${organizationDetails}">
 	<div  th:class="${successMessage} ? 'show' : 'userRegistrationSecond' ">
 	<form th:action="@{/storeDetails}" method="post" th:object="${organizationDetails}">
 		<div class="container">
@@ -224,15 +225,15 @@ a {
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="fakeUser, stat : *{credentialsForTraps}">
+						<tr th:each="fakeUser, stat : *{fakeUsers}">
 							<td class="col-sm-2" th:text="${stat.index}+1">
 								
 							</td>
 							<td class="col-sm-4">
-								<input th:field="*{credentialsForTraps[__${stat.index}__].firstName}" type="text" name="firstName" class="form-control required" />
+								<input th:field="*{fakeUsers[__${stat.index}__].firstName}" type="text" name="firstName" class="form-control required" />
 							</td>
 							<td class="col-sm-3">
-								<input th:field="*{credentialsForTraps[__${stat.index}__].lastName}" type="text" name="lastName" class="form-control required" />
+								<input th:field="*{fakeUsers[__${stat.index}__].lastName}" type="text" name="lastName" class="form-control required" />
 							</td>
 							<td class="col-sm-2"><a class="deleteRow"></a>
 		
@@ -248,10 +249,11 @@ a {
 		
 					</tfoot>
 				</table>
-				<button id="nextBtnAfterFillingNames" type="submit"  class="registerbtn nextReg">Sign Up</button>
+				<button id="nextBtnAfterFillingNames" type="submit"  class="registerbtn nextReg" disabled>Sign Up</button>
 				
 			</div>
 	</form>
+	</div>
 	</div>
 
 </body>

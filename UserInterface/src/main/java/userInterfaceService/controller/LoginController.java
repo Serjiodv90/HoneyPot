@@ -12,17 +12,21 @@ import userInterfaceService.service.CustomUserDetailsService;
 
 import javax.validation.Valid;
 
-import org.hibernate.validator.internal.util.privilegedactions.NewInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@SessionAttributes("organizationUser")
 public class LoginController {
 
     @Autowired
@@ -72,28 +76,36 @@ public class LoginController {
         } else {
         	System.out.println("user doesn't exist: \n" + user);
         	
-     //       userService.saveUser(user);
+            userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
             modelAndView.addObject("organizationUser", user);
             OrganizationDetails details = new OrganizationDetails();
            
             details.addFakeUser(new FakeUser());
             modelAndView.addObject("organizationDetails", details);
+        
 
-            System.out.println("\nModel map: \n" + modelAndView.getModelMap().get("organizationDetails"));
+            FlashMap map = new FlashMap();
+            map.put("organizationUser", user);
             modelAndView.setViewName("signup");
 
         }
         return modelAndView;
     }
     
+    
     @RequestMapping(value="/storeDetails", method=RequestMethod.POST)
-    public ModelAndView setOrganizationDetails(OrganizationDetails details, BindingResult bindingResult) {
-    	System.out.println("LoginController.setOrganizationDetails()");
+    public ModelAndView setOrganizationDetails(OrganizationDetails details, BindingResult bindingResult,
+    		@ModelAttribute("organizationUser") OrganizationUser user, SessionStatus status) {
     	
+    	System.out.println("LoginController.setOrganizationDetails()");
+    	System.err.println("Print the fucking user: " + user);
     	System.out.println("\nDetails: \n" + details);
     	
-    	return new ModelAndView("login");
+    	status.setComplete();
+    	ModelAndView modelAndView = new ModelAndView();
+    	modelAndView.setViewName("redirect:/dashboard");
+    	return modelAndView;
     	
     }
 
@@ -102,6 +114,10 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         OrganizationUser user = userService.findUserByEmail(auth.getName());
+        
+        System.out.println("LoginController.dashboard()");
+        System.err.println("Auth user: " + user);
+        
         modelAndView.addObject("currentUser", user);
 //        modelAndView.addObject("fullName", "Welcome " + user.getFullname());
         modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
