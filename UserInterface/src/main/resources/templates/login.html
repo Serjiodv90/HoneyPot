@@ -1,34 +1,4 @@
-<!-- 
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{default}">
-    <head>
-        <title>Login</title>
-    </head>
-    <body class="text-center">
-        <div layout:fragment="content">
-            <form class="form-signin" th:action="@{/login}" method="post">
-                <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72" />
-                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-                <div th:if="${param.error}">
-                    Invalid email and password.
-                </div>
-                <div th:if="${param.logout}">
-                    You have been logged out. 
-                </div>
-                <label for="inputEmail" class="sr-only">Email address</label>
-                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required="" />
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="" />
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            </form>
-            <form class="form-signin" th:action="@{/signup}" method="get">
-                <button class="btn btn-md btn-success btn-block" type="Submit">Signup Here</button>
-            </form>
-        </div>
-    </body>
-</html>
--->
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
@@ -186,33 +156,27 @@ to {
 	<button onclick="document.getElementById('id01').style.display='block'"
 		style="width: auto;">Login</button>
 	<br>
-	<button id="nextBtn" class="registerbtn nextReg" onclick="registration();" >Next</button>
 	
 	<form class="form-signin" th:action="@{/signup}" method="get">
-		<button class="btn btn-md btn-success btn-block" style="width: auto;"
-			type="Submit">Signup Here</button>
+		<button class="btn btn-md btn-success btn-block" style="width: auto;" type="Submit">Signup Here</button>
 	</form>
 
 	<div id="id01" class="modal">
 
-		<form class="modal-content animate" th:action="@{/login}"
-			method="post">
+		<form class="modal-content animate" th:action="@{/login}" method="post">
 			<div class="imgcontainer">
-				<span onclick="document.getElementById('id01').style.display='none'"
-					class="close" title="Close Modal">&times;</span> <img
-					src="img_avatar2.png" alt="Avatar" class="avatar">
+				<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span> 
+				<img src="img_avatar2.png" alt="Avatar" class="avatar">
 			</div>
 
 			<div class="container">
-				<label for="uname"><b>Username</b></label> <input type="text"
-					placeholder="Enter Username" name="email" required> <label
-					for="psw"><b>Password</b></label> <input type="password"
-					placeholder="Enter Password" name="password" required>
+				<label for="email"><b>Username</b></label> 
+				<input type="text" placeholder="Enter Username" name="email" required> 
+				<label for="password"><b>Password</b></label> 
+				<input type="password" placeholder="Enter Password" name="password" required>
 
 				<button type="submit">Login</button>
-				<label> <input type="checkbox" checked="checked"
-					name="remember"> Remember me
-				</label>
+				<label> <input type="checkbox" checked="checked" name="remember"> Remember me </label>
 			</div>
 
 			<div class="container" style="background-color: #f1f1f1">

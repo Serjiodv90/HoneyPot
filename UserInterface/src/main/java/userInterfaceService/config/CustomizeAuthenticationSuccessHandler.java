@@ -29,7 +29,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         System.out.println(authentication.getAuthorities());
         
         for (GrantedAuthority auth : authentication.getAuthorities()) {
-            if ("ADMIN".equals(auth.getAuthority())) {
+            if ("USER".equals(auth.getAuthority())) {
                 response.sendRedirect("/dashboard");
             }
         }

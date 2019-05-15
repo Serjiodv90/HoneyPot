@@ -36,8 +36,6 @@ $(document).ready(function () {
 
 	$("#addrow").on("click", function () {
 
-		$("#nextBtnAfterFillingNames").prop('disabled', true);
-
 		var reqlength = $('.required').length;
 
 		var value = $('.required').filter(function () {
@@ -67,25 +65,18 @@ $(document).ready(function () {
 			$("table.order-list").append(newRow);
 			counter++;
 
-			if (rowCount > minNames) {
-				console.log("if 1");
-				if (value.length >= 0 && (value.length == reqlength)) {
-					console.log("if 2");
-					$("#nextBtnAfterFillingNames").prop('disabled', false);
-				}
-			}
 		}
 	});
 
-
+	 
 
 
 	$("table.order-list").on("click", ".ibtnDel", function (event) {
 		$(this).closest("tr").remove();
-		counter -= 1
+		counter -= 1;
 		var rowCount = $('#myTable >tbody >tr').length;
-		if (rowCount <= 1)
-			$("#nextBtnAfterFillingNames").prop('disabled', true);
+//		if (rowCount <= 1)
+//			$("#nextBtnAfterFillingNames").prop('disabled', true);
 	});
 
 
@@ -100,11 +91,9 @@ function signUpAction() {
 	
 	if((reqlength / 2) > minNames) {
 		if(values.length === reqlength) {
-//			$("#nextBtnAfterFillingNames").prop('disabled', false);
 			return true;
 		}
 	}
-//	$("#nextBtnAfterFillingNames").prop('disabled', true);
 	return false;
 }
 
