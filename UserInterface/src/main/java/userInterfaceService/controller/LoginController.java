@@ -5,6 +5,7 @@
  */
 package userInterfaceService.controller;
 
+import userInterfaceService.connectionToTrapManagement.TrapManagementConnection;
 import userInterfaceService.domain.FakeUser;
 import userInterfaceService.domain.OrganizationDetails;
 import userInterfaceService.domain.OrganizationUser;
@@ -103,10 +104,14 @@ public class LoginController {
     	System.out.println("\nDetails: \n" + details);
     	
     	status.setComplete();
+    	
+    	System.err.println("\n\nSending to trap management...");
+    	new TrapManagementConnection().sendOrganizationDetails(details);
+    	
+    	
     	ModelAndView modelAndView = new ModelAndView();
     	modelAndView.setViewName("redirect:/dashboard");
     	return modelAndView;
-    	
     }
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
