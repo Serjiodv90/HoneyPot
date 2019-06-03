@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import trapManagementServer.traps.organizationDetails.OrganizationDetails;
 import trapManagementServer.traps.organizationDetails.OrganizationService;
-import trapManagementServer.traps.organizationDetails.OrganizationUser;
 
 @RestController
 public class TrapManagementController {
@@ -21,12 +21,13 @@ public class TrapManagementController {
 	
 	//might be changed
 	@RequestMapping(
-			path="/register",
+			path="/organizationDetails",
 			method=RequestMethod.POST,
 			produces=MediaType.APPLICATION_JSON_VALUE,	
 			consumes=MediaType.APPLICATION_JSON_VALUE
 			)
-	public OrganizationUser registerOrganization(@RequestBody OrganizationUser user) {
-		return this.organizationService.createOrganizationUser(user);
+	public OrganizationDetails registerOrganization(@RequestBody OrganizationDetails organizationDetails) {
+		System.err.println("\n\nTrapManagementController.registerOrganization()\n" + organizationDetails);
+		return this.organizationService.createOrganizationUser(organizationDetails);
 	}
 }

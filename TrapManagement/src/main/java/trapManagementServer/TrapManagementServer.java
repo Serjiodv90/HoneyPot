@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import trapManagementServer.ftp.FtpServerApplication;
 import trapManagementServer.http.HttpServerApplication;
 
-//@SpringBootApplication
+@SpringBootApplication
 //@ComponentScan({"trapManagementServer", "trapManagementServer.ftp"})
 public class TrapManagementServer {
 

@@ -1,25 +1,24 @@
 package trapManagementServer.traps.organizationDetails;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import trapManagementServer.traps.dal.OrganizationDao;
+import trapManagementServer.traps.dal.OrganizationDetailsDao;
 
 @Service
 public class OrganizationService {
 
-	private OrganizationDao oraganizationDao;
+	private OrganizationDetailsDao oraganizationDao;
 	
 	@Autowired
-	public void setOrganizationDat(OrganizationDao organizationDao) {
+	public void setOrganizationDat(OrganizationDetailsDao organizationDao) {
 		this.oraganizationDao = organizationDao;
 	}
 	
 	
-	public OrganizationUser createOrganizationUser(OrganizationUser organizationUser) {
-		return this.oraganizationDao.save(organizationUser);
+	public OrganizationDetails createOrganizationUser(OrganizationDetails organizationDetails) {
+		return this.oraganizationDao.save(organizationDetails);
 	}
 	
 //	public OrganizationDetails getDetailsByLoginEmail(String LoginEmail) {
