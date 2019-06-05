@@ -1,29 +1,49 @@
 
 function validateReg() {
 
-	var org = $("#org").val();
+	var org = $("#organization").val();
 	var email = $("#email").val();
 	var password = $("#password").val();
 	var cpassword = $("#rPass").val();
 
 	var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+	$("small").remove();
 
 	if (org == '' || email == '' || password == '' || cpassword == '') {
-		alert("Please fill all fields!!!!!!");
+		$(".generalError").append("<small>Please fill all fields</small>");
+		$(".generalError").show();
+		return false;
 	}
-	else if ((password.length) < 8) {
-		alert("Password should atleast 8 character in length!!!!!!");
+	else if (org != '' || email != '' || password != '' || cpassword != '') {
+		$(".generalError").hide();
 	}
-	else if (!(password).match(cpassword)) {
-		alert("Your passwords don't match. Try again?");
+	if (!(emailReg.test(email))) {
+		$(".emailError").append("<small>Incorrect email address</small>");
+		$(".emailError").show();
+		return false;
 	}
-	else if (!(emailReg.test(email))) {
-		alert("Wrong email address");
+	else if ((emailReg.test(email))) {
+		$(".emailError").hide();
 	}
-	else 
-		return true;
-
-	return false;
+	if ((password.length) < 8) {
+		$(".PwdError").append("<small>Password must contain atleast 8 character in length</small>");
+		$(".PwdError").show();
+		return false;
+	}
+	else if ((password.length) >= 8) {
+		$(".PwdError").hide();
+	}
+	if (!(password).match(cpassword)) {
+		$(".rptPwdError").append("<small>Passwords don't match. Try again</small>");
+		$(".rptPwdError").show();
+		return false;
+	}
+	else if ((password).match(cpassword)) {
+		$(".rptPwdError").hide();
+	}
+	
+	$(".errorField").hide();
+	return true;
 }
 
 
@@ -33,6 +53,7 @@ var minNames = 1;
 $(document).ready(function () {
 	var counter = 0;
 	
+	$(".errorField").hide();
 
 	$("#addrow").on("click", function () {
 
@@ -42,6 +63,8 @@ $(document).ready(function () {
 			return this.value != '';
 		});
 
+		$("small").remove();
+		
 		console.log("value.length = " + value.length);
 		console.log("value = " + value);
 		console.log("reqlength: " +  reqlength);
@@ -49,14 +72,16 @@ $(document).ready(function () {
 		console.log("value.length !== reqlength: " + (value.length !== reqlength));
 
 		if (value.length >= 0 && (value.length !== reqlength)) {
-			alert('Please fill out all required fields.');
+			$(".emplError").append("<small>Please fill in the current row available, before adding a new one</small>");
+			$(".emplError").show();
 
 		} else {
 			var rowCount = $('#myTable >tbody >tr').length + 1;
 			var newRow = $("<tr>");
 			var cols = "";
+			$(".emplError").hide();
 
-			cols += '<td>' + rowCount + '</td>';
+			cols += '<td class="col-sm-2 control-label">' + rowCount + '</td>';
 			cols += '<td class="col-sm-4"> <input name="fakeUsers[' + (rowCount-1) + '].firstName" id="fakeUsers' + (rowCount-1) + '.firstName" type="text"  class="form-control required" /> </td>';
 			cols += '<td class="col-sm-3"> <input name="fakeUsers[' + (rowCount-1) + '].lastName"  id="fakeUsers' + (rowCount-1) + '.lastName" type="text" class="form-control required" /> </td>';
 
@@ -84,6 +109,8 @@ $(document).ready(function () {
 
 function signUpAction() {
 
+	$("small").remove();
+	
 	var reqlength = $('.required').length;
 	var values = $('.required').filter(function () {
 		return this.value != '';
@@ -91,9 +118,13 @@ function signUpAction() {
 	
 	if((reqlength / 2) > minNames) {
 		if(values.length === reqlength) {
+			$(".emplError").hide();
 			return true;
 		}
 	}
+	
+	$(".emplError").append("<small>Please fill at least one employee details</small>");
+	$(".emplError").show();
 	return false;
 }
 

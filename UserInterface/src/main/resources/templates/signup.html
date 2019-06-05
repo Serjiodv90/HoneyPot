@@ -8,8 +8,8 @@
 
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
 <script type="text/javascript" th:src="@{/js/signUp.js}"></script>
@@ -17,7 +17,7 @@
 <style>
 body {
 	font-family: Arial, Helvetica, sans-serif;
-	background-color: black;
+ 
 }
 
 * {
@@ -53,19 +53,11 @@ hr {
 	margin-bottom: 10px;
 }
 
-.nextReg {
-	display: flex;
-	float: right;
-	padding-right: 20px;
-	margin-right: 8px;
-	padding-right: 20px;
-}
 
 /* Set a style for the submit button */
 .registerbtn {
 	background-color: #4CAF50;
 	color: white;
-	padding: 16px 20px;
 	margin: 8px;
 	border: none;
 	cursor: pointer;
@@ -86,6 +78,7 @@ a {
 .signin {
 	background-color: #f1f1f1;
 	text-align: center;
+	margin-top: 20px;
 }
 
 .userRegistrationFirst{
@@ -116,29 +109,12 @@ a {
 	margin-right: auto;
 }
 
-.nextReg {
-	display: flex;
-	float: right;
-	padding-right: 20px;
-	margin-right: 8px;
-	margin-bottom: 8px;
+.control-label:after {
+  content:" *";
+  color:red;
 }
 
-	/* Set a style for the submit button */
-.registerbtn {
-	background-color: #4CAF50;
-	color: white;
-	padding: 16px 20px;
-	margin: 8px;
-	border: none;
-	cursor: pointer;
-	width: auto;
-	opacity: 0.9;
-}
 
-.registerbtn:hover {
-	opacity: 1;
-}
 
 </style>
 
@@ -150,61 +126,71 @@ a {
 <body>
 
 	<div th:class="${successMessage} ? 'hide' : 'userRegistrationFirst' ">
+	<div class="container shadow bg-light mt-4">
 		<form th:action="@{/signup}" method="post" th:object="${organizationUser}" onsubmit="return validateReg()">
-			<div class="container">
+			<div class="mb-2">
 				<h1>Register</h1>
 				<p>Please fill in this form to create an account.</p>
+				<small class="text-danger">* Required fields</small>
+				<div class="errorField generalError alert alert-danger"></div>
 				<hr>
 				
-				<div th:if="${#fields.hasErrors('email')}"  th:errors="*{email}" th:utext="#{errorMessage}"></div>
-				<div th:if="${#fields.hasErrors('organization')}" th:errors="*{organization}"  th:utext="#{errorMessage}">orgError</div>
+				<div th:if="${#fields.hasErrors('email')}"  th:errors="*{email}" th:utext="#{errorMessage}" class="text-danger"></div>
+				<div th:if="${#fields.hasErrors('organization')}" th:errors="*{organization}"  th:utext="#{errorMessage}" class="alert alert-danger"></div>
 
-				<label for="organization"><b>Organization Name</b></label> 
+				<label for="organization" class="control-label"><b>Organization Name</b></label> 
 				<br>
 				<input id="organization" type="text" placeholder="Organization" name="organization" class="form-control" required> 
 				<hr>
-				<label for="email"><b>Email</b></label>
+				<div class="errorField emailError alert alert-danger"></div>
+				<label for="email" class="control-label"><b>Email</b></label>
 				<br>
 				<input th:field="*{email}" id="email" type="email" placeholder="Enter Email" name="email" class="form-control" required>
 				<hr>
-				<label for="password"><b>Password</b></label>
+				<div class="errorField PwdError alert alert-danger"></div>
+				<label for="password" class="control-label"><b>Password</b></label>
 				<br>
 				<input id="password" type="password" placeholder="Enter Password" name="password" class="form-control" required>
 				<hr> 
-				<label for="rptPassword"><b>Repeat Password</b></label>
+				<div class="errorField rptPwdError alert alert-danger"></div>
+				<label for="rptPassword" class="control-label"><b>Repeat Password</b></label>
 				<br>
 				<input id="rPass" type="password" placeholder="Repeat Password" name="rptPassword" class="form-control" required>
-
-
 				
-				<button id="nextBtn" type="submit" class="registerbtn nextReg">Next</button>				
-				<br>
+				<button id="nextBtn" type="submit" class="btn btn-lg float-right mx-auto registerbtn nextReg">Next</button>				
+				
+			
 			</div>
-
+			
 			<div class="container signin">
-				<p>
+				<div class="justify-content-center p-2">
 					Already have an account? <a th:href="@{/login}">Sign in</a>.
-				</p>
+				</div>
 			</div>
+			
 		</form>
-		
+		</div>
 	</div>
 	
 	<div th:if="${organizationDetails}">
 	<div  th:class="${successMessage} ? 'show' : 'userRegistrationSecond' ">
+	<div class="container shadow bg-light mt-4">
 	<form th:action="@{/storeDetails}" method="post" th:object="${organizationDetails}" onsubmit="return signUpAction()">
-		<div class="container">
+		<div class="clearfix">
 
 				<h1>Organization Details</h1>
 				<p>Please fill in this form with your organization's details.</p>
+				<small class="text-danger">* Required fields</small>
 				<hr>
 		
-				<label for="emailPostfix"><b>Organization's email postfix</b></label><br>
+				<label for="errorField emailPostfix" class="control-label"><b>Organization's email postfix</b></label><br>
 				<input th:field="*{emailPostfix}" id="emailPostfix" type="text" placeholder="example.com" name="emailPostfix" class="form-control"
 					required>
+					<br><br>
 		
 				<h3><b>Please fill in First and Last names of some of the employees: </b></h3>
 				<hr>
+				<div class="errorField emplError mt-4 alert alert-danger"></div>
 				<table id="myTable" class=" table order-list" >
 					<thead>
 						<tr>
@@ -215,7 +201,7 @@ a {
 					</thead>
 					<tbody>
 						<tr th:each="fakeUser, stat : *{fakeUsers}">
-							<td class="col-sm-2" th:text="${stat.index}+1">
+							<td class="col-sm-2 control-label" th:text="${stat.index}+1">
 								
 							</td>
 							<td class="col-sm-4">
@@ -232,15 +218,15 @@ a {
 					<tfoot>
 						<tr>
 							<td colspan="5" style="text-align: left;">
-								<input type="button" class="btn btn-lg registerbtn " id="addrow" value="Add Row" />
+								<input type="button" class="btn btn-sm btn-outline-info" id="addrow" value="Add Row" />
 							</td>
 						</tr>
 		
 					</tfoot>
 				</table>
-				<button id="nextBtnAfterFillingNames" type="submit"  class="registerbtn nextReg">Sign Up</button>
-				
+				<button id="nextBtnAfterFillingNames" type="submit"  class="btn btn-lg  float-right mx-auto registerbtn nextReg">Sign Up</button>
 			</div>
+			
 	</form>
 	</div>
 	</div>

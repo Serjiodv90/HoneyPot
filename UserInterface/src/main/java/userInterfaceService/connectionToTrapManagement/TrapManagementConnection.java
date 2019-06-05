@@ -19,7 +19,6 @@ public class TrapManagementConnection {
 	private RestTemplate restTemplate;
 	
 	
-	
 	@Value("${trapManagement.server}:localhost")
 	public void setHostName(String hostName) {
 		this.hostName = hostName;
@@ -39,11 +38,10 @@ public class TrapManagementConnection {
 	
 	@PostConstruct
 	public void configRestTemplate() {
+		System.out.println("TrapManagementConnection.configRestTemplate()");
 		this.restTemplate = new RestTemplate();
 	}
 	
-	
-
 	public void sendOrganizationDetails(OrganizationDetails details) {
 		System.err.println("TrapManagementConnection.sendOrganizationDetails()");
 		sendOrganizationDetailsToTrapManagement(details);
@@ -51,7 +49,7 @@ public class TrapManagementConnection {
 	
 	private void sendOrganizationDetailsToTrapManagement(OrganizationDetails details) {
 		System.err.println("TrapManagementConnection.sendOrganizationDetailsToTrapManagement()");
-		String url = "https://localhost:8090/organizationDetails"  ;
+		String url = "http://localhost:8090/organizationDetails"  ;
 				//this.protocol + 
 //					 "://" + 
 //					 this.hostName + 
@@ -60,7 +58,7 @@ public class TrapManagementConnection {
 //					 this.hostPath;
 //		
 		System.err.println("URL: " + url + "\nDETAILS: " + details);
-		
+		this.restTemplate = new RestTemplate();
 		this.restTemplate.postForObject(url, details, OrganizationDetails.class);		
 	}
 

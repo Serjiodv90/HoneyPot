@@ -3,16 +3,14 @@ package trapManagementServer;
 
 import java.io.IOException;
 import org.apache.ftpserver.ftplet.FtpException;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 
 import trapManagementServer.ftp.FtpServerApplication;
 import trapManagementServer.http.HttpServerApplication;
 
 @SpringBootApplication
-//@ComponentScan({"trapManagementServer", "trapManagementServer.ftp"})
+@ComponentScan({"trapManagementServer.traps", "trapManagementServer.ftp"})
 public class TrapManagementServer {
 
 	public static void main(String[] args) {

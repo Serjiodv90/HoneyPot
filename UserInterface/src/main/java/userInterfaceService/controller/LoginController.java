@@ -77,7 +77,7 @@ public class LoginController {
         } else {
         	System.out.println("user doesn't exist: \n" + user);
         	
-            userService.saveUser(user);
+       //     userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
             modelAndView.addObject("organizationUser", user);
             OrganizationDetails details = new OrganizationDetails();
@@ -110,7 +110,7 @@ public class LoginController {
     	
     	
     	ModelAndView modelAndView = new ModelAndView();
-    	modelAndView.setViewName("redirect:/dashboard");
+    	modelAndView.setViewName("redirect:/dashboard");	//set the url - dashboard
     	return modelAndView;
     }
 

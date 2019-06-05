@@ -21,9 +21,7 @@ public class OrganizationService {
 		return this.oraganizationDao.save(organizationDetails);
 	}
 	
-//	public OrganizationDetails getDetailsByLoginEmail(String LoginEmail) {
-//		this.oraganizationDao.fin
-//	}
+	
 	
 	
 	
