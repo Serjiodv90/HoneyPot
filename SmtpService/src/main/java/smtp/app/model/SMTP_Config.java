@@ -20,6 +20,7 @@ public class SMTP_Config {
 		
 		
 		
+		
 
 		System.out.println("TempSmtpConfig.run()\nSmtp started on host: " + this.smtpServer.getHostName() + "\nPort: " + this.smtpServer.getPort());
 	}

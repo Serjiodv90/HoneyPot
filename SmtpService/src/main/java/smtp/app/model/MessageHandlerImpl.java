@@ -32,7 +32,6 @@ private SmtpLoggerManager loggerManager;
 	@Override
 	public void from(String from) throws RejectException {
 		System.out.println("From: " + from);
-
 	}
 
 	@Override

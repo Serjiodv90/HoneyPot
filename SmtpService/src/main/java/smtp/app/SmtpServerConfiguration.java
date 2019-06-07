@@ -38,7 +38,7 @@ public class SmtpServerConfiguration {
 		//testing client for smtp via localhost smtp server
 		//in case of real smtp server,authentication needed, as registered users and of course knwon host domain
 		configSession();
-		sendTextMail();
+//		sendTextMail();
 		sendMailWithFile();
 		
 		
