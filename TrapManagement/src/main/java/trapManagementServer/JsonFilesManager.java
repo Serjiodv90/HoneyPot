@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 
 import com.google.gson.Gson;
 
-import trapManagementServer.http.logging.HttpRequestsInterceptor;
+//import trapManagementServer.http.logging.HttpRequestsInterceptor;
 import trapManagementServer.monitorInterface.MonitorConnection;
 
 
