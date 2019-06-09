@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=windows-1255"
-    pageEncoding="windows-1255"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -26,35 +26,35 @@
                                 <td colspan=2 id="credentials_table_postheader"></td>
                             </tr>
                             <tr>
-                                <td class="apm-credentials_table_label_cell"><label for='input_1' id='label_input_1'>ων
-                                        ξωϊξω</label></td>
+                                <td class="apm-credentials_table_label_cell"><label for='input_1' id='label_input_1'>Χ©Χ
+                                        ΧΧ©ΧªΧΧ©</label></td>
                                 <td class="apm-credentials_table_field_cell"><input type='text' name='userName'
                                         class='credentials_input_text' value='' id='input_1' autocomplete='off'/></td>
                             </tr>
                             <tr>
                                 <td class="apm-credentials_table_label_cell"><label for='input_2'
-                                        id='label_input_2'>ριρξδ</label></td>
+                                        id='label_input_2'>Χ΅Χ™Χ΅ΧΧ”</label></td>
                                 <td class="apm-credentials_table_field_cell"><input type='password' name='password'
                                         class='credentials_input_password' value='' id='input_2' autocomplete='off'/></td>
                             </tr>
                             <tr>
                                 <td class="apm-credentials_table_label_cell"><label for='input_3'
-                                        id='label_input_3'>ωιεκ</label></td>
+                                        id='label_input_3'>Χ©Χ™Χ•Χ</label></td>
                                 <td class="apm-credentials_table_field_cell">
                                     <div class='radio-div'><input type='radio' value="ACADEMIC" name='Domain'
                                             id='input_3_0' /><label for='input_3_0' id='label_input_3_0'
-                                            class='radio-label' style='display: inline'>ρθεγπθιν</label></div>
+                                            class='radio-label' style='display: inline'>Χ΅ΧΧ•Χ“Χ ΧΧ™Χ</label></div>
                                     <div class='radio-div'><input type='radio' value="MGMT" name='Domain'
                                             id='input_3_1' /><label for='input_3_1' id='label_input_3_1'
-                                            class='radio-label' style='display: inline'>ρβμ</label></div>
+                                            class='radio-label' style='display: inline'>Χ΅Χ’Χ</label></div>
                                     <div class='radio-div'><input type='radio' value="ACADEMIC_Bogrim" name='Domain'
                                             id='input_3_2' /><label for='input_3_2' id='label_input_3_2'
-                                            class='radio-label' style='display: inline'>αεβψιν</label></div>
+                                            class='radio-label' style='display: inline'>Χ‘Χ•Χ’Χ¨Χ™Χ</label></div>
                                 </td>
                             </tr>
                             <tr id="submit_row">
                                 <td colspan="2" align="center"><input type=submit
-                                        class="submit_button submit_button:hover" value="λπιρδ"></td>
+                                        class="submit_button submit_button:hover" value="Χ›Χ Χ™Χ΅Χ”"></td>
                             </tr>
                         </table>
                     </form>

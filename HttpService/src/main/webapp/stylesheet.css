@@ -2,7 +2,7 @@ body {
     direction: rtl;
     /* background-repeat: repeat-x; */
     background-size: 100%;
-    background-image: url(/public/images/customization/Common/Multi_Domain_Afeka_act_logon_page_1_ag/image02_zh-cn.jpg);
+    background-image: url(Images/loginBackground.jpg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;

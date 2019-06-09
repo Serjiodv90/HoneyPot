@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=windows-1255"
-    pageEncoding="windows-1255"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,14 +11,11 @@
  		
  		<form name="AddForm" method="Get" action="Home" style="float:right;">
  		<br>
-  	  	<!--	<input type="submit" style="float:right;" name="press" value="����/��� ����"> -->
-			<input type="submit" style="float:right;" name="press" value="add/delete teacher"><br><br>
+  	  		<input type="submit" style="float:right;" name="press" value="הוספת/מחיקת מרצה" ><br><br>
 			
-  	  		<!-- <input type="submit" style="float:right;" name="press" value="��������"> -->
-  	  		<input type="submit" style="float:right;" name="press" value="students"><br><br>
+  	  		<input type="submit" style="float:right;" name="press" value="סטודנטים"><br><br>
 
-  	  		<!-- <input type="submit" style="float:right;" name="press" value="���� ���"> -->
-  	  		<input type="submit" style="float:right;" name="press" value="finance department"><br><br>
+  	  		<input type="submit" style="float:right;" name="press" value="מדור שכר"><br><br>
 		</form>
 
 </body>

@@ -1,21 +1,30 @@
 package http.app.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class User {
 	
-	@Id
 	private String userName;
 	private String password;
 	
+	public User() {
+		System.err.println("user c'tor");
+	}
+	
+	public User(String userName, String password) {
+		System.err.println("User constructor");
+		setUserName(userName);
+		setPassword(password);
+	}
+	
+	@Id
 	public String getUserName() {
 		return userName;
 	}
 	public void setUserName(String userName) {
+		System.out.println("User.setUserName()");
 		this.userName = userName;
 	}
 	public String getPassword() {
