@@ -14,7 +14,7 @@ public interface JsonToReportParser {
 //	private String reportDirectoryPath;
 
 
-	public Report parse(List<RequestFormat> reqArrList);
+	public Report parse(ArrayList<RequestFormat> reqArrList);
 	public void storeReport();
 	
 //	public String getJsonDirectoryPath() {

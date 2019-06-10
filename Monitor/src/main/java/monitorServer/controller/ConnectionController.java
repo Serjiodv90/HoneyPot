@@ -31,7 +31,7 @@ public class ConnectionController {
 	public RequestFormat[] getJsonFile(@RequestBody RequestFormat[] reqArrList) {
 		System.out.println("In monitor");
 		//		System.out.println(reqArrList);
-		this.reportStorage.createReport(Arrays.asList(reqArrList));
+		this.reportStorage.createReport(new ArrayList<>(Arrays.asList(reqArrList)));
 		return reqArrList;
 	}
 

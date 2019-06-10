@@ -41,7 +41,7 @@ public class HTTP_Parser implements JsonToReportParser{
 	}
 	
 	@Override
-	public Report parse(List<RequestFormat> reqArrList) {
+	public Report parse(ArrayList<RequestFormat> reqArrList) {
 		Pattern ipPattern = Pattern.compile(this.ipv4Pattern, Pattern.CASE_INSENSITIVE);
 		Pattern timePattern = Pattern.compile(this.timePatter, Pattern.CASE_INSENSITIVE);
 		

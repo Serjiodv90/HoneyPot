@@ -61,7 +61,7 @@ public class ReportStorage {
 	}
 	
 	@Async
-	public Report createReport(List<RequestFormat> reqArrList) {
+	public Report createReport(ArrayList<RequestFormat> reqArrList) {
 		setParser(reqArrList.get(0).getRequest());
 		Report report = this.parser.parse(reqArrList);
 		return this.reportDao.save(report);
