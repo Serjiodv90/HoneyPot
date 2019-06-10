@@ -123,7 +123,7 @@ function signUpAction() {
 		}
 	}
 	
-	$(".emplError").append("<small>Please fill at least one employee details</small>");
+	$(".emplError").append("<small>Please fill at least " + minNames + " `employee details</small>");
 	$(".emplError").show();
 	return false;
 }

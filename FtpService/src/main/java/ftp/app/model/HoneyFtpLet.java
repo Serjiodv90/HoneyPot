@@ -9,12 +9,21 @@ import org.apache.ftpserver.ftplet.FtpException;
 import org.apache.ftpserver.ftplet.FtpRequest;
 import org.apache.ftpserver.ftplet.FtpSession;
 import org.apache.ftpserver.ftplet.FtpletResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
-import ftp.app.connections.JsonFilesManager;
+import ftp.app.ConfigurationJsonDelegator;
 import ftp.app.logging.FtpLoggerManager;
 
 //http://javadox.com/org.apache.ftpserver/ftplet-api/1.0.5/org/apache/ftpserver/ftplet/package-summary.html
 
+//@Configuration
+//@Scope("prototype")
+//@Component
 public class HoneyFtpLet extends DefaultFtplet{
 
 	
@@ -23,6 +32,17 @@ public class HoneyFtpLet extends DefaultFtplet{
 	private String userPassword;
 	private List<String> currentConnectedClients = new ArrayList<>();
 	
+//	@Autowired
+//	ApplicationContext context;
+	
+//	@Autowired
+//	public void setLogMan(FtpLoggerManager logMan) {
+//		this.logMan = logMan;
+//	}
+	
+	public HoneyFtpLet() {
+		System.err.println("HoneyFtpLet.HoneyFtpLet()");
+	}
 	
 	@Override
 	public FtpletResult onConnect(FtpSession session) {
@@ -30,12 +50,14 @@ public class HoneyFtpLet extends DefaultFtplet{
 				+ session.getClientAddress().getAddress() + "\n\n");
 		
 		String clientIp = session.getClientAddress().getHostString();
-		
+				
 		//if the same client (by its ip address) tries to connect with different userName or something like that, don't create another log fo it
 		if(!this.currentConnectedClients.contains(clientIp)) {
-			logMan = new FtpLoggerManager();
+			ApplicationContext context = new AnnotationConfigApplicationContext(ConfigurationJsonDelegator.class);
+			System.err.println(((FtpLoggerManager)context.getBean("FtpLoggerManager")));
+//			((FtpLoggerManager)context.getBean("FtpLoggerManager")).delegateJson();
+			logMan = ((FtpLoggerManager)(context.getBean("FtpLoggerManager")));//new FtpLoggerManager();
 			logMan.onConnect(clientIp);
-			logMan.registerJsonObserver(JsonFilesManager.getInstance());
 		}
 		return null;
 	}

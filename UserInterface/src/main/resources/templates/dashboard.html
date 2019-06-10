@@ -1,13 +1,55 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{default}">
-    <head>
-        <title>Dashboard</title>
-    </head>
-    <body>
-        <div layout:fragment="content">
-            <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-            <h2>This is your Admin Dashboard</h2>
-        </div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{default}">
+<head>
+<title>Dashboard</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+		<h2>This is your Admin Dashboard</h2>
+	</div>
+
+	<div class="seedstarterlist"
+		th:unless="${#lists.isEmpty(allSeedStarters)}">
+		<h2 th:text="#{title.list}">List of Seed Starters</h2>
+		<table>
+			<thead>
+				<tr>
+					<th th:text="#{seedstarter.datePlanted}">Date Planted</th>
+					<th th:text="#{seedstarter.covered}">Covered</th>
+					<th th:text="#{seedstarter.type}">Type</th>
+					<th th:text="#{seedstarter.features}">Features</th>
+					<th th:text="#{seedstarter.rows}">Rows</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="sb : ${allSeedStarters}">
+					<td th:text="${{sb.datePlanted}}">13/01/2011</td>
+					<td th:text="#{|bool.${sb.covered}|}">yes</td>
+					<td th:text="#{|seedstarter.type.${sb.type}|}">Wireframe</td>
+					<td
+						th:text="${#strings.arrayJoin(
+#messages.arrayMsg(
+#strings.arrayPrepend(sb.features,'seedstarter.feature.')),
+', ')}">Electric
+						Heating, Turf</td>
+					<td>
+						<table>
+							<tbody>
+								<tr th:each="row,rowStat : ${sb.rows}">
+									<td th:text="${rowStat.count}">1</td>
+									<td th:text="${row.variety.name}">Thymus Thymi</td>
+									<td th:text="${row.seedsPerCell}">12</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
 </html>

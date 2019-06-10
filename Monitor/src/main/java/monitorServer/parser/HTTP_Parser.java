@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,7 +41,7 @@ public class HTTP_Parser implements JsonToReportParser{
 	}
 	
 	@Override
-	public Report parse(ArrayList<RequestFormat> reqArrList) {
+	public Report parse(List<RequestFormat> reqArrList) {
 		Pattern ipPattern = Pattern.compile(this.ipv4Pattern, Pattern.CASE_INSENSITIVE);
 		Pattern timePattern = Pattern.compile(this.timePatter, Pattern.CASE_INSENSITIVE);
 		

@@ -1,4 +1,4 @@
-package monitorServer.storage;
+package userInterfaceService.domain;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -1,6 +1,7 @@
 package monitorServer.parser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import monitorServer.RequestFormat;
 import monitorServer.storage.Report;
@@ -13,7 +14,7 @@ public interface JsonToReportParser {
 //	private String reportDirectoryPath;
 
 
-	public Report parse(ArrayList<RequestFormat> reqArrList);
+	public Report parse(List<RequestFormat> reqArrList);
 	public void storeReport();
 	
 //	public String getJsonDirectoryPath() {

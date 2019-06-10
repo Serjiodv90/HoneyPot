@@ -1,6 +1,7 @@
 package monitorServer.parser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import monitorServer.RequestFormat;
 import monitorServer.storage.Report;
@@ -10,7 +11,7 @@ public class SMTP_Parser implements JsonToReportParser{
 	
 	
 	@Override
-	public Report parse(ArrayList<RequestFormat> reqArrList) {
+	public Report parse(List<RequestFormat> reqArrList) {
 		return null;
 		
 	}

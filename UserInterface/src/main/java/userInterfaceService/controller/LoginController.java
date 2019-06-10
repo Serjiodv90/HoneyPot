@@ -5,7 +5,7 @@
  */
 package userInterfaceService.controller;
 
-import userInterfaceService.connectionToTrapManagement.TrapManagementConnection;
+import userInterfaceService.connections.trapManagement.TrapManagementConnection;
 import userInterfaceService.domain.FakeUser;
 import userInterfaceService.domain.OrganizationDetails;
 import userInterfaceService.domain.OrganizationUser;
@@ -13,6 +13,7 @@ import userInterfaceService.service.CustomUserDetailsService;
 
 import javax.validation.Valid;
 
+import org.hibernate.validator.internal.util.privilegedactions.GetAnnotationAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -106,12 +107,19 @@ public class LoginController {
     	status.setComplete();
     	
     	System.err.println("\n\nSending to trap management...");
-    	new TrapManagementConnection().sendOrganizationDetails(details);
+//    	new TrapManagementConnection().sendOrganizationDetails(details);
     	
     	
     	ModelAndView modelAndView = new ModelAndView();
     	modelAndView.setViewName("redirect:/dashboard");	//set the url - dashboard
     	return modelAndView;
+    }
+    
+    @RequestMapping(value = "/reports", method = RequestMethod.GET)
+    public ModelAndView getReports() {
+    	
+    	
+    	return null;
     }
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
