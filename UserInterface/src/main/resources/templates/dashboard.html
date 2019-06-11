@@ -5,56 +5,84 @@
 	layout:decorate="~{default}">
 <head>
 <title>Dashboard</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+
+
+
+
+
 
 <style>
-
 .collapse.in {
-  visibility: visible;
-  display: flex;
+	visibility: visible;
+	display: flex;
 }
+
+body {
+	background-color: black;
+}
+
 </style>
+
+
 </head>
+
+
+
+
+
 <body>
 	<div layout:fragment="content">
-		<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-		<h2>This is your Admin Dashboard</h2>
+		<div id="header" class="d-flex justify-content-around p-3 bg-secondary mb-3">
+		
+		<div class="p-2">
+			<h3 th:inline="text" style="font-family: 'Segoe UI', Arial, sans-serif;">Hello [[${#httpServletRequest.remoteUser}]]!</h3>
+		</div>
+		
+		<div class="p-2">
+			<h2>Dashboard</h2>
+		</div>
+		
+		<div class="p-2">
+			<form th:action="@{/reports}" method="post">
+				<button type="submit" class="btn btn-lg ">Show reports</button>
+			</form>
+		</div>
 	</div>
-	
-	<form th:action="@{/reports}" method="post">
-		<button type="submit" class="btn btn-lg ">Show reports</button>
-	</form>
-
-<br>
-	<div class="reportTable"
-		th:unless="${#arrays.isEmpty(reports)}">
+	<br>
+	<div class="reportTable m-5 text-white" th:unless="${#arrays.isEmpty(reports)}">
 		<h2>Reports</h2>
-		<table class="table table-hover">
+		<table class="table table-hover table-dark table-striped text-white">
 			<thead>
-				<tr>
+				<tr class="table-success">
 					<th>No.</th>
 					<th>Date</th>
 					<th>Protocol</th>
-					
+
 				</tr>
 			</thead>
-			<tbody >
-			<th:block th:each="report, stat : ${reports}">
-				<tr   th:attr="data-target=|#reportData${stat.index}|" data-toggle="collapse">
-					
-					<td th:text="${stat.index}+1"></td>
-					<td th:text="${#dates.format(report.dateAndTime, 'dd-MM-yyyy')}"></td>
-					<td th:text="${{report.type}}"></td>
-				</tr>
-				
-				<tr>
-					<td colspan="3">
-						<pre th:id="|reportData${stat.index}|" class="collapse" th:text="${{report.content}}"></pre>
-					</td>
-				</tr>
-		</th:block>
+			<tbody>
+				<th:block th:each="report, stat : ${reports}">
+					<tr th:attr="data-target=|#reportData${stat.index}|"
+						data-toggle="collapse">
+
+						<td th:text="${stat.index}+1"></td>
+						<td th:text="${#dates.format(report.dateAndTime, 'dd-MM-yyyy')}"></td>
+						<td th:text="${{report.type}}"></td>
+					</tr>
+
+					<tr>
+						<td colspan="3" class="hiddenRow"><pre
+								th:id="|reportData${stat.index}|" class="collapse"
+								th:text="${{report.toString()}}"></pre></td>
+					</tr>
+				</th:block>
 			</tbody>
 		</table>
 	</div>
