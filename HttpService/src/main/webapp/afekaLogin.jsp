@@ -7,7 +7,7 @@
     <!--<meta charset="windows-1255">-->
     <meta charset="utf-8" />
     <title>Afeka Login</title>
-    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 
 <body>

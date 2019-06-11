@@ -16,7 +16,9 @@
   	  		<input type="submit" style="float:right;" name="press" value="סטודנטים"><br><br>
 
   	  		<input type="submit" style="float:right;" name="press" value="מדור שכר"><br><br>
-		</form>
+		</form><br><br>
+		
+		<a href="/logout">logout</a>
 
 </body>
 </html>

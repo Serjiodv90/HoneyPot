@@ -5,6 +5,9 @@ import java.util.Collection;
 import java.util.Vector;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.userdetails.UserDetails;
 //import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,11 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-//import http.app.MyUserPrincipal;
+import http.app.MyUserPrincipal;
 import http.app.dal.UserDao;
 
 @Service
-public class UserService /*implements UserDetailsService*/ {
+public class UserService implements UserDetailsService {
 
 	private UserDao dao;
 	private Vector<User> users;
@@ -61,15 +64,16 @@ public class UserService /*implements UserDetailsService*/ {
 		return dao.save(user);
 	}
 
-//	@Override
-//	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//		User user = dao.findByUserName(username);
-//		if (user == null) {
-//            throw new UsernameNotFoundException("No user found with username: " + username);
-//        }
-//
-//        return new MyUserPrincipal(user);
-//	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		User user = dao.findByUserName(username);
+		if (user == null) {
+            throw new UsernameNotFoundException("No user found with username: " + username);
+        }
+
+        return new MyUserPrincipal(user);
+	}
 
 }
 

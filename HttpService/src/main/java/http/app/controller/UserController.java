@@ -60,5 +60,10 @@ public class UserController {
 	public String login(User user) {
 		return service.login(user);
 	}
+	
+	@RequestMapping(value="/logout-success")
+	public String logoutPage() {
+		return "logout.jsp";
+	}
 
 }
