@@ -13,24 +13,6 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
 
-
-
-
-
-
-<style>
-.collapse.in {
-	visibility: visible;
-	display: flex;
-}
-
-body {
-	background-color: black;
-}
-
-</style>
-
-
 </head>
 
 
@@ -38,53 +20,64 @@ body {
 
 
 <body>
-	<div layout:fragment="content">
-		<div id="header" class="d-flex justify-content-around p-3 bg-secondary mb-3">
-		
-		<div class="p-2">
-			<h3 th:inline="text" style="font-family: 'Segoe UI', Arial, sans-serif;">Hello [[${#httpServletRequest.remoteUser}]]!</h3>
+
+<div id="bodyDiv">
+	<div id="header" class="d-flex p-3 bg-secondary text-white">
+
+		<div class=" p-2">
+			<h1 style="size:40px;">Dashboard</h1>
 		</div>
-		
-		<div class="p-2">
-			<h2>Dashboard</h2>
-		</div>
-		
-		<div class="p-2">
+
+		<div class="mx-auto float-right p-2">
 			<form th:action="@{/reports}" method="post">
-				<button type="submit" class="btn btn-lg ">Show reports</button>
+				<button type="submit" class="btn btn-lg text-white">Show reports</button>
 			</form>
 		</div>
 	</div>
-	<br>
-	<div class="reportTable m-5 text-white" th:unless="${#arrays.isEmpty(reports)}">
-		<h2>Reports</h2>
-		<table class="table table-hover table-dark table-striped text-white">
-			<thead>
-				<tr class="table-success">
-					<th>No.</th>
-					<th>Date</th>
-					<th>Protocol</th>
 
-				</tr>
-			</thead>
-			<tbody>
-				<th:block th:each="report, stat : ${reports}">
-					<tr th:attr="data-target=|#reportData${stat.index}|"
-						data-toggle="collapse">
-
-						<td th:text="${stat.index}+1"></td>
-						<td th:text="${#dates.format(report.dateAndTime, 'dd-MM-yyyy')}"></td>
-						<td th:text="${{report.type}}"></td>
-					</tr>
-
+	<div>
+	
+	<div class="text-white p-2">
+			<h3 th:inline="text"
+				style="font-family: 'Segoe UI', Arial, sans-serif;" th:utext="'Hello ' + ${currentUser.organization}">Hello
+				[[${#httpServletRequest.remoteUser}]]!</h3>
+		</div>
+		
+		<div class="reportTable m-5 text-white"
+			th:unless="${#arrays.isEmpty(reports)}">
+			<h2 style="font-family: 'Segoe UI', Arial, sans-serif;">Reports</h2>
+			<table class="table table-hover table-striped text-white">
+				<thead>
 					<tr>
-						<td colspan="3" class="hiddenRow"><pre
-								th:id="|reportData${stat.index}|" class="collapse"
-								th:text="${{report.toString()}}"></pre></td>
+						<th>No.</th>
+						<th>Date</th>
+						<th>Protocol</th>
+
 					</tr>
-				</th:block>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					<th:block th:each="report, stat : ${reports}">
+						<tr th:attr="data-target=|#reportData${stat.index}|"
+							data-toggle="collapse">
+
+							<td th:text="${stat.index}+1"></td>
+							<td th:text="${#dates.format(report.dateAndTime, 'dd-MM-yyyy')}"></td>
+							<td th:text="${{report.type}}"></td>
+						</tr>
+
+						<tr>
+							<td colspan="3" class="hiddenRow">
+							<pre class="text-white collapse"
+									th:id="|reportData${stat.index}|" 
+									th:text="${{report.toString()}}">
+							</pre>
+							</td>
+						</tr>
+					</th:block>
+				</tbody>
+			</table>
+		</div>
+	</div>
 	</div>
 </body>
 </html>

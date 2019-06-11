@@ -2,8 +2,10 @@ package userInterfaceService.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import userInterfaceService.connections.monitor.monitorConnection;
@@ -26,7 +28,6 @@ public class ReportsController {
     @RequestMapping(value = "/reports", method = RequestMethod.POST)
     public ModelAndView getReports() {
     	Report[] reports = this.monitorConnection.getReportsFromMonitor();
-    	
     	ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("reports", reports);
         modelAndView.setViewName("dashboard");

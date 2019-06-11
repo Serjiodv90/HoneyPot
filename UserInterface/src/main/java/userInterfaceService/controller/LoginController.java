@@ -5,10 +5,12 @@
  */
 package userInterfaceService.controller;
 
+import userInterfaceService.connections.monitor.monitorConnection;
 import userInterfaceService.connections.trapManagement.TrapManagementConnection;
 import userInterfaceService.domain.FakeUser;
 import userInterfaceService.domain.OrganizationDetails;
 import userInterfaceService.domain.OrganizationUser;
+import userInterfaceService.domain.Report;
 import userInterfaceService.service.CustomUserDetailsService;
 
 import javax.validation.Valid;
@@ -22,6 +24,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.FlashMap;
@@ -140,5 +143,10 @@ public class LoginController {
         modelAndView.setViewName("stam");	// the name of the html FILE!!!!!
         return modelAndView;
     }
+    
+    
+    
+    
+
 
 }
