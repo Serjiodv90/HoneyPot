@@ -38,7 +38,6 @@ public class JsonDelegatorConnection {
 	@Value("${jsonDelegator.host:localhost}")
 	public void setHostName(String hostName) {
 		this.hostName = hostName;
-		System.err.println("JsonDelegatorConnection.setHostName()\nHost name: " + this.hostName);
 	}
 	@Value("${jsonDelegator.port:8091}")
 	public void setHostPort(String hostPort) {
@@ -58,11 +57,11 @@ public class JsonDelegatorConnection {
 	}
 	
 	
-	public Object[] sendJsonToJsonDelegator(RequestFormat[] requestArr) {
+	public RequestFormat[] sendJsonToJsonDelegator(RequestFormat[] requestArr) {
 		String url = this.protocol + "://" + this.hostName + ":" + this.hostPort + this.hostPath;
 		System.err.println("In try to connect\nURL: " + url);
 		System.err.println("\n\nRest ya ben zonaaaa: " + rest + "\n\n");
-		return restTemplate.postForObject(url, requestArr, ResponseEntity[].class);
+		return restTemplate.postForObject(url, requestArr, RequestFormat[].class);
 	}
 	
 	

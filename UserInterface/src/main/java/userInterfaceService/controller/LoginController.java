@@ -115,12 +115,6 @@ public class LoginController {
     	return modelAndView;
     }
     
-    @RequestMapping(value = "/reports", method = RequestMethod.GET)
-    public ModelAndView getReports() {
-    	
-    	
-    	return null;
-    }
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public ModelAndView dashboard() {
@@ -137,6 +131,7 @@ public class LoginController {
         modelAndView.setViewName("dashboard");
         return modelAndView;
     }
+    
     
     @RequestMapping(value = {"/","/home"}, method = RequestMethod.GET)
     public ModelAndView home() {

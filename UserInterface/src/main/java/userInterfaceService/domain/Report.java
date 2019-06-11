@@ -5,12 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-import monitorServer.RequestFormat;
-import monitorServer.parser.ServerType;
 
-@Document(collection="REPORTS")
 public class Report {
 
 	private String id; 

@@ -5,49 +5,56 @@
 	layout:decorate="~{default}">
 <head>
 <title>Dashboard</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+<style>
+
+.collapse.in {
+  visibility: visible;
+  display: flex;
+}
+</style>
 </head>
 <body>
 	<div layout:fragment="content">
 		<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
 		<h2>This is your Admin Dashboard</h2>
 	</div>
+	
+	<form th:action="@{/reports}" method="post">
+		<button type="submit" class="btn btn-lg ">Show reports</button>
+	</form>
 
-	<div class="seedstarterlist"
-		th:unless="${#lists.isEmpty(allSeedStarters)}">
-		<h2 th:text="#{title.list}">List of Seed Starters</h2>
-		<table>
+<br>
+	<div class="reportTable"
+		th:unless="${#arrays.isEmpty(reports)}">
+		<h2>Reports</h2>
+		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th th:text="#{seedstarter.datePlanted}">Date Planted</th>
-					<th th:text="#{seedstarter.covered}">Covered</th>
-					<th th:text="#{seedstarter.type}">Type</th>
-					<th th:text="#{seedstarter.features}">Features</th>
-					<th th:text="#{seedstarter.rows}">Rows</th>
+					<th>No.</th>
+					<th>Date</th>
+					<th>Protocol</th>
+					
 				</tr>
 			</thead>
-			<tbody>
-				<tr th:each="sb : ${allSeedStarters}">
-					<td th:text="${{sb.datePlanted}}">13/01/2011</td>
-					<td th:text="#{|bool.${sb.covered}|}">yes</td>
-					<td th:text="#{|seedstarter.type.${sb.type}|}">Wireframe</td>
-					<td
-						th:text="${#strings.arrayJoin(
-#messages.arrayMsg(
-#strings.arrayPrepend(sb.features,'seedstarter.feature.')),
-', ')}">Electric
-						Heating, Turf</td>
-					<td>
-						<table>
-							<tbody>
-								<tr th:each="row,rowStat : ${sb.rows}">
-									<td th:text="${rowStat.count}">1</td>
-									<td th:text="${row.variety.name}">Thymus Thymi</td>
-									<td th:text="${row.seedsPerCell}">12</td>
-								</tr>
-							</tbody>
-						</table>
+			<tbody >
+			<th:block th:each="report, stat : ${reports}">
+				<tr   th:attr="data-target=|#reportData${stat.index}|" data-toggle="collapse">
+					
+					<td th:text="${stat.index}+1"></td>
+					<td th:text="${#dates.format(report.dateAndTime, 'dd-MM-yyyy')}"></td>
+					<td th:text="${{report.type}}"></td>
+				</tr>
+				
+				<tr>
+					<td colspan="3">
+						<pre th:id="|reportData${stat.index}|" class="collapse" th:text="${{report.content}}"></pre>
 					</td>
 				</tr>
+		</th:block>
 			</tbody>
 		</table>
 	</div>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import monitorServer.RequestFormat;
+import monitorServer.storage.Report;
 import monitorServer.storage.ReportStorage;
 
 
@@ -24,15 +25,27 @@ public class ConnectionController {
 		this.reportStorage = reportStorage;
 	}
 
-	@RequestMapping(path="/storeReport",
+	@RequestMapping(
+					path="/storeReport",
 					method=RequestMethod.POST,
 					consumes=MediaType.APPLICATION_JSON_VALUE,
-					produces=MediaType.APPLICATION_JSON_VALUE)
+					produces=MediaType.APPLICATION_JSON_VALUE
+					)
 	public RequestFormat[] getJsonFile(@RequestBody RequestFormat[] reqArrList) {
 		System.out.println("In monitor");
 		//		System.out.println(reqArrList);
 		this.reportStorage.createReport(new ArrayList<>(Arrays.asList(reqArrList)));
 		return reqArrList;
+	}
+	
+	
+	@RequestMapping(
+					path="/reports",
+					method=RequestMethod.GET,
+					produces=MediaType.APPLICATION_JSON_VALUE
+					)
+	public Report[] getAllReports() {
+		return this.reportStorage.getAllReports().toArray(new Report[0]);
 	}
 
 

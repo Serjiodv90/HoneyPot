@@ -2,6 +2,7 @@ package monitorServer.storage;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,6 +10,8 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.databind.ser.std.IterableSerializer;
 
 import monitorServer.RequestFormat;
 import monitorServer.dal.ReportDao;
@@ -68,6 +71,11 @@ public class ReportStorage {
 	}
 	
 	
+	public List<Report> getAllReports() {
+		List<Report> reports = new ArrayList<>();
+		this.reportDao.findAll().forEach(reports::add);
+		return reports;
+	}
 	
 	
 
