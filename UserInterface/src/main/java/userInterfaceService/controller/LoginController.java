@@ -14,8 +14,10 @@ import userInterfaceService.domain.Report;
 import userInterfaceService.service.CustomUserDetailsService;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import org.hibernate.validator.internal.util.privilegedactions.GetAnnotationAttribute;
+import org.hibernate.validator.internal.util.privilegedactions.NewInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +26,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -37,13 +40,15 @@ public class LoginController {
     @Autowired
     private CustomUserDetailsService userService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = {"/","/home", "/login"}, method = RequestMethod.GET)
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
+        
         modelAndView.setViewName("login");
         System.out.println("LoginController.login()\n" + modelAndView.toString());
         return modelAndView;
     }
+    
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public ModelAndView signup() {
@@ -114,14 +119,14 @@ public class LoginController {
     	
     	
     	ModelAndView modelAndView = new ModelAndView();
-    	modelAndView.setViewName("redirect:/dashboard");	//set the url - dashboard
+    	modelAndView.setViewName("redirect:/login");	//set the url - dashboard
     	return modelAndView;
     }
     
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-    public ModelAndView dashboard() {
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView dashboard(ModelAndView modelAndView) {
+//        ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         OrganizationUser user = userService.findUserByEmail(auth.getName());
         
@@ -129,20 +134,21 @@ public class LoginController {
         System.err.println("Auth user: " + user);
         
         modelAndView.addObject("currentUser", user);
+//        modelAndView.addObject("type", new String());
 //        modelAndView.addObject("fullName", "Welcome " + user.getFullname());
-        modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
+//        modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
         modelAndView.setViewName("dashboard");
         return modelAndView;
     }
     
     
-    @RequestMapping(value = {"/","/home"}, method = RequestMethod.GET)
-    public ModelAndView home() {
-    	System.out.println("LoginController.home()");
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("stam");	// the name of the html FILE!!!!!
-        return modelAndView;
-    }
+//    @RequestMapping(value = {"/","/home"}, method = RequestMethod.GET)
+//    public ModelAndView home() {
+//    	System.out.println("LoginController.home()");
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("login");	// the name of the html FILE!!!!!
+//        return modelAndView;
+//    }
     
     
     
