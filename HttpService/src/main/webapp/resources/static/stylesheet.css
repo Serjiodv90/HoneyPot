@@ -1,14 +1,24 @@
 body {
     direction: rtl;
     /* background-repeat: repeat-x; */
-    background-size: 100%;
+    /*background-size: 100%;*/
     background-image: url(/resources/static/Images/loginBackground.jpg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     font-family: Calibri, Tahoma, Verdana, Arial, Helvetica, Sans-Serif;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    /*-moz-osx-font-smoothing: grayscale;*/
+}
+
+body, table, td, th, div, input {
+    font-size: 14px;
+}
+
+body, html {
+    padding: 0;
+    margin: 0;
+    height: 100%;
 }
 
 label {
