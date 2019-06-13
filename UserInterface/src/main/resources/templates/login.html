@@ -43,7 +43,7 @@ body {
 		</form>
 	</div>
 	
-		<div  id="id01" class="modal">
+		<div th:style="${badLogin} ? 'display:block' : 'display:none'" id="id01" class="modal">
 
 			<form class="modal-content animate regLogForm" th:action="@{/login}"
 				method="post">
@@ -53,6 +53,7 @@ body {
 
 				<div class="container">
 					 
+					<div th:if="${badLogin}"   th:utext="${badLogin}" class="alert alert-danger"></div>
 					 
 					<label for="email"><b>Email</b></label> 
 					<input type="text" placeholder="Enter Username" name="email" required> 

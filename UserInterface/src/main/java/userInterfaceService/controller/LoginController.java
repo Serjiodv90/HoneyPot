@@ -41,8 +41,13 @@ public class LoginController {
     private CustomUserDetailsService userService;
 
     @RequestMapping(value = {"/","/home", "/login"}, method = RequestMethod.GET)
-    public ModelAndView login() {
+    public ModelAndView login(@RequestParam(name="error", required=false) String errorStr) {
         ModelAndView modelAndView = new ModelAndView();
+        
+        System.err.println("\n\nERROR: " + errorStr + "\n\n");
+        
+        if(errorStr != null && !errorStr.isEmpty() && errorStr.equalsIgnoreCase("true"))
+        	modelAndView.addObject("badLogin", "Incorrect email or password");
         
         modelAndView.setViewName("login");
         System.out.println("LoginController.login()\n" + modelAndView.toString());

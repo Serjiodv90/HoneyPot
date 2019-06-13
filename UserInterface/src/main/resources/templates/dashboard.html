@@ -33,10 +33,14 @@
 				<h1 style="size: 40px;">Dashboard</h1>
 			</div>
 
+		
 			<div style="display: flex; margin-left: 956px;">
-				<button type="submit" class="btn btn-lg text-white">Download
-					Traps</button>
+				<form th:action="@{/download}" method="get">
+					<button type="submit" class="btn btn-lg text-white">Download Traps</button>
+				</form>
 			</div>
+			
+			
 
 		</div>
 
