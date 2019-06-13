@@ -1,4 +1,4 @@
-package http.app;
+package http.app.securityConfig;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.csrf().disable()
-			.authorizeRequests().antMatchers("/login").permitAll()
+			.authorizeRequests().antMatchers("/login", "/resources/**").permitAll()
 			.anyRequest().authenticated()
 			.and()
 			.formLogin()
@@ -59,13 +59,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return provider;
 	}
 
-	@Override
-    public void configure(WebSecurity web) throws Exception {
-        web
-                .ignoring()
-                .antMatchers("/webapp/**");
-    }
-	
+//	@Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web
+//                .ignoring()
+//                .antMatchers("/resources/**", "/static/**", "/css/**", "/images/**", "/webapp/**");
+//    }
+//	
 //	@Bean
 //	@Override
 //	protected UserDetailsService userDetailsService() {

@@ -2,7 +2,7 @@ body {
     direction: rtl;
     /* background-repeat: repeat-x; */
     background-size: 100%;
-    background-image: url(Images/loginBackground.jpg);
+    background-image: url(/resources/static/Images/loginBackground.jpg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;

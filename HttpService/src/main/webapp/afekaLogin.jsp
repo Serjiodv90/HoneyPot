@@ -7,7 +7,8 @@
     <!--<meta charset="windows-1255">-->
     <meta charset="utf-8" />
     <title>Afeka Login</title>
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+   <link rel="stylesheet" type="text/css" href="/resources/static/stylesheet.css">    
+   <!--<link href="<c:url value="/resources/stylesheet.css" />" rel="stylesheet">-->
 </head>
 
 <body>
@@ -20,7 +21,7 @@
                     <form action="login" method="post">
                         <table id="credentials_table">
                             <tr>
-                                <td colspan=2 id="credentials_table_header"><img src="Images/afeka_logo.png"></td>
+                                <td colspan=2 id="credentials_table_header"><img src="/resources/static/Images/afeka_logo.png"></td>
                             </tr>
                             <tr>
                                 <td colspan=2 id="credentials_table_postheader"></td>
