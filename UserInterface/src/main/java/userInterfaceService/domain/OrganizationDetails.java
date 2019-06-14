@@ -3,7 +3,6 @@ package userInterfaceService.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
 
 
 public class OrganizationDetails {

@@ -1,15 +1,15 @@
-package trapManagementServer.traps.controller;
+package trapManagement.app.controller;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import trapManagementServer.traps.organizationDetails.OrganizationDetails;
-import trapManagementServer.traps.organizationDetails.OrganizationService;
+import trapManagement.app.model.organizationDetails.OrganizationDetails;
+import trapManagement.app.model.organizationDetails.OrganizationService;
 
 @RestController
 public class TrapManagementController {

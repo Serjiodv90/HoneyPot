@@ -4,7 +4,7 @@ public class FakeUser {
 
 	private String id;	//generated for DB
 	private String firstName; 
-	private String lastname;
+	private String lastName;
 //	private String password;
 //	private String dedicationServer;
 	
@@ -21,11 +21,11 @@ public class FakeUser {
 	}
 
 	public String getLastName() {
-		return lastname;
+		return lastName;
 	}
 
 	public void setLastName(String lastname) {
-		this.lastname = lastname;
+		this.lastName = lastname;
 	}
 
 //	public String getDedicationServer() {
@@ -56,6 +56,6 @@ public class FakeUser {
 @Override
 	public String toString() {
 		return "First name: " + this.firstName + 
-				"\tLast name: " + this.lastname;
+				", Last name: " + this.lastName + "\t";
 	}
 }

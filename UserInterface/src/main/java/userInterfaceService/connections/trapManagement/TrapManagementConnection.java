@@ -19,19 +19,19 @@ public class TrapManagementConnection {
 	private RestTemplate restTemplate;
 	
 	
-	@Value("${trapManagement.server}:localhost")
+	@Value("${trapManagement.server:localhost}")
 	public void setHostName(String hostName) {
 		this.hostName = hostName;
 	}
-	@Value("${trapManagement.port}:8090")
+	@Value("${trapManagement.port:8090}")
 	public void setHostPort(String hostPort) {
 		this.hostPort = hostPort;
 	}
-	@Value("${trapManagement.path}:/organizationDetails")
+	@Value("${trapManagement.path:/organizationDetails}")
 	public void setHostPath(String hostPath) {
 		this.hostPath = hostPath;
 	}
-	@Value("${trapManagement.protocol}:https")
+	@Value("${trapManagement.protocol:http}")
 	public void setProtocol(String protocol) {
 		this.protocol = protocol;
 	}

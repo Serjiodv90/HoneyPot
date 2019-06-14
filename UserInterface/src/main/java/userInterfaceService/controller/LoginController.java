@@ -43,9 +43,7 @@ public class LoginController {
     @RequestMapping(value = {"/","/home", "/login"}, method = RequestMethod.GET)
     public ModelAndView login(@RequestParam(name="error", required=false) String errorStr) {
         ModelAndView modelAndView = new ModelAndView();
-        
-        System.err.println("\n\nERROR: " + errorStr + "\n\n");
-        
+                
         if(errorStr != null && !errorStr.isEmpty() && errorStr.equalsIgnoreCase("true"))
         	modelAndView.addObject("badLogin", "Incorrect email or password");
         
@@ -120,7 +118,7 @@ public class LoginController {
     	status.setComplete();
     	
     	System.err.println("\n\nSending to trap management...");
-//    	new TrapManagementConnection().sendOrganizationDetails(details);
+    	new TrapManagementConnection().sendOrganizationDetails(details);
     	
     	
     	ModelAndView modelAndView = new ModelAndView();

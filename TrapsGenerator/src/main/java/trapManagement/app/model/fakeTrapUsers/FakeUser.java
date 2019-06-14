@@ -1,14 +1,22 @@
-package trapManagementServer.traps.fakeTrapUsers;
+package trapManagement.app.model.fakeTrapUsers;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 //@Document(collection="Fake_Users")
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class FakeUser {
 	
 	private String id;	//generated for DB
 	private String firstName; 
-	private String lastname;
+	private String lastName;
+	
+//	@JsonProperty(access=Access.READ_ONLY)
 	private String password;
+//	@JsonProperty(access=Access.READ_ONLY)
 	private String dedicationServer;
 	
 	public FakeUser() {
@@ -23,12 +31,12 @@ public class FakeUser {
 		this.firstName = firstName;
 	}
 
-	public String getLastname() {
-		return lastname;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setLastName(String lastname) {
+		this.lastName = lastname;
 	}
 
 	public String getDedicationServer() {
@@ -54,6 +62,13 @@ public class FakeUser {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	@Override
+	public String toString() {
+		return "FakeUser [id=" + id + ", firstName=" + firstName + ", lastname=" + lastName + ", password=" + password
+				+ ", dedicationServer=" + dedicationServer + "]";
+	}
+
 	
 	
 

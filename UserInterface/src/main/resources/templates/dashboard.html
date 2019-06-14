@@ -99,7 +99,7 @@
 								data-toggle="collapse">
 
 								<td th:text="${stat.index}+1"></td>
-								<td th:text="${#dates.format(report.dateAndTime, 'dd-MM-yyyy')}"></td>
+								<td th:text="${#dates.format(report.dateAndTime, 'dd-MM-yyyy  HH:mm:ss')}"></td>
 								<td th:text="${{report.type}}"></td>
 							</tr>
 
