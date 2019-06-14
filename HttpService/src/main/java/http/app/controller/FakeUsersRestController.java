@@ -33,19 +33,19 @@ public class FakeUsersRestController {
 		 
 	}
 	
-	
-	@RequestMapping(path="/fakeUser",
-			method=RequestMethod.POST,
-			produces=MediaType.APPLICATION_JSON_VALUE,
-			consumes=MediaType.APPLICATION_JSON_VALUE)
-	public User fakeUser(@RequestBody User user) {
-
-		System.err.println("FakeUsersRestController");
-		System.out.println(user.getUserName());
-		System.out.println(user.getPassword());
-		return userService.save(user);
-		 
-	}
+//	
+//	@RequestMapping(path="/fakeUser",
+//			method=RequestMethod.POST,
+//			produces=MediaType.APPLICATION_JSON_VALUE,
+//			consumes=MediaType.APPLICATION_JSON_VALUE)
+//	public User fakeUser(@RequestBody User user) {
+//
+//		System.err.println("FakeUsersRestController");
+//		System.out.println(user.getUserName());
+//		System.out.println(user.getPassword());
+//		return userService.save(user);
+//		 
+//	}
 	
 	
 	

@@ -3,9 +3,12 @@ package http.app.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection="HTTP_Users")
 public class User {
 	
+	private String id;
 	private String userName;
 	private String password;
 	
@@ -20,6 +23,14 @@ public class User {
 	}
 	
 	@Id
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	public String getUserName() {
 		return userName;
 	}

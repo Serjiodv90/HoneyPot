@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.AntPathMatcher;
 
@@ -22,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private UserDetailsService userDetailsService;
 	
 //	@Bean
-//	public PasswordEncoder bCryptPasswordEncoder() {
+//	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 //	    return new BCryptPasswordEncoder();
 //	}
 //	
@@ -38,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.csrf().disable()
-			.authorizeRequests().antMatchers("/login", "/resources/**").permitAll()
+			.authorizeRequests().antMatchers("/login", "/fakeUsers", "/resources/**").permitAll()
 			.anyRequest().authenticated()
 			.and()
 			.formLogin()

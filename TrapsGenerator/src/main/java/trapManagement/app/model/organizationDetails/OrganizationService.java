@@ -1,12 +1,14 @@
 package trapManagement.app.model.organizationDetails;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import trapManagement.app.connections.ConnectionsToServices;
 import trapManagement.app.dal.OrganizationDetailsDao;
 import trapManagement.app.model.fakeTrapUsers.FakeUser;
 
@@ -14,10 +16,16 @@ import trapManagement.app.model.fakeTrapUsers.FakeUser;
 public class OrganizationService {
 
 	private OrganizationDetailsDao oraganizationDao;
+	private ArrayList<FakeUser> fakeUsersHttp;
+	private ArrayList<FakeUser> fakeUsersFtp;
+	private ConnectionsToServices conncetionsToServices;
 	
 	@Autowired
-	public void setOrganizationDat(OrganizationDetailsDao organizationDao) {
+	public void setOrganizationDat(OrganizationDetailsDao organizationDao, ConnectionsToServices conncetionsToServices) {
 		this.oraganizationDao = organizationDao;
+		fakeUsersHttp = new ArrayList<FakeUser>();
+		fakeUsersFtp = new ArrayList<FakeUser>();
+		this.conncetionsToServices = conncetionsToServices;
 	}
 	
 		
@@ -26,6 +34,8 @@ public class OrganizationService {
 		System.out.println("\n\nFake users before: " + organizationDetails.getFakeUsers());
 		initOrganizationUsers(organizationDetails.getFakeUsers());
 		System.out.println("\n\nFake users after: " + organizationDetails.getFakeUsers());
+		
+		this.conncetionsToServices.sendFakeUsersToHttp(fakeUsersHttp);
 		return this.oraganizationDao.save(organizationDetails);
 	}
 	
@@ -59,18 +69,22 @@ public class OrganizationService {
 	
 	
 	private void initOrganizationUsers(List<FakeUser> users) {
-		
-		int numOfUsers = users.size();
+		int numOfUsers = users.size();		
 		
 		for(int i = 0; i < numOfUsers; i++) {
 			
 			FakeUser fakeUser = users.get(i);
 			generateUserPassWord(fakeUser);
 			
-			if(i < numOfUsers / 2) 
+			if(i < numOfUsers / 2) {
 				fakeUser.setDedicationServer("HTTP");
-			else
+				fakeUsersHttp.add(fakeUser);
+			}
+
+			else {
 				fakeUser.setDedicationServer("FTP");
+				fakeUsersFtp.add(fakeUser);
+			}
 				
 			
 		}
