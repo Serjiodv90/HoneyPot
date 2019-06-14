@@ -53,6 +53,7 @@ public class HoneyFtpLet extends DefaultFtplet{
 				
 		//if the same client (by its ip address) tries to connect with different userName or something like that, don't create another log fo it
 		if(!this.currentConnectedClients.contains(clientIp)) {
+			this.currentConnectedClients.add(clientIp);
 			ApplicationContext context = new AnnotationConfigApplicationContext(ConfigurationJsonDelegator.class);
 			System.err.println(((FtpLoggerManager)context.getBean("FtpLoggerManager")));
 //			((FtpLoggerManager)context.getBean("FtpLoggerManager")).delegateJson();
@@ -91,10 +92,16 @@ public class HoneyFtpLet extends DefaultFtplet{
 	 public FtpletResult onDisconnect(FtpSession session) {
 		System.out.println("\n\nUser dissconnected: \n\n");
 		String clientIp = session.getClientAddress().getHostString();
+		System.err.println("Current connected users: " + this.currentConnectedClients);
+
+		//make sure that this client didn't disconnected already
+		if(this.currentConnectedClients.contains(clientIp)) {
+			logMan.onDisconnect(clientIp);
+			//delete client from the list when disconnected
+			this.currentConnectedClients.remove(clientIp);
+		}
 		
-		logMan.onDisconnect(clientIp);
-		//delete client from the list when disconnected
-		this.currentConnectedClients.remove(clientIp);
+		
 		return null;
 	}																																																																																
 	

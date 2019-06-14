@@ -7,9 +7,11 @@ public enum HoneyFtpCommands {
 	DELE("DELE", "deleted file: "),
 	RMD("RMD", "removed directory: "),
 	RETR("RETR", "is downloading file : "),
-	MDR("MDR", "created new directory: "),
+	MKD("MKD", "created new directory: "),
 	CWD("CWD", "changed working directory to: "),
 	PWD("PWD", "prints current working directory: "),
+	RNFR("RNFR", "renamed from: "),
+	RNTO("RNTO", "renamed to: "),
 	QUIT("QUIT", "disconnected")
 	
 	;

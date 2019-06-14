@@ -71,7 +71,7 @@ public class FtpLoggerManager {
 	//	}
 
 	private void addActionToList(String action) {
-		System.out.println("\nWriting to log\n");
+		System.out.println("\nWriting to log : " + action + "\n");
 		this.actionsToStore.add(new RequestFormat(DateFormatter.getCurrentDateTimeForLog(), action));
 		logger.info(action);
 	}
@@ -90,8 +90,6 @@ public class FtpLoggerManager {
 		String action = "Client with ip address: " + clientIp + ", has disconnected from the server";
 		addActionToList(action);
 		delegateJson();
-
-		//TODO: send the list to trapManager so it can send it to monitor
 	}
 
 	public void onLogin(String userName, String userPwd) {

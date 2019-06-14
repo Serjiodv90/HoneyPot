@@ -31,22 +31,26 @@ public class FTP_Parser implements JsonToReportParser{
 	}
 
 	private String getCmdDescription(String request) {
-//		System.out.println("FTP_Parser.getCmdDescription()\nthe request: " + request + "\n");
 		String [] cmdAndName = request.split(":")[2].split(",");	//contains the action description and the action target (e.x. file name) 
 		String reqCmd = cmdAndName[0].trim();
 		
-		System.out.println("request: " + request);
+		System.err.println("\nrequest: " + request);
 		
-		String cmdDescription = formatCommandDescription("Client" + HoneyFtpCommands.getCommandDescription(reqCmd));
-		if(!cmdDescription.isEmpty())
-			if(!cmdAndName[1].contains("null"))
-				cmdDescription += "\t" + cmdAndName[1];
-			else 
-				return "";
+		String cmdDescription = HoneyFtpCommands.getCommandDescription(reqCmd);
+		if(!cmdDescription.isEmpty() && !cmdAndName[1].contains("null")) {
+//			if()
+			String cmdForReport = formatCommandDescription("Client " + cmdDescription);
+			cmdForReport += "\t" + cmdAndName[1];
+			
+			System.err.println("FTP_Parser.getCmdDescription()\tcmdAndName: " + cmdForReport);
+
+			return  cmdForReport ;
+		}
+		else 
+			return "";
 			
 		
-		System.out.println("FTP_Parser.getCmdDescription()\tcmdAndName: " + cmdDescription);
-		return  cmdDescription ;
+		
 	}
 
 	@Override

@@ -10,6 +10,8 @@ public enum HoneyFtpCommands {
 	MDR("MDR", "Create new directory: "),
 	CWD("CWD", "Change working directory to: "),
 	PWD("PWD", "Print current working directory: "),
+	RNFR("RNFR", "renamed from: "),
+	RNTO("RNTO", "renamed to: "),
 	QUIT("QUIT", "User disconnected")
 	
 	;
