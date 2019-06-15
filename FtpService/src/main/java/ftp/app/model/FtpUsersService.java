@@ -1,4 +1,4 @@
-package ftp.app.dblink;
+package ftp.app.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,19 +17,28 @@ public class FtpUsersService {
 	@Autowired
 	public FtpUsersService(FtpUserDao ftpUserDao) {
 		this.ftpUserDao = ftpUserDao;
+		
 	}
 	
-	public List<FtpUser> getAllAllowedFtpUsers() {
-		List<FtpUser> users = new ArrayList<>();
-		this.ftpUserDao.findAll().forEach(user->users.add(user));
-		return users;
-	}
+//	public List<FtpUser> getAllAllowedFtpUsers() {
+//		List<FtpUser> users = new ArrayList<>();
+//		this.ftpUserDao.findAll().forEach(user->users.add(user));
+//		return users;
+//	}
 	
 	public Optional<FtpUser> getUserByName(String name) {
 		return this.ftpUserDao.findById(name);
 	}
 	
-	public FtpUser insertFrpUser(FtpUser user) {
+	public void saveAllFtpUsers(FtpUser[] users) {
+		for (FtpUser user : users) {
+			this.saveFtpUser(user);
+			System.err.println("FtpUsersService.saveAllFtpUsers()\nUser: " + user);
+		}
+		
+	}
+	
+	public FtpUser saveFtpUser(FtpUser user) {
 		return this.ftpUserDao.save(user);
 	}
 	

@@ -9,13 +9,20 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 //@Document(collection="Fake_Users")
 //@JsonIgnoreProperties(ignoreUnknown = true)
 public class FakeUser {
-	
+
 	private String id;	//generated for DB
 	private String firstName; 
 	private String lastName;
 	private String userName;
-	
-public String getUserName() {
+
+	//	@JsonProperty(access=Access.READ_ONLY)
+	private String password;
+	//	@JsonProperty(access=Access.READ_ONLY)
+	private String dedicationServer;
+
+
+
+	public String getUserName() {
 		return userName;
 	}
 
@@ -23,13 +30,8 @@ public String getUserName() {
 		this.userName = userName;
 	}
 
-	//	@JsonProperty(access=Access.READ_ONLY)
-	private String password;
-//	@JsonProperty(access=Access.READ_ONLY)
-	private String dedicationServer;
-	
 	public FakeUser() {
-		
+
 	}
 
 	public String getFirstName() {
@@ -78,9 +80,9 @@ public String getUserName() {
 				+ ", password=" + password + ", dedicationServer=" + dedicationServer + "]";
 	}
 
-	
 
-	
-	
+
+
+
 
 }

@@ -34,8 +34,8 @@ public class OrganizationService {
 		initOrganizationUsers(organizationDetails);
 		System.out.println("\n\nFake users after: " + organizationDetails.getFakeUsers());
 		
-		this.conncetionsToServices.sendFakeUsersToHttp(fakeUsersHttp);
-		this.conncetionsToServices.sendFakeUsersToFtp(fakeUsersFtp)
+//		this.conncetionsToServices.sendFakeUsersToHttp(fakeUsersHttp);
+		this.conncetionsToServices.sendFakeUsersToFtp(fakeUsersFtp);
 		
 		return this.oraganizationDao.save(organizationDetails);
 	}

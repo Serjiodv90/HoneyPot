@@ -1,4 +1,4 @@
-package ftp.app.model;
+package ftp.app.logic;
 
 public enum HoneyFtpCommands {
 	USER("USER", "User name: "),

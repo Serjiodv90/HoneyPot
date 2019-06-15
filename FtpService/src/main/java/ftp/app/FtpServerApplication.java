@@ -9,7 +9,7 @@ import org.apache.ftpserver.ftplet.FtpException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import ftp.app.model.HoneyFtpUtils;
+import ftp.app.logic.HoneyFtpUtils;
 
 @SpringBootApplication
 public class FtpServerApplication {

@@ -1,4 +1,4 @@
-package ftp.app.model;
+package ftp.app.logic;
 
 import java.io.IOException;
 
