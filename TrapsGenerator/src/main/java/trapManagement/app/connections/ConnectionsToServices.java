@@ -15,14 +15,14 @@ import trapManagement.app.model.fakeTrapUsers.FakeUser;
 @Component
 public class ConnectionsToServices {
 	
-	private String httpHostName;
-	private String ftpHostName;
+	private String hostName;
+//	private String ftpHostName;
 	
-	private String httpHostPort;
-	private String ftpHostPort;
+	private String hostPort;
+//	private String ftpHostPort;
 	
-	private String httpHostPath;
-	private String ftpHostPath;
+	private String hostPath;
+//	private String ftpHostPath;
 	
 	private String protocol;
 	
@@ -36,33 +36,33 @@ public class ConnectionsToServices {
 	}
 	
 	
-	@Value("${http.server:localhost}")
-	public void setHttpHostName(String hostName) {
-		this.httpHostName = hostName;
-	}
-	@Value("${http.port:8091}")
-	public void setHttpHostPort(String hostPort) {
-		this.httpHostPort = hostPort;
-	}
-	@Value("${http.path:/fakeUsers}")
-	public void setHttpHostPath(String hostPath) {
-		this.httpHostPath = hostPath;
-	}
-	@Value("${http.protocol:http}")
-	public void setProtocol(String protocol) {
-		this.protocol = protocol;
-	}
+//	@Value("${http.server:localhost}")
+//	public void setHttpHostName(String hostName) {
+//		this.hostName = hostName;
+//	}
+//	@Value("${http.port:8092}")
+//	public void setHttpHostPort(String hostPort) {
+//		this.hostPort = hostPort;
+//	}
+//	@Value("${http.path:/fakeUsers}")
+//	public void setHttpHostPath(String hostPath) {
+//		this.hostPath = hostPath;
+//	}
+//	@Value("${http.protocol:http}")
+//	public void setProtocol(String protocol) {
+//		this.protocol = protocol;
+//	}
 	
 	@PostConstruct
 	public void configRestTemplate() {
 		this.restTemplate = new RestTemplate();
 	}
 	
-	public void sendFakeUsersToHttp(ArrayList<FakeUser> fakeUsersHttp) {
+	private void sendFakeUsers(ArrayList<FakeUser> fakeUsers) {
 //		this.protocol = env.getProperty("ftp.protocol");
-		System.err.println("ConnectionToServices: sendFakeUsersToHttp()");
-		FakeUser[] users = new FakeUser[fakeUsersHttp.size()];
-		users = fakeUsersHttp.toArray(users);
+		System.err.println("ConnectionToServices: sendFakeUsers()");
+		FakeUser[] users = new FakeUser[fakeUsers.size()];
+		users = fakeUsers.toArray(users);
 		
 		for(int i=0; i < users.length ; i++) {
 			System.out.println(users[i]);
@@ -72,10 +72,10 @@ public class ConnectionsToServices {
 		String url = //"http://localhost:8085/reports"  ;
 				this.protocol + 
 					 "://" + 
-					 this.httpHostName + 
+					 this.hostName + 
 					 ":" + 
-					 this.httpHostPort +
-					 this.httpHostPath;
+					 this.hostPort +
+					 this.hostPath;
 		
 		System.err.println("URL: " + url );
 		this.restTemplate.postForObject(url, users, FakeUser[].class);		
@@ -83,11 +83,21 @@ public class ConnectionsToServices {
 
 
 	public void sendFakeUsersToFtp(ArrayList<FakeUser> fakeUsersFtp) {
-		FakeUser[] users = new FakeUser[fakeUsersFtp.size()];
-		users = fakeUsersFtp.toArray(users);
+		this.hostName = env.getProperty("ftp.server");
+		this.protocol = env.getProperty("ftp.protocol");
+		this.hostPort = env.getProperty("ftp.port");
+		this.hostPath = env.getProperty("ftp.path");
 		
-		//TODO set url and send
-		
+		sendFakeUsers(fakeUsersFtp);
 	}
-
+	
+	public void sendFakeUsersToHttp(ArrayList<FakeUser> fakeUsersHttp) {
+		this.hostName = env.getProperty("http.server");
+		this.protocol = env.getProperty("http.protocol");
+		this.hostPort = env.getProperty("http.port");
+		this.hostPath = env.getProperty("http.path");
+		
+		sendFakeUsers(fakeUsersHttp);
+	}
+	
 }

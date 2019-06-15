@@ -28,22 +28,19 @@ public class OrganizationService {
 		this.conncetionsToServices = conncetionsToServices;
 	}
 	
-		
 	public OrganizationDetails createOrganizationUser(OrganizationDetails organizationDetails) {	
 		
 		System.out.println("\n\nFake users before: " + organizationDetails.getFakeUsers());
-		initOrganizationUsers(organizationDetails.getFakeUsers());
+		initOrganizationUsers(organizationDetails);
 		System.out.println("\n\nFake users after: " + organizationDetails.getFakeUsers());
 		
 		this.conncetionsToServices.sendFakeUsersToHttp(fakeUsersHttp);
-		this.conncetionsToServices.sendFakeUsersToFtp(fakeUsersFtp);
+		this.conncetionsToServices.sendFakeUsersToFtp(fakeUsersFtp)
+		
 		return this.oraganizationDao.save(organizationDetails);
 	}
 	
-	
-	
-	
-	private static void generateUserPassWord(FakeUser user) {
+	private void generateUserPassWord(FakeUser user) {
 		final int MAX_PASS_LEN = 12;
 		final int MIN_PASS_LEN = 8;
 		
@@ -63,22 +60,21 @@ public class OrganizationService {
 		
 		user.setPassword(password.toString());
 		
-		//TODO method to set usernames and delete this row
-		user.setUserName(fName);
-		
 		System.err.println("\n\nUser: " + user + "\n");
 		
 	}
 	
 	
 	
-	private void initOrganizationUsers(List<FakeUser> users) {
+	private void initOrganizationUsers(OrganizationDetails organizationDetails) {
+		List<FakeUser> users = organizationDetails.getFakeUsers();
 		int numOfUsers = users.size();		
 		
 		for(int i = 0; i < numOfUsers; i++) {
 			
 			FakeUser fakeUser = users.get(i);
 			generateUserPassWord(fakeUser);
+			generateUserName(fakeUser, organizationDetails.getEmailPostfix());
 			
 			if(i < numOfUsers / 2) {
 				fakeUser.setDedicationServer("HTTP");
@@ -92,6 +88,22 @@ public class OrganizationService {
 				
 			
 		}
+	}
+
+	private void generateUserName(FakeUser fakeUser, String emailPostfix) {
+		String fName = fakeUser.getFirstName();
+		String lName = fakeUser.getLastName();
+		
+		StringBuilder userName = new StringBuilder().append(fName).append(".");
+		
+		Random random = new Random();
+		int randomLastNameLen = random.nextInt(lName.length()) + 1;
+		
+		userName.append(lName.substring(0, randomLastNameLen)).append(emailPostfix);
+		
+		fakeUser.setUserName(userName.toString());
+		
+		System.err.println("\n\nUser after setUserName: " + fakeUser + "\n");
 	}
 	
 	
