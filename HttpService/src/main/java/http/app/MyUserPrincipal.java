@@ -11,7 +11,11 @@ import http.app.model.User;
 
 public class MyUserPrincipal implements UserDetails {
 	
-    private User user;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private User user;
  
     public MyUserPrincipal(User user) {
         this.user = user;

@@ -45,6 +45,10 @@ public class HttpSessionConfig {
                 System.out.println("Attribute Added following information");
                 System.out.println("Attribute Name:" + se.getName());
                 System.out.println("Attribute Value:" + se.getName());
+                
+                if(se.getName().equals("userName")) { 
+                	httpRequestInterceptor.saveUserNameAndPassword();
+                }
             }
             @Override
             public void attributeRemoved(HttpSessionBindingEvent se) {      // This method will be automatically called when session attribute removed

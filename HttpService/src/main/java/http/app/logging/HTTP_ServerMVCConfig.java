@@ -16,7 +16,7 @@ public class HTTP_ServerMVCConfig implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 //		System.out.println("Config");
-		registry.addInterceptor(httpReqInterceptor).addPathPatterns("/**/");
+		registry.addInterceptor(httpReqInterceptor).addPathPatterns("/**");
 		
 		JsonFilesManager jsonManager = JsonFilesManager.getInstance();
 		httpReqInterceptor.registerObserver(jsonManager);

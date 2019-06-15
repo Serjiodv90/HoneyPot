@@ -25,10 +25,7 @@ public class UserService implements UserDetailsService {
 
 	private UserDao dao;
 	private Vector<User> users;
-//	private PasswordEncoder passwordEncoder;
-	
-	
-  
+
 	private BCryptPasswordEncoder encoder;
     
     public UserService() {
@@ -72,10 +69,12 @@ public class UserService implements UserDetailsService {
 
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = dao.findByUserName(username);
+	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+		System.err.println("loadUserByUsername");
+		User user = dao.findByUserName(userName);
+		System.out.println("userName= " + userName + "user is " + user);
 		if (user == null) {
-            throw new UsernameNotFoundException("No user found with username: " + username);
+            throw new UsernameNotFoundException("No user found with username: " + userName);
         }
 
         return new MyUserPrincipal(user);

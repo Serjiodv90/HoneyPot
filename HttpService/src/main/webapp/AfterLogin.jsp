@@ -9,7 +9,7 @@
 <body>
 		<img id="image1" class="img-responsive" src="/resources/static/Images/topAfeka.jpg" width="100%">
  		
- 		<form name="AddForm" method="Get" action="Home" style="float:right;">
+ 		<form name="AddForm" method="Get" action="home" style="float:right;">
  		<br>
   	  		<input type="submit" style="float:right;" name="press" value="הוספת/מחיקת מרצה" ><br><br>
 			

@@ -18,6 +18,7 @@
         <table id="main_table">
             <tr>
                 <td id="main_table_info_cell">
+                <!--  ${SPRING_SECURITY_LAST_EXCEPTION.message}-->
                     <form action="login" method="post">
                         <table id="credentials_table">
                             <tr>
@@ -29,7 +30,7 @@
                             <tr>
                                 <td class="apm-credentials_table_label_cell"><label for='input_1' id='label_input_1'>שם
                                         משתמש</label></td>
-                                <td class="apm-credentials_table_field_cell"><input type='text' name='userName'
+                                <td class="apm-credentials_table_field_cell"><input type='text' name='username'
                                         class='credentials_input_text' value='' id='input_1' autocomplete='off'/></td>
                             </tr>
                             <tr>

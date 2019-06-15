@@ -21,29 +21,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
-	
-//	@Bean
-//	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-//	    return new BCryptPasswordEncoder();
-//	}
-//	
-//	@Bean
-//	public DaoAuthenticationProvider authProvider() {
-//	    DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-//	    authProvider.setUserDetailsService(userDetailsService);
-//	    authProvider.setPasswordEncoder(bCryptPasswordEncoder());
-//	    return authProvider;
-//	}
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.csrf().disable()
 			.authorizeRequests().antMatchers("/login", "/fakeUsers", "/resources/**").permitAll()
+//			.antMatchers("/").hasAuthority("USER")
 			.anyRequest().authenticated()
 			.and()
 			.formLogin()
-			.loginPage("/").permitAll()
+			.loginPage("/login").permitAll()
 			.and().logout().invalidateHttpSession(true)
 			.clearAuthentication(true)
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
@@ -53,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	public AuthenticationProvider authProvider() { 
+		System.err.println("in authProvider()");
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 		provider.setUserDetailsService(userDetailsService);
 		provider.setPasswordEncoder(new BCryptPasswordEncoder());

@@ -1,10 +1,6 @@
 package http.app.logging;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,9 +12,12 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import http.app.MyUserPrincipal;
 import http.app.connections.DateFormatter;
 import http.app.connections.JsonObserver;
 import http.app.connections.JsonSave;
@@ -50,6 +49,10 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, 
 			Object handler) {
+		
+		
+		
+		System.err.println();
 
 		StringBuffer requestBody = new StringBuffer();
 
@@ -57,6 +60,18 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 
 		requestBody.append("\tHTTP --> ");
 		requestBody.append(request.getMethod() + " ");
+		
+		
+//		System.err.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+//		Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		if(user instanceof MyUserPrincipal) {
+//			System.err.println(((MyUserPrincipal)user).getUsername());
+//			requestBody.append("\tHTTP --> ");
+//			requestBody.append("POST ");
+//			requestBody.append(" username: " + ((MyUserPrincipal)user).getUsername() 
+//					+ "password: " + ((MyUserPrincipal)user).getPassword());
+//		}
+		
 		
 		// save connection for the first time
 		String tmpIpAddress = request.getHeader("X-FORWARDED-FOR");  
@@ -68,7 +83,6 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 				this.ipAddress = tmpIpAddress;
 				requestBody.append("New connection request from: " + ipAddress);
 			}
-			
 		}
 		
 		String date = DateFormatter.getCurrentDateTimeForFile();
@@ -133,5 +147,23 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 			obs.notifyJsonSaved(reqArrList);
 		}
 
+	}
+
+	public void saveUserNameAndPassword() {
+		StringBuffer requestBody = new StringBuffer();
+		System.err.println("saveUserNameAndPassword");
+		Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(user instanceof MyUserPrincipal) {
+			System.err.println(((MyUserPrincipal)user).getUsername());
+			requestBody.append("\tHTTP --> ");
+			requestBody.append("POST ");
+			requestBody.append("username: " + ((MyUserPrincipal)user).getUsername() 
+					+ " password: " + ((MyUserPrincipal)user).getPassword());
+		}
+		LOGGER.info(requestBody.toString());
+		reqArrList.add(new RequestFormat(DateFormatter.getCurrentDateTimeForLog()
+				/*LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))*/,
+				requestBody.toString()));
+		
 	}
 }
