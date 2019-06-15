@@ -40,7 +40,7 @@ public class ConnectionsToServices {
 	public void setHttpHostName(String hostName) {
 		this.httpHostName = hostName;
 	}
-	@Value("${http.port:8080}")
+	@Value("${http.port:8091}")
 	public void setHttpHostPort(String hostPort) {
 		this.httpHostPort = hostPort;
 	}
@@ -61,7 +61,13 @@ public class ConnectionsToServices {
 	public void sendFakeUsersToHttp(ArrayList<FakeUser> fakeUsersHttp) {
 //		this.protocol = env.getProperty("ftp.protocol");
 		System.err.println("ConnectionToServices: sendFakeUsersToHttp()");
-		fakeUsersHttp.toArray();
+		FakeUser[] users = new FakeUser[fakeUsersHttp.size()];
+		users = fakeUsersHttp.toArray(users);
+		
+		for(int i=0; i < users.length ; i++) {
+			System.out.println(users[i]);
+		}
+	
 		
 		String url = //"http://localhost:8085/reports"  ;
 				this.protocol + 
@@ -72,7 +78,16 @@ public class ConnectionsToServices {
 					 this.httpHostPath;
 		
 		System.err.println("URL: " + url );
-		this.restTemplate.postForObject(url, fakeUsersHttp, FakeUser[].class);		
+		this.restTemplate.postForObject(url, users, FakeUser[].class);		
+	}
+
+
+	public void sendFakeUsersToFtp(ArrayList<FakeUser> fakeUsersFtp) {
+		FakeUser[] users = new FakeUser[fakeUsersFtp.size()];
+		users = fakeUsersFtp.toArray(users);
+		
+		//TODO set url and send
+		
 	}
 
 }

@@ -44,7 +44,7 @@
                                         id='label_input_3'>שיוך</label></td>
                                 <td class="apm-credentials_table_field_cell">
                                     <div class='radio-div'><input type='radio' value="ACADEMIC" name='Domain'
-                                            id='input_3_0' /><label for='input_3_0' id='label_input_3_0'
+                                            id='input_3_0' checked /><label for='input_3_0' id='label_input_3_0'
                                             class='radio-label' style='display: inline'>סטודנטים</label></div>
                                     <div class='radio-div'><input type='radio' value="MGMT" name='Domain'
                                             id='input_3_1' /><label for='input_3_1' id='label_input_3_1'

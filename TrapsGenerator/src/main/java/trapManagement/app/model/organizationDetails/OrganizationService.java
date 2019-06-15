@@ -36,6 +36,7 @@ public class OrganizationService {
 		System.out.println("\n\nFake users after: " + organizationDetails.getFakeUsers());
 		
 		this.conncetionsToServices.sendFakeUsersToHttp(fakeUsersHttp);
+		this.conncetionsToServices.sendFakeUsersToFtp(fakeUsersFtp);
 		return this.oraganizationDao.save(organizationDetails);
 	}
 	
@@ -61,6 +62,9 @@ public class OrganizationService {
 		}
 		
 		user.setPassword(password.toString());
+		
+		//TODO method to set usernames and delete this row
+		user.setUserName(fName);
 		
 		System.err.println("\n\nUser: " + user + "\n");
 		

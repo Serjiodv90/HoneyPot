@@ -13,8 +13,17 @@ public class FakeUser {
 	private String id;	//generated for DB
 	private String firstName; 
 	private String lastName;
+	private String userName;
 	
-//	@JsonProperty(access=Access.READ_ONLY)
+public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	//	@JsonProperty(access=Access.READ_ONLY)
 	private String password;
 //	@JsonProperty(access=Access.READ_ONLY)
 	private String dedicationServer;
@@ -65,9 +74,11 @@ public class FakeUser {
 
 	@Override
 	public String toString() {
-		return "FakeUser [id=" + id + ", firstName=" + firstName + ", lastname=" + lastName + ", password=" + password
-				+ ", dedicationServer=" + dedicationServer + "]";
+		return "FakeUser [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName
+				+ ", password=" + password + ", dedicationServer=" + dedicationServer + "]";
 	}
+
+	
 
 	
 	
