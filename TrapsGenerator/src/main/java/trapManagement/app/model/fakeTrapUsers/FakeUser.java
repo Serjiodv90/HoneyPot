@@ -1,12 +1,13 @@
 package trapManagement.app.model.fakeTrapUsers;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
-//@Document(collection="Fake_Users")
+@Document(collection="Fake_Users")
 //@JsonIgnoreProperties(ignoreUnknown = true)
 public class FakeUser {
 
@@ -15,9 +16,7 @@ public class FakeUser {
 	private String lastName;
 	private String userName;
 
-	//	@JsonProperty(access=Access.READ_ONLY)
 	private String password;
-	//	@JsonProperty(access=Access.READ_ONLY)
 	private String dedicationServer;
 
 
@@ -58,6 +57,7 @@ public class FakeUser {
 		this.dedicationServer = dedicationServer;
 	}
 
+	@Id
 	public String getId() {
 		return id;
 	}

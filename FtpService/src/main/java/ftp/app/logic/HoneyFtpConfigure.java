@@ -110,7 +110,6 @@ public class HoneyFtpConfigure {
 		}
 		
 		
-		
 		serverFactory.setFtplets(Collections.singletonMap("MyFtpLet", new HoneyFtpLet()));
 		
 		return serverFactory.createServer ();
