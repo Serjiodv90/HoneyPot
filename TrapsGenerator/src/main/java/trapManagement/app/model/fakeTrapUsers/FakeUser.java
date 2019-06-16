@@ -14,12 +14,20 @@ public class FakeUser {
 	private String id;	//generated for DB
 	private String firstName; 
 	private String lastName;
+	
 	private String userName;
-
 	private String password;
 	private String dedicationServer;
 
 
+	public FakeUser() {
+		
+	}
+	
+	public FakeUser(String userName, String password) {
+		this.userName = userName;
+		this.password = password;
+	}
 
 	public String getUserName() {
 		return userName;
@@ -29,9 +37,6 @@ public class FakeUser {
 		this.userName = userName;
 	}
 
-	public FakeUser() {
-
-	}
 
 	public String getFirstName() {
 		return firstName;
