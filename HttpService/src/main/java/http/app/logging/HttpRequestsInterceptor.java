@@ -27,7 +27,8 @@ import http.app.connections.RequestFormat;
 @Component
 public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implements JsonSave {
 
-	private final String LOGGER_PATH = /*"D:/java/HoneyPot/TrapManagement/Logs/HTTP_tmpLog/"*/"C:\\Users\\DELL\\Documents\\Honeypot\\projects\\HoneyPot\\HttpService\\src\\logFiles\\";
+//	private final String LOGGER_PATH = /*"D:/java/HoneyPot/TrapManagement/Logs/HTTP_tmpLog/"*/"C:\\Users\\DELL\\Documents\\Honeypot\\projects\\HoneyPot\\HttpService\\src\\logFiles\\";
+	private final String LOGGER_PATH = "./src/logFiles/";
 	private final static Logger LOGGER = Logger.getLogger("HTTP Log");
 	//	private final static String JSON_PATH ="C:\\Users\\DELL\\Documents\\workspace-sts-3.9.7.RELEASE\\TrapManagement\\src\\JsonFiles";
 	private final static String JSON_FILE_NAME = "\\HTTPLog.json";

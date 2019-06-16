@@ -42,7 +42,8 @@ public class OrganizationService {
 		
 		this.trapGenerator.setFakeUsers(organizationDetails.getFakeUsers());
 		
-		System.err.println("\n\nI'm done...sending to controller...\n");
+		System.err.println("\n\nI'm done...sending to controller...\nThread: " + Thread.currentThread() + "\n");
+//		this.trapGenerator.createTraps();
 		return this.oraganizationDao.save(organizationDetails);
 	}
 	
