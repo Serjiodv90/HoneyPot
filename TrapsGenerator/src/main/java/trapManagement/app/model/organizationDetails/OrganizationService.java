@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import trapManagement.app.connections.ConnectionsToServices;
 import trapManagement.app.dal.OrganizationDetailsDao;
 import trapManagement.app.model.fakeTrapUsers.FakeUser;
+import trapManagement.app.trapsGenerator.TrapsGenerator;
 
 @Service
 public class OrganizationService {
@@ -19,13 +20,15 @@ public class OrganizationService {
 	private ArrayList<FakeUser> fakeUsersHttp;
 	private ArrayList<FakeUser> fakeUsersFtp;
 	private ConnectionsToServices conncetionsToServices;
+	private TrapsGenerator trapGenerator;
 	
 	@Autowired
-	public void setOrganizationDat(OrganizationDetailsDao organizationDao, ConnectionsToServices conncetionsToServices) {
+	public void setOrganizationDat(OrganizationDetailsDao organizationDao, ConnectionsToServices conncetionsToServices, TrapsGenerator trapsGenerator) {
 		this.oraganizationDao = organizationDao;
 		fakeUsersHttp = new ArrayList<FakeUser>();
 		fakeUsersFtp = new ArrayList<FakeUser>();
 		this.conncetionsToServices = conncetionsToServices;
+		this.trapGenerator = trapsGenerator;
 	}
 	
 	public OrganizationDetails createOrganizationUser(OrganizationDetails organizationDetails) {	
@@ -35,8 +38,11 @@ public class OrganizationService {
 		System.out.println("\n\nFake users after: " + organizationDetails.getFakeUsers());
 		
 //		this.conncetionsToServices.sendFakeUsersToHttp(fakeUsersHttp);
-		this.conncetionsToServices.sendFakeUsersToFtp(fakeUsersFtp);
+//		this.conncetionsToServices.sendFakeUsersToFtp(fakeUsersFtp);
 		
+		this.trapGenerator.setFakeUsers(organizationDetails.getFakeUsers());
+		
+		System.err.println("\n\nI'm done...sending to controller...\n");
 		return this.oraganizationDao.save(organizationDetails);
 	}
 	
@@ -99,8 +105,8 @@ public class OrganizationService {
 		Random random = new Random();
 		int randomLastNameLen = random.nextInt(lName.length()) + 1;
 		
-		userName.append(lName.substring(0, randomLastNameLen)).append(emailPostfix);
-		
+		userName.append(lName.substring(0, randomLastNameLen)).append("@" + emailPostfix);
+		 
 		fakeUser.setUserName(userName.toString());
 		
 		System.err.println("\n\nUser after setUserName: " + fakeUser + "\n");
