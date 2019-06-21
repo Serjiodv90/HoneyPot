@@ -16,6 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.imageio.ImageIO;
 
@@ -59,6 +60,8 @@ public class TrapsGenerator {
 	private final String ZIP_FINAL_NAME = "ftp_creds.zip";
 	
 	private final String FTP_BATCH_FILE = "ftp_connect.bat";
+	
+	private final String ALL_TRAPS_ZIP_FILE = "./src/main/resources/traps";
 
 	private Environment env;
 
@@ -91,9 +94,13 @@ public class TrapsGenerator {
 //			plantUsernameInHttpServiceLoginPage();
 //			htmlPasswordTypeExplotation();
 //			userNameUrlTextFile();
-//			createLockedZipWithImage();
-			createFtpConnectionBatFile();
+			createLockedZipWithImage();
+//			createFtpConnectionBatFile();
+			createTrapsZipFile();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ZipException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -240,27 +247,35 @@ public class TrapsGenerator {
 
 		return file;
 	}
-
-	private void zipAllFilesAndLock(File fileToZip, String zipPwd) throws Exception {
-
+	
+	private void zipFile(String zipFileName, File fileToZip, Optional<String> password) throws ZipException {
 		ZipParameters params = new ZipParameters();
 		params.setCompressionMethod(Zip4jConstants.COMP_DEFLATE);
 		params.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL);
-		params.setEncryptFiles(true);
-		params.setEncryptionMethod(Zip4jConstants.ENC_METHOD_AES);
-		params.setAesKeyStrength(Zip4jConstants.AES_STRENGTH_256);
-		params.setPassword(zipPwd);
-
-		ZipFile zipFile = new ZipFile(TARGET_DIR + ZIPPED_IMAGE_PATH + ZIP_FINAL_NAME);
-		zipFile.addFile(fileToZip, params);
+		
+		password.ifPresent(pass -> {
+			params.setEncryptFiles(true);
+			params.setEncryptionMethod(Zip4jConstants.ENC_METHOD_AES);
+			params.setAesKeyStrength(Zip4jConstants.AES_STRENGTH_256);
+			params.setPassword(pass);
+		});
+		
+		ZipFile zipFile = new ZipFile(zipFileName);
+		
+		if(fileToZip.isDirectory())
+			zipFile.addFolder(fileToZip, params);
+		else
+			zipFile.addFile(fileToZip, params);
 	}
+
+
 
 	private void createLockedZipWithImage() throws IOException {
 		String zipPwd = createFileWithEncodedPassword(TARGET_DIR + ZIPPED_IMAGE_PATH + ZIP_PWD_FILE);
 
 		File imgToZip = createImageWithCredentialsAndLink();
 		try {
-			zipAllFilesAndLock(imgToZip, zipPwd);
+			zipFile(TARGET_DIR + ZIPPED_IMAGE_PATH + ZIP_FINAL_NAME, imgToZip, Optional.of(zipPwd));
 			imgToZip.delete();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -274,6 +289,14 @@ public class TrapsGenerator {
 		String userPassword = "PWD " + ftpUser.getPassword();
 		
 		writeToTextFile(this.TARGET_DIR + this.FTP_BATCH_FILE, openFtpConnection, userName, userPassword);
+	}
+	
+	private void createTrapsZipFile() throws ZipException {
+		File trapsDir = new File(this.TARGET_DIR);
+		if(trapsDir.exists() && trapsDir.isDirectory()) {
+			zipFile("./src/main/resources/AllTraps.zip", trapsDir, Optional.empty());
+		}
+			
 	}
 
 }
