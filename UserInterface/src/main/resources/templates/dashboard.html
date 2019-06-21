@@ -62,9 +62,9 @@
 						<div class="m-2 p-1">
 							<select name="type">
 								<option th:value="ALL" th:text="ALL"></option>
-								<option th:value="Http" th:text="Http"></option>
-								<option th:value="Ftp" th:text="Ftp"></option>
-								<option th:value="Smtp" th:text="Smtp"></option>
+								<option th:value="HTTP" th:text="HTTP"></option>
+								<option th:value="FTP" th:text="FTP"></option>
+								<option th:value="SMTP" th:text="SMTP"></option>
 							</select>
 						</div>
 
@@ -99,7 +99,7 @@
 								data-toggle="collapse">
 
 								<td th:text="${stat.index}+1"></td>
-								<td th:text="${#dates.format(report.dateAndTime, 'dd-MM-yyyy  HH:mm:ss')}"></td>
+								<td th:text="${#dates.format(report.date, 'dd-MM-yyyy  HH:mm:ss')}"></td>
 								<td th:text="${{report.type}}"></td>
 							</tr>
 

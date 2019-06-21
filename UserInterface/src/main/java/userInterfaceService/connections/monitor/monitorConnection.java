@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import userInterfaceService.domain.OrganizationDetails;
 import userInterfaceService.domain.Report;
 
 @Component
@@ -41,15 +40,9 @@ public class monitorConnection {
 		this.restTemplate = new RestTemplate();
 	}
 	
-	public Report[] getReports() {
-		System.err.println("TrapManagementConnection.sendOrganizationDetails()");
-		return getReportsFromMonitor();
-	}
-	
-	public Report[] getReportsFromMonitor() {
+	public Report[] getAllReports() {
 		System.err.println("TrapManagementConnection.sendOrganizationDetailsToTrapManagement()");
-		String url = //"http://localhost:8085/reports"  ;
-				this.protocol + 
+		String url = this.protocol + 
 					 "://" + 
 					 this.hostName + 
 					 ":" + 
@@ -58,6 +51,39 @@ public class monitorConnection {
 		
 		System.err.println("URL: " + url );
 		return this.restTemplate.getForObject(url, Report[].class);		
+	}
+	
+	public Report[] getReportsByDateAndType(String fromDate, String type) {
+		String url = this.protocol + 
+					 "://" + 
+					 this.hostName + 
+					 ":" + 
+					 this.hostPort +
+					 this.hostPath;
+		
+		return this.restTemplate.getForObject(url + "?fromDate={fromDate}&type={type}", Report[].class, fromDate,type);
+	}
+	
+	public Report[] getReportsByDate(String fromDate) {
+		String url = this.protocol + 
+					 "://" + 
+					 this.hostName + 
+					 ":" + 
+					 this.hostPort +
+					 this.hostPath;
+		
+		return this.restTemplate.getForObject(url + "?fromDate={fromDate}", Report[].class, fromDate);
+	}
+	
+	public Report[] getReportsByType(String type) {
+		String url = this.protocol + 
+					 "://" + 
+					 this.hostName + 
+					 ":" + 
+					 this.hostPort +
+					 this.hostPath;
+		
+		return this.restTemplate.getForObject(url + "?type={type}", Report[].class, type);
 	}
 
 }

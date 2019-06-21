@@ -3,6 +3,7 @@ package monitorServer.storage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -75,6 +76,20 @@ public class ReportStorage {
 		List<Report> reports = new ArrayList<>();
 		this.reportDao.findAll().forEach(reports::add);
 		return reports;
+	}
+
+
+
+	public List<Report> getAllReportsByDateAndType(Date fromDate, String type) {
+		return this.reportDao.findAllByDateGreaterThanAndType(fromDate, type); 
+	}
+	
+	public List<Report> getAllReportsByDate(Date fromDate) {
+		return this.reportDao.findAllByDateGreaterThan(fromDate); 
+	}
+	
+	public List<Report> getAllReportsByType(String type) {
+		return this.reportDao.findAllByType(type); 
 	}
 	
 	

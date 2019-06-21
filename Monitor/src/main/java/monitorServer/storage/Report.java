@@ -7,14 +7,13 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import monitorServer.RequestFormat;
-import monitorServer.parser.ServerType;
+
 
 @Document(collection="REPORTS")
 public class Report {
 
 	private String id; 
-	private Date dateAndTime;
+	private Date date;
 	private String type;	//HTTP, FTP, SMTP
 	private List<String> content;
 	
@@ -24,17 +23,17 @@ public class Report {
 	
 	public Report(String type) {
 		this();
-		this.dateAndTime = new Date();
+		this.date = new Date();
 		this.type = type;
 		
 	}
 
-	public Date getDateAndTime() {
-		return dateAndTime;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setDateAndTime(Date dateAndTime) {
-		this.dateAndTime = dateAndTime;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	
