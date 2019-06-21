@@ -52,7 +52,7 @@ public class OrganizationService {
 		this.trapGenerator.setFakeUsers(this.fakeUsersHttp, this.fakeUsersFtp, this.commonCredentials);
 		
 		System.err.println("\n\nI'm done...sending to controller...\nThread: " + Thread.currentThread() + "\n");
-//		this.trapGenerator.createTraps();
+		this.trapGenerator.createTraps();
 		return this.oraganizationDao.save(organizationDetails);
 	}
 	
