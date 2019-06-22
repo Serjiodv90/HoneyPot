@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import userInterfaceService.domain.Report;
 
 @Component
-public class monitorConnection {
+public class MonitorConnection {
 	
 	private String hostName;
 	private String hostPort;
@@ -85,5 +85,7 @@ public class monitorConnection {
 		
 		return this.restTemplate.getForObject(url + "?type={type}", Report[].class, type);
 	}
+	
+	
 
 }

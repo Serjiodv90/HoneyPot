@@ -24,7 +24,6 @@ public class TrapManagementController {
 	}
 	
 	
-	//might be changed
 	@RequestMapping(
 			path="/organizationDetails",
 			method=RequestMethod.POST,
@@ -35,4 +34,16 @@ public class TrapManagementController {
 		System.err.println("\n\nTrapManagementController.registerOrganization()\n" + organizationDetails);
 		return this.organizationService.createOrganizationUser(organizationDetails);
 	}
+	
+	
+	@RequestMapping(
+			path="/downloadTraps",
+			method=RequestMethod.GET,
+			produces=MediaType.APPLICATION_JSON_VALUE
+			)
+	public String getTrapsPath() {
+		return this.organizationService.getTrapsDownloadPath();
+	}
+	
+	
 }

@@ -17,6 +17,8 @@ public class FtpUser {
 	private String userName;
 	private String password;
 	private String userPermission;
+	
+	
 
 	
 	public FtpUser() {

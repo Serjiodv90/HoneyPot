@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
+import java.util.PrimitiveIterator.OfDouble;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.context.Theme;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,7 +31,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import reactor.netty.http.server.HttpServerResponse;
-import userInterfaceService.connections.monitor.monitorConnection;
+import userInterfaceService.connections.monitor.MonitorConnection;
+import userInterfaceService.connections.trapManagement.TrapManagementConnection;
 import userInterfaceService.domain.OrganizationDetails;
 import userInterfaceService.domain.OrganizationUser;
 import userInterfaceService.domain.Report;
@@ -39,8 +42,9 @@ import userInterfaceService.service.CustomUserDetailsService;
 
 public class DashboardController {
 	
-	private monitorConnection monitorConnection;
-	private final String TRAPS_FILE_NAME = "templates.rar";
+	private MonitorConnection monitorConnection;
+	private TrapManagementConnection trapManagementConnection;
+//	private final String TRAPS_FILE_NAME = "templates.rar";
 	
 	
 	
@@ -48,8 +52,9 @@ public class DashboardController {
 	private CustomUserDetailsService userService;
 	
 	@Autowired
-	public void setMonitorConnection(monitorConnection monitorConnection) {
+	public DashboardController(MonitorConnection monitorConnection, TrapManagementConnection trapManagementConnection) {
 		this.monitorConnection = monitorConnection;
+		this.trapManagementConnection = trapManagementConnection;
 	}
 	
 	
@@ -96,8 +101,12 @@ public class DashboardController {
     @RequestMapping(value="/download", method=RequestMethod.GET)
     public void downloadTraps (HttpServletResponse response) throws IOException {
     	
-    	ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-    	File trapsZipFile = new File(classLoader.getResource(this.TRAPS_FILE_NAME).getFile());
+    	String trapsZipFilePath = this.trapManagementConnection.getTrapsDownloadPathFromTrapManagement();
+    	
+//    	ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+//    	File trapsZipFile = new File(classLoader.getResource(this.TRAPS_FILE_NAME).getFile());
+    	
+    	File trapsZipFile = new File(trapsZipFilePath);
     	
     	if(!trapsZipFile.exists()) {
     		System.err.println("NO FILE BITCH!");

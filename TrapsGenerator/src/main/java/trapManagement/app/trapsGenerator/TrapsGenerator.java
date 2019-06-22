@@ -3,19 +3,10 @@ package trapManagement.app.trapsGenerator;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import javax.imageio.ImageIO;
@@ -25,7 +16,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
@@ -37,6 +27,7 @@ import net.lingala.zip4j.model.ZipParameters;
 import net.lingala.zip4j.util.Zip4jConstants;
 import trapManagement.app.model.fakeTrapUsers.FakeUser;
 
+@SuppressWarnings("restriction")
 @Component
 public class TrapsGenerator {
 
@@ -61,10 +52,10 @@ public class TrapsGenerator {
 	
 	private final String FTP_BATCH_FILE = "ftp_connect.bat";
 	
-	private final String ALL_TRAPS_ZIP_FILE = "./src/main/resources/traps";
 
 	private Environment env;
 
+	
 	private enum ServerType {
 		HTTP, FTP, COMMON
 	};
@@ -83,6 +74,10 @@ public class TrapsGenerator {
 		this.httpFakeUsers = httpUsers;
 		this.ftpFakeUsers = ftpUsers;
 		this.commonFakeUsers = commonUsers;
+	}
+	
+	public String getAllTrapsZipFileName() {
+		return this.env.getProperty("files.allTraps.zip");
 	}
 
 	@Async
@@ -294,7 +289,7 @@ public class TrapsGenerator {
 	private void createTrapsZipFile() throws ZipException {
 		File trapsDir = new File(this.TARGET_DIR);
 		if(trapsDir.exists() && trapsDir.isDirectory()) {
-			zipFile("./src/main/resources/AllTraps.zip", trapsDir, Optional.empty());
+			zipFile(getAllTrapsZipFileName(), trapsDir, Optional.empty());
 		}
 			
 	}

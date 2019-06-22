@@ -14,11 +14,7 @@ import org.apache.ftpserver.listener.ListenerFactory;
 import org.apache.ftpserver.usermanager.*;
 import org.apache.ftpserver.usermanager.impl.*;
 
-
-/**
- * FTP test utility based on Apache FtpServer:
- * {@link " http://www.jarvana.com/jarvana/view/org/apache/ftpserver/ftpserver-core/1.0.6/ftpserver-core-1.0.6-javadoc.jar!/org/apache/ ftpserver / FtpServer.html "}
- */ 
+import ftp.app.model.FtpUser;
 
 public class HoneyFtpConfigure {
 
@@ -35,21 +31,12 @@ public class HoneyFtpConfigure {
 	 * @param maxLogins maximum number of logins (0 for default value)
 	 */ 
 	
-	private static Listener listener;
+//	private static Listener listener;
 	
-	public static FtpServer createFtpServer (int ftpPort, String ftpHomeDir, String readUserName, String readUserPwd, String writeUserName, String writeUserPwd) throws FtpException, IOException
-	{
-		return createFtpServer (ftpPort, ftpHomeDir, readUserName, readUserPwd, writeUserName, writeUserPwd, null, 0);
-		//      return createFtpServer(ftpPort, ftpHomeDir, readUserName, readUserPwd, writeUserName, writeUserPwd);
-	}
+	
+	private static FtpServerFactory serverFactory;
+	private static PropertiesUserManagerFactory userManagerFactory;
 
-	public static FtpServer createFtpServer (int ftpPort, String ftpHomeDir,
-			String readUserName, String readUserPwd, String writeUserName, String writeUserPwd,
-			String ftpUsersPropsFile, int maxLogins) throws FtpException, IOException
-	{
-		return createFtpServer (ftpPort, ftpHomeDir, readUserName, readUserPwd, writeUserName, writeUserPwd,
-				ftpUsersPropsFile, maxLogins, 0);
-	}
 
 	public static FtpServer createFtpServer (int ftpPort, String ftpHomeDir,
 			String readUserName, String readUserPwd, String writeUserName, String writeUserPwd,
@@ -64,14 +51,14 @@ public class HoneyFtpConfigure {
 		listenerFactory.setPort (ftpPort);
 		
 
-//		PropertiesUserManagerFactory userManagerFactory = new PropertiesUserManagerFactory ();
-//		userManagerFactory.setPasswordEncryptor (new SaltedPasswordEncryptor ());
-//		if (ftpUsersPropsFile != null && ftpUsersPropsFile.trim (). length ()> 0) {
-//			File upf = new File (ftpUsersPropsFile);
-//			if (!upf.exists ()) 
-//				upf.createNewFile ();
-//			userManagerFactory.setFile(upf);
-//		}
+		userManagerFactory = new PropertiesUserManagerFactory ();
+		userManagerFactory.setPasswordEncryptor (new SaltedPasswordEncryptor ());
+		if (ftpUsersPropsFile != null && ftpUsersPropsFile.trim (). length ()> 0) {
+			File upf = new File (ftpUsersPropsFile);
+			if (!upf.exists ()) 
+				upf.createNewFile ();
+			userManagerFactory.setFile(upf);
+		}
 //
 //		// Create a read-only user and a user with write permission:
 //		UserManager userManager = userManagerFactory.createUserManager ();
@@ -97,9 +84,9 @@ public class HoneyFtpConfigure {
 //		userManager.save (userRd);
 //		userManager.save (userWr);
 //
-		FtpServerFactory serverFactory = new FtpServerFactory ();
-		listener = listenerFactory.createListener ();
-		serverFactory.addListener ("default", listener);
+		serverFactory = new FtpServerFactory ();
+//		listener = listenerFactory.createListener ();
+//		serverFactory.addListener ("default", listener);
 //		serverFactory.setUserManager (userManager);
 		
 		
@@ -113,6 +100,33 @@ public class HoneyFtpConfigure {
 		serverFactory.setFtplets(Collections.singletonMap("MyFtpLet", new HoneyFtpLet()));
 		
 		return serverFactory.createServer ();
+	}
+	
+	public void addFtpUsers(List<FtpUser> users) {
+		UserManager userManager = userManagerFactory.createUserManager ();
+		
+		BaseUser userRd = new BaseUser ();
+		userRd.setName (readUserName);
+		userRd.setPassword (readUserPwd);
+		userRd.setHomeDirectory (ftpHomeDir);
+		
+		BaseUser userWr = new BaseUser ();
+		userWr.setName (writeUserName);
+		userWr.setPassword (writeUserPwd);
+		userWr.setHomeDirectory (ftpHomeDir);
+		
+		if (maxIdleTimeSec > 0) {
+			userRd.setMaxIdleTime (maxIdleTimeSec);
+			userWr.setMaxIdleTime (maxIdleTimeSec);
+		}
+		
+		List <Authority> authorities = new ArrayList <Authority> ();
+		authorities.add (new WritePermission ());
+		userWr.setAuthorities (authorities);
+		
+		userManager.save (userRd);
+		userManager.save (userWr);
+		
 	}
 	
 

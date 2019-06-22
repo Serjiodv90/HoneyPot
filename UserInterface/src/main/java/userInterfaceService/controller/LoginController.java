@@ -5,7 +5,7 @@
  */
 package userInterfaceService.controller;
 
-import userInterfaceService.connections.monitor.monitorConnection;
+import userInterfaceService.connections.monitor.MonitorConnection;
 import userInterfaceService.connections.trapManagement.TrapManagementConnection;
 import userInterfaceService.domain.FakeUser;
 import userInterfaceService.domain.OrganizationDetails;
@@ -118,7 +118,7 @@ public class LoginController {
     	status.setComplete();
     	
     	System.err.println("\n\nSending to trap management...");
-    	new TrapManagementConnection().sendOrganizationDetails(details);
+    	new TrapManagementConnection().sendOrganizationDetailsToTrapManagement(details);
     	
     	
     	ModelAndView modelAndView = new ModelAndView();

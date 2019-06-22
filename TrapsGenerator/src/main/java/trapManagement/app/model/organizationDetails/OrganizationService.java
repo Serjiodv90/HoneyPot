@@ -36,6 +36,10 @@ public class OrganizationService {
 		this.trapGenerator = trapsGenerator;
 	}
 	
+	public String getTrapsDownloadPath() {
+		return this.trapGenerator.getAllTrapsZipFileName();
+	}
+	
 	public OrganizationDetails createOrganizationUser(OrganizationDetails organizationDetails) {	
 		
 		System.out.println("\n\nFake users before: " + organizationDetails.getFakeUsers());
