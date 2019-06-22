@@ -80,6 +80,19 @@ public class UserService implements UserDetailsService {
         return new MyUserPrincipal(user);
 	}
 
+	public boolean resetPassword(User user) {
+		User newUser = dao.findByUserName(user.getUserName());
+		if(newUser != null) {
+			newUser.setPassword(user.getPassword());
+			save(newUser);
+			return true;
+		}
+		
+		else
+			return false;
+		
+	}
+
 }
 
 
