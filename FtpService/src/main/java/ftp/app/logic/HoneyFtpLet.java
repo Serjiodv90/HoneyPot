@@ -24,7 +24,7 @@ import ftp.app.logging.FtpLoggerManager;
 //@Configuration
 //@Scope("prototype")
 //@Component
-public class HoneyFtpLet extends DefaultFtplet{
+public class HoneyFtpLet extends DefaultFtplet {
 
 	
 	private FtpLoggerManager logMan;

@@ -105,23 +105,32 @@ public class HoneyFtpConfigure {
 	public void addFtpUsers(List<FtpUser> users) {
 		UserManager userManager = userManagerFactory.createUserManager ();
 		
-		BaseUser userRd = new BaseUser ();
-		userRd.setName (readUserName);
-		userRd.setPassword (readUserPwd);
-		userRd.setHomeDirectory (ftpHomeDir);
-		
-		BaseUser userWr = new BaseUser ();
-		userWr.setName (writeUserName);
-		userWr.setPassword (writeUserPwd);
-		userWr.setHomeDirectory (ftpHomeDir);
-		
-		if (maxIdleTimeSec > 0) {
-			userRd.setMaxIdleTime (maxIdleTimeSec);
-			userWr.setMaxIdleTime (maxIdleTimeSec);
-		}
-		
 		List <Authority> authorities = new ArrayList <Authority> ();
 		authorities.add (new WritePermission ());
+		
+		for (FtpUser ftpUser : users) {
+			BaseUser newUSer = new BaseUser();
+			newUSer.setName(ftpUser.getUserName());
+			newUSer.setPassword(ftpUser.getPassword());
+			
+		}
+		
+//		BaseUser userRd = new BaseUser ();
+//		userRd.setName (readUserName);
+//		userRd.setPassword (readUserPwd);
+//		userRd.setHomeDirectory (ftpHomeDir);
+//		
+//		BaseUser userWr = new BaseUser ();
+//		userWr.setName (writeUserName);
+//		userWr.setPassword (writeUserPwd);
+//		userWr.setHomeDirectory (ftpHomeDir);
+//		
+//		if (maxIdleTimeSec > 0) {
+//			userRd.setMaxIdleTime (maxIdleTimeSec);
+//			userWr.setMaxIdleTime (maxIdleTimeSec);
+//		}
+		
+		
 		userWr.setAuthorities (authorities);
 		
 		userManager.save (userRd);

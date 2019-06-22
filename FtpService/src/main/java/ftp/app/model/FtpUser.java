@@ -1,5 +1,6 @@
 package ftp.app.model;
 
+import org.omg.CORBA.PRIVATE_MEMBER;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,9 +17,10 @@ public class FtpUser {
 	private String id;
 	private String userName;
 	private String password;
-	private String userPermission;
+//	private String userPermission;
+	private FtpPermission userPermission;
 	
-	
+	public enum FtpPermission {WRITE, READ};
 
 	
 	public FtpUser() {
@@ -62,14 +64,22 @@ public class FtpUser {
 
 
 
-	public String getUserPermission() {
-		return userPermission;
-	}
-
-
-
-	public void setUserPermission(String userPermission) {
+//	public String getUserPermission() {
+//		return userPermission;
+//	}
+//
+//
+//
+//	public void setUserPermission(String userPermission) {
+//		this.userPermission = userPermission;
+//	}
+	
+	public void setUserPermission(FtpPermission userPermission) {
 		this.userPermission = userPermission;
+	}
+	
+	public FtpPermission getUserPermission() {
+		return userPermission;
 	}
 
 
