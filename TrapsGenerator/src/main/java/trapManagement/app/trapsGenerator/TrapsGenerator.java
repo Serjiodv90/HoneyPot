@@ -3,21 +3,34 @@ package trapManagement.app.trapsGenerator;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Optional;
 
 import javax.imageio.ImageIO;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
@@ -38,11 +51,11 @@ public class TrapsGenerator {
 	private ArrayList<FakeUser> commonFakeUsers;
 	private int commonUsersCounter = 0;
 
-	private final String SOURCES_DIR = "./src/main/resources/trapsSources/";
-	private final String TARGET_DIR = "./src/main/resources/traps/";
+	private String sourcerDir;
+	private String targetDir;
 
 	private final String HTML_TRAP = "htmlTrap/afekaLogin.html";
-	private final String USERNAME_URL_FILE = SOURCES_DIR + "login.txt";
+	private final String USERNAME_URL_FILE = "login.txt";
 	private final String HTML_PWD_TYPE_TRAP = "htmlPwdTypeTrap/loginPage.html";
 
 	private final String ZIPPED_IMAGE_PATH = "zippedImage/";
@@ -54,6 +67,16 @@ public class TrapsGenerator {
 	
 
 	private Environment env;
+	
+	@Value("${files.traps.sourceDir:trapsSources/}")
+	public void setSourceDir(String sourceDir) {
+		this.sourcerDir = sourceDir;
+	}
+	
+	@Value("${files.traps.targetDir:/traps/}")
+	public void setTargetDir(String targetDir) {
+		this.targetDir = targetDir;
+	}
 
 	
 	private enum ServerType {
@@ -76,21 +99,26 @@ public class TrapsGenerator {
 		this.commonFakeUsers = commonUsers;
 	}
 	
-	public String getAllTrapsZipFileName() {
-		return this.env.getProperty("files.allTraps.zip");
+	public String getAllTrapsZipFileName() throws URISyntaxException {
+//		URL root = getClass().getProtectionDomain().getCodeSource().getLocation();
+//		String root = System.getProperty("user.dir");
+		String AllTrapsZipFile = getTargetTrapsContainingDirectory(this.env.getProperty("files.allTraps.zip"));
+		System.err.println("\n\nROOT: " + AllTrapsZipFile);
+		return AllTrapsZipFile;
 	}
 
 	@Async
 	public void createTraps() {
 		System.err.println("TrapsGenerator.createTraps()\nFake Users: " + this.httpFakeUsers + "\nThread: "
 				+ Thread.currentThread() + "\n");
+		System.err.println("\n\nUSER DIR: " + System.getProperty("user.dir"));
 
 		try {
-//			plantUsernameInHttpServiceLoginPage();
-//			htmlPasswordTypeExplotation();
-//			userNameUrlTextFile();
+			plantUsernameInHttpServiceLoginPage();
+			htmlPasswordTypeExplotation();
+			userNameUrlTextFile();
 			createLockedZipWithImage();
-//			createFtpConnectionBatFile();
+			createFtpConnectionBatFile();
 			createTrapsZipFile();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -98,34 +126,56 @@ public class TrapsGenerator {
 		} catch (ZipException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
+	}
+	
+	private String getTargetTrapsContainingDirectory(String relativePath) {
+		return System.getProperty("user.dir") + relativePath;
 	}
 
 	private void writeToHtmlFile(String targetFileName, Document doc) throws IOException {
 		File htmlTargetFile = openFile(targetFileName);
-
+		
 		PrintWriter pw = new PrintWriter(htmlTargetFile);
 		pw.print(doc.toString());
 		pw.close();
 		System.out.println(doc.toString());
 	}
+	
+//	private InputStream getStreamOfExistingFile(String srcFile) {
+//		InputStream input = ClassLoader.getSystemClassLoader().getResourceAsStream(srcFile);
+//	}
 
-	private Document manipulateUserNameInHtmlFileById(String srcFileName, String id) throws IOException {
-		File htmlSrcFile = openFile(srcFileName);
+	//open the original html file, parse it with Jsoup, change the element - input.
+	private Document manipulateUserNameInHtmlFileById(String srcFileName, String id) throws IOException, URISyntaxException {
+//		File htmlSrcFile = openFile(srcFileName);
+//		getClass().getResource(srcFileName).toExternalForm().replaceFirst("file:/", "")
+		System.out.println("\n\nSOMETHING: " + ClassLoader.getSystemClassLoader().getResource(srcFileName) + "\nSOMETHING 2: " + getClass().getResource(srcFileName)
+				+ "\nSOMETHING 3: " + TrapsGenerator.class.getResource(srcFileName));
+		
+//		System.err.println("\n\nHTML FILE NAME: " + srcFileName + "\n\nResource: " + ClassLoader.getSystemClassLoader().getResource(srcFileName).getFile());
 
-		Document doc = Jsoup.parse(htmlSrcFile, "UTF-8");
-
+//		File file = new File(TrapsGenerator.class.getResource(srcFileName).getFile().replaceFirst("file:/", ""));
+		InputStream inputHtml = TrapsGenerator.class.getResourceAsStream(srcFileName);
+//		System.err.println("\n\nFILE: " + file);
+//		Document doc = Jsoup.parse(file, "UTF-8"); 
+		Document doc = Jsoup.parse(inputHtml, "UTF-8", TrapsGenerator.class.getResource(srcFileName).toURI().toString());
+		System.err.println("\n\nHTML: " + doc.toString());
 		Element username = doc.getElementById(id);
 		username.attr("value", getFakeUser(ServerType.HTTP).getUserName());
 		return doc;
 	}
 
 	private Document manipulateUserNameAndPasswordInHtmlFileById(String srcFileName, String userNameId, String pwdId)
-			throws IOException {
-		File htmlSrcFile = openFile(srcFileName);
+			throws IOException, URISyntaxException {
+//		File htmlSrcFile = openFile(srcFileName);
+		InputStream inputHtml = TrapsGenerator.class.getResourceAsStream(srcFileName);
 
-		Document doc = Jsoup.parse(htmlSrcFile, "UTF-8");
+		Document doc = Jsoup.parse(inputHtml, "UTF-8", TrapsGenerator.class.getResource(srcFileName).toURI().toString());
 		FakeUser tmpUser = getFakeUser(ServerType.HTTP);
 
 		Element username = doc.getElementById(userNameId);
@@ -136,24 +186,57 @@ public class TrapsGenerator {
 
 		return doc;
 	}
-
+	
 	private File openFile(String fileName) throws IOException {
-		File file = new File(fileName);
-
-		if (!file.exists())
+		
+////		
+////		if(fileName.charAt(0) == '/')
+////			filePath = filePath.substring(1, filePath.length());
+//		System.out.println("\nfilePath: " + filePath);
+		
+//		System.out.println("\n\nin OPEN FILE: " + fileName + "\nexists? : " +getClass().getResource(fileName).toExternalForm() + 
+//				"\ngetPath: " + getClass().getResource(fileName).toExternalForm().replaceFirst("file:/", "") + "\nDoes file exists? : ");
+//		File file;
+//		URL filePath = TrapsGenerator.class.getResource(fileName);
+//		System.err.println("\n\nFile Path: " + filePath);
+//		if(filePath != null)
+//			file = new File(filePath.getFile().replaceFirst("file:/", ""));
+//		else {
+//			String justFileName = Paths.get(fileName).getFileName().toString();
+//			System.err.println("\n\nJust file name: "  + justFileName);
+//			filePath = TrapsGenerator.class.getResource(fileName.replace(justFileName, ""));
+//			System.err.println("\n\nFile Path: " + filePath.getFile().replaceFirst("file:/", ""));
+//			file = new File(filePath.getFile().replaceFirst("file:/", "") + justFileName);
+//			file.createNewFile();
+//		}
+		
+		System.err.println("\n\nIN OPEN FILE, FILE NAME: " + (System.getProperty("user.dir") + fileName)); //+ "\n\nResource: " + ClassLoader.getSystemClassLoader().getResource(fileName).getFile());
+		String rootDirFileName = getTargetTrapsContainingDirectory(fileName);//System.getProperty("user.dir") + fileName;
+		File file = new File(rootDirFileName);//ClassLoader.getSystemClassLoader().getResource(fileName).getFile());
+		if(!file.exists())
 			file.createNewFile();
+			
+		
+//		File file = ResourceUtils.getFile("classpath:" + fileName);
+//		InputStream input = new FileInputStream(ResourceUtils.getFile("classpath:" + fileName));
+//		System.out.println("\n\nInput: " + input.read());
+//		System.err.flush();
+		System.err.println(file.exists());
+//		return null;
+		
+			
 		return file;
 	}
 
-	private void plantUsernameInHttpServiceLoginPage() throws IOException {
-		Document doc = manipulateUserNameInHtmlFileById(this.SOURCES_DIR + this.HTML_TRAP, "input_1");
-		writeToHtmlFile(this.TARGET_DIR + this.HTML_TRAP, doc);
+	private void plantUsernameInHttpServiceLoginPage() throws IOException, URISyntaxException {
+		Document doc = manipulateUserNameInHtmlFileById(this.sourcerDir + this.HTML_TRAP, "input_1");
+		writeToHtmlFile(this.targetDir + this.HTML_TRAP, doc);
 	}
 
-	private void htmlPasswordTypeExplotation() throws IOException {
-		Document doc = manipulateUserNameAndPasswordInHtmlFileById(this.SOURCES_DIR + this.HTML_PWD_TYPE_TRAP,
+	private void htmlPasswordTypeExplotation() throws IOException, URISyntaxException {
+		Document doc = manipulateUserNameAndPasswordInHtmlFileById(this.sourcerDir + this.HTML_PWD_TYPE_TRAP,
 				"userNameInput", "pwdInput");
-		writeToHtmlFile(this.TARGET_DIR + this.HTML_PWD_TYPE_TRAP, doc);
+		writeToHtmlFile(this.targetDir + this.HTML_PWD_TYPE_TRAP, doc);
 
 	}
 
@@ -198,7 +281,7 @@ public class TrapsGenerator {
 
 		System.out.println("TrapsGenerator.userNameUrlTextFile()\nURL: " + url);
 
-		writeToTextFile(this.USERNAME_URL_FILE, getFakeUser(ServerType.COMMON).getUserName(), url);
+		writeToTextFile(this.targetDir + this.USERNAME_URL_FILE, getFakeUser(ServerType.COMMON).getUserName(), url);
 	}
 
 	private String createFileWithEncodedPassword(String passwordFileName) throws IOException {
@@ -234,16 +317,16 @@ public class TrapsGenerator {
 		g2d.dispose();
 
 		// Save as PNG
-		File file = new File(TARGET_DIR + ZIPPED_IMAGE_PATH + ZIP_PWD_IMG);
-		if (!file.exists())
-			file.createNewFile();
+		File file = openFile(targetDir + ZIPPED_IMAGE_PATH + ZIP_PWD_IMG);//new File(targetDir + ZIPPED_IMAGE_PATH + ZIP_PWD_IMG);
+//		if (!file.exists())
+//			file.createNewFile();
 
 		ImageIO.write(bufferedImage, "png", file);
 
 		return file;
 	}
 	
-	private void zipFile(String zipFileName, File fileToZip, Optional<String> password) throws ZipException {
+	private void zipFile(String zipFileName, File fileToZip, Optional<String> password) throws ZipException, IOException {
 		ZipParameters params = new ZipParameters();
 		params.setCompressionMethod(Zip4jConstants.COMP_DEFLATE);
 		params.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL);
@@ -255,22 +338,54 @@ public class TrapsGenerator {
 			params.setPassword(pass);
 		});
 		
-		ZipFile zipFile = new ZipFile(zipFileName);
+		ZipFile zipFile;
+		String rootDirFileName = getTargetTrapsContainingDirectory(zipFileName);//System.getProperty("user.dir") + zipFileName;
+		String justFileName = Paths.get(zipFileName).getFileName().toString();
+		System.err.println("\n\nJust file name: "  + justFileName + "\nzipFileName: " + zipFileName + "\nrootDirFileName: " + rootDirFileName);
+//		URL filePath = getClass().getResource(zipFileName.replace(justFileName, ""));
+//		System.err.println("\n\nFile Path: " + filePath);
+		
+//		if(filePath == null) {
+			File newDir = new File(getTargetTrapsContainingDirectory(zipFileName.replace(justFileName, "")));
+			if(!newDir.exists())
+				newDir.mkdir();
+			
+			System.err.println("\n\nWTF?! : " + newDir);
+			
+//			System.err.println("\n\nZIP: " + getClass().getResource(zipFileName.replace(justFileName, "")));	
+//			filePath = getClass().getResource(zipFileName.replace(justFileName, ""));
+			
+			zipFile = new ZipFile(rootDirFileName);
+			System.err.println("\n\nThe Zip Folder: " + zipFile + "\nFile to add to zip: " + fileToZip);
+//			System.err.println("\n\nIN if : is file created: " + zipFile.);
+//		}
+//		else
+//			zipFile = new ZipFile(filePath.toExternalForm().replaceFirst("file:/", "") + justFileName);
 		
 		if(fileToZip.isDirectory())
-			zipFile.addFolder(fileToZip, params);
+			zipFile.addFolder(fileToZip+"/", params);
 		else
 			zipFile.addFile(fileToZip, params);
 	}
 
 
 
-	private void createLockedZipWithImage() throws IOException {
-		String zipPwd = createFileWithEncodedPassword(TARGET_DIR + ZIPPED_IMAGE_PATH + ZIP_PWD_FILE);
+	private void createLockedZipWithImage() throws IOException, URISyntaxException {
+		
+//		ClassLoader classLoader = getClass().getClassLoader();
+//		
+//		InputStream in = getClass().getResourceAsStream("/traps/" + ZIPPED_IMAGE_PATH + ZIP_PWD_FILE); 
+//		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+//		
+//		System.out.println("\n\nBLAAA:::" + getClass().getResource("/traps/" + ZIPPED_IMAGE_PATH + ZIP_PWD_FILE));
+		
+//		System.out.println("\n\nPath: " + classgetResource(ZIP_PWD_FILE));
+
+		String zipPwd = createFileWithEncodedPassword(targetDir + ZIPPED_IMAGE_PATH + ZIP_PWD_FILE);
 
 		File imgToZip = createImageWithCredentialsAndLink();
 		try {
-			zipFile(TARGET_DIR + ZIPPED_IMAGE_PATH + ZIP_FINAL_NAME, imgToZip, Optional.of(zipPwd));
+			zipFile(targetDir + ZIPPED_IMAGE_PATH + ZIP_FINAL_NAME, imgToZip, Optional.of(zipPwd));
 			imgToZip.delete();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -283,13 +398,15 @@ public class TrapsGenerator {
 		String userName = "USER " + ftpUser.getUserName();
 		String userPassword = "PWD " + ftpUser.getPassword();
 		
-		writeToTextFile(this.TARGET_DIR + this.FTP_BATCH_FILE, openFtpConnection, userName, userPassword);
+		writeToTextFile(this.targetDir + this.FTP_BATCH_FILE, openFtpConnection, userName, userPassword);
 	}
 	
-	private void createTrapsZipFile() throws ZipException {
-		File trapsDir = new File(this.TARGET_DIR);
+	private void createTrapsZipFile() throws ZipException, URISyntaxException, IOException {
+		String trapsDirPath = getTargetTrapsContainingDirectory(this.targetDir);//System.getProperty("user.dir") + this.targetDir;
+		File trapsDir = new File(trapsDirPath);
+		System.err.println("\n\nCREATE ALL ZIP: " + trapsDir);
 		if(trapsDir.exists() && trapsDir.isDirectory()) {
-			zipFile(getAllTrapsZipFileName(), trapsDir, Optional.empty());
+			zipFile(/*getAllTrapsZipFileName()*/this.env.getProperty("files.allTraps.zip"), trapsDir, Optional.empty());
 		}
 			
 	}

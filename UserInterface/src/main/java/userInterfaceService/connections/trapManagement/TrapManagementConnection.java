@@ -61,7 +61,7 @@ public class TrapManagementConnection {
 					 ":" + 
 					 this.hostPort +
 					 this.hostPath;
-		
+		System.err.println("\n\nURL: " + url + "\n\n");
 		this.restTemplate.postForObject(url, details, OrganizationDetails.class);		
 	}
 	
@@ -73,7 +73,7 @@ public class TrapManagementConnection {
 				 	 ":" + 
 				 	 this.hostPort +
 				 	 this.env.getProperty("trapManagement.download.path");
-		
+		System.err.println("\n\nURL: " + url + "\n\n");
 		return this.restTemplate.getForObject(url, String.class);
 	}
 

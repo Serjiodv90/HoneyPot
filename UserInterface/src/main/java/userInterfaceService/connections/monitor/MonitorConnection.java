@@ -41,7 +41,6 @@ public class MonitorConnection {
 	}
 	
 	public Report[] getAllReports() {
-		System.err.println("TrapManagementConnection.sendOrganizationDetailsToTrapManagement()");
 		String url = this.protocol + 
 					 "://" + 
 					 this.hostName + 

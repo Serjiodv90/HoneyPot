@@ -44,7 +44,6 @@ public class FtpUsersService {
 	
 	
 	private void setUsersPermissions(FtpUser[] users) {
-		final String writePermission = "write"; 
 		for (FtpUser user : users) {
 			user.setUserPermission(FtpUser.FtpPermission.WRITE);
 		}

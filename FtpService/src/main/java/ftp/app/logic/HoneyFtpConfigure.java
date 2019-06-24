@@ -13,6 +13,7 @@ import org.apache.ftpserver.listener.Listener;
 import org.apache.ftpserver.listener.ListenerFactory;
 import org.apache.ftpserver.usermanager.*;
 import org.apache.ftpserver.usermanager.impl.*;
+import org.springframework.data.domain.ExampleMatcher.NullHandler;
 
 import ftp.app.model.FtpUser;
 
@@ -112,7 +113,11 @@ public class HoneyFtpConfigure {
 			BaseUser newUSer = new BaseUser();
 			newUSer.setName(ftpUser.getUserName());
 			newUSer.setPassword(ftpUser.getPassword());
+			newUSer.setHomeDirectory(home);
+			if(ftpUser.getUserPermission() == null || ftpUser.getUserPermission().equals(FtpUser.FtpPermission.WRITE))
+				newUSer.setAuthorities(authorities);
 			
+			userManager.save(newUSer);
 		}
 		
 //		BaseUser userRd = new BaseUser ();
@@ -137,6 +142,8 @@ public class HoneyFtpConfigure {
 		userManager.save (userWr);
 		
 	}
+	
+	public void addFtpUser()
 	
 
 

@@ -18,6 +18,8 @@ local.properties
 *.txt
 *.txt.lck
 TrapManagement/Logs/
+*.jar
+*.tar
 
 
 # External tool builders

@@ -37,8 +37,15 @@ import org.springframework.web.servlet.ModelAndView;
 @SessionAttributes("organizationUser")
 public class LoginController {
 
-    @Autowired
+    
     private CustomUserDetailsService userService;
+    private TrapManagementConnection trapManagementConnection;
+    
+    @Autowired
+    public LoginController(CustomUserDetailsService userService, TrapManagementConnection trapManagementConnection) {
+		this.userService = userService;
+		this.trapManagementConnection = trapManagementConnection;
+	}
 
     @RequestMapping(value = {"/","/home", "/login"}, method = RequestMethod.GET)
     public ModelAndView login(@RequestParam(name="error", required=false) String errorStr) {
@@ -118,7 +125,7 @@ public class LoginController {
     	status.setComplete();
     	
     	System.err.println("\n\nSending to trap management...");
-    	new TrapManagementConnection().sendOrganizationDetailsToTrapManagement(details);
+    	this.trapManagementConnection.sendOrganizationDetailsToTrapManagement(details);
     	
     	
     	ModelAndView modelAndView = new ModelAndView();

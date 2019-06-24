@@ -1,0 +1,54 @@
+#Docker-compose file for the honeypot system
+
+version: '3'
+services:
+
+  maindb:
+    image: mongo:latest
+    restart: always
+    environment:
+     - MONGO_INITDB_ROOT_USERNAME=root
+     - MONGO_INITDB_ROOT_PASSWORD=example
+    ports:
+     - "27017:27017"
+
+  monitorserver:
+    container_name: 'monitorserver'
+    build: 'monitor_server'
+    depends_on:
+     - "maindb"
+    ports:
+     - "8085:8085"
+      
+  trapsgeneratorservice:
+    container_name: 'trapsgeneratorservice'
+    build: 'traps_generator'
+    depends_on:
+     - "maindb"
+    volumes:
+     - TrapsZip:/HoneyPot/TrapsGenerator/TrapsZip
+    ports:
+     - "8090:8090"
+        
+  userinterface:
+    container_name: 'user_interface'
+    build: 'user_interface'
+    depends_on:
+     - "maindb"
+     - "trapsgeneratorservice"
+     - "monitorserver"
+    volumes:
+     - TrapsZip:/HoneyPot/TrapsGenerator/TrapsZip
+    ports:
+     - "8080:8080"
+    links:
+     - trapsgeneratorservice:trapsgeneratorservice
+     - monitorserver:monitorserver
+     
+volumes:
+  TrapsZip:
+     
+   
+     
+
+  

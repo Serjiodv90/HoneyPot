@@ -11,7 +11,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>UserInterface</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>UserInterface</name>
 	<description>Demo project for Spring Boot</description>
 

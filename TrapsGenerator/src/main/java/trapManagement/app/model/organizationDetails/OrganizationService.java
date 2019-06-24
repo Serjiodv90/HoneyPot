@@ -1,15 +1,13 @@
 package trapManagement.app.model.organizationDetails;
 
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import trapManagement.app.connections.ConnectionsToServices;
 import trapManagement.app.dal.OrganizationDetailsDao;
@@ -37,7 +35,13 @@ public class OrganizationService {
 	}
 	
 	public String getTrapsDownloadPath() {
-		return this.trapGenerator.getAllTrapsZipFileName();
+		try {
+			return this.trapGenerator.getAllTrapsZipFileName();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public OrganizationDetails createOrganizationUser(OrganizationDetails organizationDetails) {	
@@ -55,8 +59,9 @@ public class OrganizationService {
 		
 		this.trapGenerator.setFakeUsers(this.fakeUsersHttp, this.fakeUsersFtp, this.commonCredentials);
 		
-		System.err.println("\n\nI'm done...sending to controller...\nThread: " + Thread.currentThread() + "\n");
+		
 		this.trapGenerator.createTraps();
+		System.err.println("\n\nI'm done...sending to controller...\nThread: " + Thread.currentThread() + "\n");
 		return this.oraganizationDao.save(organizationDetails);
 	}
 	
