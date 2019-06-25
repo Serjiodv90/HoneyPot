@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.access.method.P;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -45,16 +46,18 @@ public class DashboardController {
 	private MonitorConnection monitorConnection;
 	private TrapManagementConnection trapManagementConnection;
 //	private final String TRAPS_FILE_NAME = "templates.rar";
-	
-	
-	
-	 @Autowired
+	private Environment env;
 	private CustomUserDetailsService userService;
 	
 	@Autowired
-	public DashboardController(MonitorConnection monitorConnection, TrapManagementConnection trapManagementConnection) {
+	public DashboardController(MonitorConnection monitorConnection, 
+								TrapManagementConnection trapManagementConnection, 
+								CustomUserDetailsService userService,
+								Environment env) {
 		this.monitorConnection = monitorConnection;
 		this.trapManagementConnection = trapManagementConnection;
+		this.userService = userService;
+		this.env = env;
 	}
 	
 	
@@ -101,7 +104,11 @@ public class DashboardController {
     @RequestMapping(value="/download", method=RequestMethod.GET)
     public void downloadTraps (HttpServletResponse response) throws IOException {
     	
+    	
+    	
     	String trapsZipFilePath = this.trapManagementConnection.getTrapsDownloadPathFromTrapManagement();
+    	if(!this.env.getProperty("service.machine").equalsIgnoreCase("localhost"))
+    		trapsZipFilePath = System.getProperty("user.dir") + trapsZipFilePath;
     	
 //    	ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 //    	File trapsZipFile = new File(classLoader.getResource(this.TRAPS_FILE_NAME).getFile());

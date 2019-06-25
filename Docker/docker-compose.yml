@@ -38,15 +38,18 @@ services:
      - "trapsgeneratorservice"
      - "monitorserver"
     volumes:
-     - TrapsZip:/HoneyPot/TrapsGenerator/TrapsZip
+     - TrapsZip:/HoneyPot/UserInterface/TrapsZip
     ports:
      - "8080:8080"
     links:
      - trapsgeneratorservice:trapsgeneratorservice
      - monitorserver:monitorserver
+    
      
 volumes:
   TrapsZip:
+  
+
      
    
      

@@ -102,10 +102,15 @@ public class TrapsGenerator {
 	public String getAllTrapsZipFileName() throws URISyntaxException {
 //		URL root = getClass().getProtectionDomain().getCodeSource().getLocation();
 //		String root = System.getProperty("user.dir");
-		String AllTrapsZipFile = getTargetTrapsContainingDirectory(this.env.getProperty("files.allTraps.zip"));
-		System.err.println("\n\nROOT: " + AllTrapsZipFile);
-		return AllTrapsZipFile;
-	}
+		String allTrapsZipFile;
+		if(this.env.getProperty("service.machine").equalsIgnoreCase("localhost"))
+			allTrapsZipFile = getTargetTrapsContainingDirectory(this.env.getProperty("files.allTraps.zip"));
+		else 
+			allTrapsZipFile = this.env.getProperty("files.allTraps.zip");
+		
+		System.err.println("\n\nROOT: " + allTrapsZipFile);
+		return allTrapsZipFile;
+	} 
 
 	@Async
 	public void createTraps() {
