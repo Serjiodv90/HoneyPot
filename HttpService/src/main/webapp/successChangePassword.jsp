@@ -4,9 +4,44 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title></title>
+
+<style>
+body {
+    direction: rtl;
+    /* background-repeat: repeat-x; */
+    /*background-size: 100%;*/
+    background-image: url(/resources/static/Images/loginBackground.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    font-family: Calibri, Tahoma, Verdana, Arial, Helvetica, Sans-Serif;
+    -webkit-font-smoothing: antialiased;
+    /*-moz-osx-font-smoothing: grayscale;*/
+}
+
+body, html {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+div {
+
+background-color: white;
+opacity: 0.5;
+}
+
+</style>
 </head>
 <body>
+
+<div>
+<h1 style="color:'white';">הסיסמה שונתה בהצלחה</h1>
+<a href="http://localhost:8092/login" style="color:'white';">התחבר</a>
+</div>
+
+
 
 </body>
 </html>

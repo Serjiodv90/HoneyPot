@@ -55,7 +55,7 @@ tr {
     max-height: 400px;
     height: 50%;
     position: fixed;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
