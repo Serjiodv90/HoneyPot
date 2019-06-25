@@ -51,9 +51,25 @@
                             <td class="apm-credentials_table_field_cell"><input type='password' name='rptPassword'
                                         class='credentials_input_password' value='' id='rPass' autocomplete='off'/></td>
                         </tr>
+                        <tr>
+                        <td colspan="2">
+                        <div class="errorField rptPwdError alert alert-danger"></div>
+                        </td>
+                        </tr>
                         <tr id="submit_row">
                             <td colspan="2" align="center"><input type=submit name="resetPassword"
                                         class="submit_button submit_button:hover" value="אפס סיסמה"></td>
+                        </tr>
+                        
+                        <tr>
+                        	<td colspan="2">
+                        			<div id="myDIV" style="float:left; margin:10px; font-size: 15px; color:red;">
+                        		<c:if test="${not empty error}">
+						  				${error}
+								</c:if>
+                        			</div>
+                        
+                        	</td>
                         </tr>
                     </table>
 		<!-- <label for="userName" class="control-label"><b>שם משתמש</b></label>
