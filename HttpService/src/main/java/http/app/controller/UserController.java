@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import http.app.MyUserPrincipal;
 import http.app.logging.HttpRequestsInterceptor;
@@ -21,7 +23,7 @@ public class UserController {
 	@Autowired
 	HttpRequestsInterceptor httpRequestInterceptor;
 
-	@RequestMapping(value="/login")
+	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String home(HttpServletRequest request) {
 		Integer integer = (Integer) request.getSession()
 				.getAttribute("sessionNumber");        // create session if not exists and get attribute
@@ -35,7 +37,8 @@ public class UserController {
 		}
 //		java.util.Map<String, Integer> hitCounter = new HashMap<>();
 //		hitCounter.put("Hit Counter", integer);
-		return "afekaLogin.jsp";
+		
+		return "afekaLogin.html";
 	}
 
 	@RequestMapping(value= {"/", "/home"})
@@ -52,7 +55,7 @@ public class UserController {
 			}
 			
 		}
-		return "AfterLogin.jsp";
+		return "AfterLogin.html";
 	}
 	
 
@@ -63,7 +66,7 @@ public class UserController {
 	
 	@RequestMapping(value="/logout-success")
 	public String logoutPage() {
-		return "afekaLogin.jsp";
+		return "afekaLogin.html";
 	}
 
 }
