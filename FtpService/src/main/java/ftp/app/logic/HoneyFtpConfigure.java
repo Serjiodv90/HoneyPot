@@ -13,10 +13,16 @@ import org.apache.ftpserver.listener.Listener;
 import org.apache.ftpserver.listener.ListenerFactory;
 import org.apache.ftpserver.usermanager.*;
 import org.apache.ftpserver.usermanager.impl.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.data.domain.ExampleMatcher.NullHandler;
+import org.springframework.stereotype.Component;
 
 import ftp.app.model.FtpUser;
 
+@Component
 public class HoneyFtpConfigure {
 
 
@@ -31,28 +37,38 @@ public class HoneyFtpConfigure {
 	 * @param ftpUsersPropsFile can be null, or eg "target / FtpUsers.properties"
 	 * @param maxLogins maximum number of logins (0 for default value)
 	 */ 
-	
-//	private static Listener listener;
-	
-	
-	private static FtpServerFactory serverFactory;
-	private static PropertiesUserManagerFactory userManagerFactory;
+
+	//	private static Listener listener;
 
 
-	public static FtpServer createFtpServer (int ftpPort, String ftpHomeDir,
+	private FtpServerFactory serverFactory;
+	private PropertiesUserManagerFactory userManagerFactory;
+	private Environment env;
+	
+	
+	@Autowired
+	public HoneyFtpConfigure(FtpServerFactory serverFactory, PropertiesUserManagerFactory userManagerFactory, Environment env) {
+		this.serverFactory = serverFactory;
+		this.userManagerFactory = userManagerFactory;
+		this.env = env;
+	}
+	
+
+	public FtpServer createFtpServer (int ftpPort, String ftpHomeDir,
 			String readUserName, String readUserPwd, String writeUserName, String writeUserPwd,
 			String ftpUsersPropsFile, int maxLogins, int maxIdleTimeSec) throws FtpException, IOException
 	{
-		
+
 		File fhd = new File (ftpHomeDir);
+		System.out.println("\n\nIN CreateFtpServer, ftmHome: " + fhd);
 		if (!fhd.exists ())
 			fhd.mkdirs ();
 
 		ListenerFactory listenerFactory = new ListenerFactory ();
 		listenerFactory.setPort (ftpPort);
-		
+		UserManager userManager = userManagerFactory.createUserManager ();
 
-		userManagerFactory = new PropertiesUserManagerFactory ();
+//		userManagerFactory = new PropertiesUserManagerFactory ();
 		userManagerFactory.setPasswordEncryptor (new SaltedPasswordEncryptor ());
 		if (ftpUsersPropsFile != null && ftpUsersPropsFile.trim (). length ()> 0) {
 			File upf = new File (ftpUsersPropsFile);
@@ -60,91 +76,109 @@ public class HoneyFtpConfigure {
 				upf.createNewFile ();
 			userManagerFactory.setFile(upf);
 		}
-//
-//		// Create a read-only user and a user with write permission:
-//		UserManager userManager = userManagerFactory.createUserManager ();
-//		BaseUser userRd = new BaseUser ();
-//		userRd.setName (readUserName);
-//		userRd.setPassword (readUserPwd);
-//		userRd.setHomeDirectory (ftpHomeDir);
-//		
-//		BaseUser userWr = new BaseUser ();
-//		userWr.setName (writeUserName);
-//		userWr.setPassword (writeUserPwd);
-//		userWr.setHomeDirectory (ftpHomeDir);
-//		
-//		if (maxIdleTimeSec > 0) {
-//			userRd.setMaxIdleTime (maxIdleTimeSec);
-//			userWr.setMaxIdleTime (maxIdleTimeSec);
-//		}
-		
-//		List <Authority> authorities = new ArrayList <Authority> ();
-//		authorities.add (new WritePermission ());
-//		userWr.setAuthorities (authorities);
-//		
-//		userManager.save (userRd);
-//		userManager.save (userWr);
-//
-		serverFactory = new FtpServerFactory ();
-//		listener = listenerFactory.createListener ();
-//		serverFactory.addListener ("default", listener);
-//		serverFactory.setUserManager (userManager);
-		
-		
+		//
+		//		// Create a read-only user and a user with write permission:
+		//		UserManager userManager = userManagerFactory.createUserManager ();
+		//		BaseUser userRd = new BaseUser ();
+		//		userRd.setName (readUserName);
+		//		userRd.setPassword (readUserPwd);
+		//		userRd.setHomeDirectory (ftpHomeDir);
+		//		
+		//		BaseUser userWr = new BaseUser ();
+		//		userWr.setName (writeUserName);
+		//		userWr.setPassword (writeUserPwd);
+		//		userWr.setHomeDirectory (ftpHomeDir);
+		//		
+		//		if (maxIdleTimeSec > 0) {
+		//			userRd.setMaxIdleTime (maxIdleTimeSec);
+		//			userWr.setMaxIdleTime (maxIdleTimeSec);
+		//		}
+
+		//		List <Authority> authorities = new ArrayList <Authority> ();
+		//		authorities.add (new WritePermission ());
+		//		userWr.setAuthorities (authorities);
+		//		
+		//		userManager.save (userRd);
+		//		userManager.save (userWr);
+		//
+//		serverFactory = new FtpServerFactory ();
+//				listener = listenerFactory.createListener ();
+				serverFactory.addListener ("default", listenerFactory.createListener());
+				serverFactory.setUserManager (userManager);
+
+
 		if (maxLogins > 0) {
 			ConnectionConfigFactory ccf = new ConnectionConfigFactory ();
 			ccf.setMaxLogins (maxLogins);
 			serverFactory.setConnectionConfig (ccf.createConnectionConfig ());
 		}
-		
-		
+
+
 		serverFactory.setFtplets(Collections.singletonMap("MyFtpLet", new HoneyFtpLet()));
-		
+
 		return serverFactory.createServer ();
 	}
-	
-	public void addFtpUsers(List<FtpUser> users) {
-		UserManager userManager = userManagerFactory.createUserManager ();
+
+	public void addFtpUsers(List<FtpUser> users)  {
+//		UserManager userManager = userManagerFactory.createUserManager ();
+//
+//		List <Authority> authorities = new ArrayList <Authority> ();
+//		authorities.add (new WritePermission ());
+
+		for (FtpUser ftpUser : users) {
+			
+			try {
+				addFtpUser(ftpUser);
+			} catch (FtpException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+
+		//		BaseUser userRd = new BaseUser ();
+		//		userRd.setName (readUserName);
+		//		userRd.setPassword (readUserPwd);
+		//		userRd.setHomeDirectory (ftpHomeDir);
+		//		
+		//		BaseUser userWr = new BaseUser ();
+		//		userWr.setName (writeUserName);
+		//		userWr.setPassword (writeUserPwd);
+		//		userWr.setHomeDirectory (ftpHomeDir);
+		//		
+		//		if (maxIdleTimeSec > 0) {
+		//			userRd.setMaxIdleTime (maxIdleTimeSec);
+		//			userWr.setMaxIdleTime (maxIdleTimeSec);
+		//		}
+
+		//		
+		//		userWr.setAuthorities (authorities);
+		//		
+		//		userManager.save (userRd);
+		//		userManager.save (userWr);
+
+	}
+
+	public void addFtpUser(FtpUser ftpUser) throws FtpException {
+		UserManager userManager = userManagerFactory.createUserManager ();//this.serverFactory.getUserManager();// 
+
+		System.out.println("\n\nAdding new user to ftp: " + ftpUser);
 		
 		List <Authority> authorities = new ArrayList <Authority> ();
 		authorities.add (new WritePermission ());
 		
-		for (FtpUser ftpUser : users) {
-			BaseUser newUSer = new BaseUser();
-			newUSer.setName(ftpUser.getUserName());
-			newUSer.setPassword(ftpUser.getPassword());
-			newUSer.setHomeDirectory(home);
-			if(ftpUser.getUserPermission() == null || ftpUser.getUserPermission().equals(FtpUser.FtpPermission.WRITE))
-				newUSer.setAuthorities(authorities);
-			
-			userManager.save(newUSer);
-		}
-		
-//		BaseUser userRd = new BaseUser ();
-//		userRd.setName (readUserName);
-//		userRd.setPassword (readUserPwd);
-//		userRd.setHomeDirectory (ftpHomeDir);
-//		
-//		BaseUser userWr = new BaseUser ();
-//		userWr.setName (writeUserName);
-//		userWr.setPassword (writeUserPwd);
-//		userWr.setHomeDirectory (ftpHomeDir);
-//		
-//		if (maxIdleTimeSec > 0) {
-//			userRd.setMaxIdleTime (maxIdleTimeSec);
-//			userWr.setMaxIdleTime (maxIdleTimeSec);
-//		}
-		
-		
-		userWr.setAuthorities (authorities);
-		
-		userManager.save (userRd);
-		userManager.save (userWr);
-		
+		BaseUser newUSer = new BaseUser();
+		newUSer.setName(ftpUser.getUserName());
+		newUSer.setPassword(ftpUser.getPassword());
+		newUSer.setHomeDirectory(this.env.getProperty("ftpServer.homeDir"));
+		if(ftpUser.getUserPermission() == null || ftpUser.getUserPermission().equals(FtpUser.FtpPermission.WRITE))
+			newUSer.setAuthorities(authorities);
+
+		userManager.save(newUSer);
+		serverFactory.setUserManager (userManager);
+
 	}
-	
-	public void addFtpUser()
-	
+
 
 
 

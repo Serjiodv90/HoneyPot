@@ -31,7 +31,7 @@ public class HoneyFtpUtils {
 	@Value("${ftpServer.writeUserPwd:WriteUserPwd}")
 	private  String WRITE_USER_PWD = "WriteUserPwd";
 	
-	private  FtpServer ftpServer;
+//	private  FtpServer ftpServer;
 	private HoneyFtpConfigure ftpConfigure;
 	
 	@Autowired
@@ -41,10 +41,12 @@ public class HoneyFtpUtils {
 
 	//for ALPHA version
 	@PostConstruct
-	public  void startFtpServer () throws FtpException, IOException
+	public void startFtpServer () throws FtpException, IOException
 	{
-		ftpServer = HoneyFtpConfigure.createFtpServer (FTP_PORT, FTP_HOME_DIR,
+		
+		FtpServer ftpServer = ftpConfigure.createFtpServer (FTP_PORT, FTP_HOME_DIR,
 				READ_USER_NAME, READ_USER_PWD, WRITE_USER_NAME, WRITE_USER_PWD, FTPUSERSPROPS_FILE, 0, 0);
+		
 		ftpServer.start();			
 
 		
