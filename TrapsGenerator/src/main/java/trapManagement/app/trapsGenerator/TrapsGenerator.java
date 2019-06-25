@@ -172,6 +172,7 @@ public class TrapsGenerator {
 		System.err.println("\n\nHTML: " + doc.toString());
 		Element username = doc.getElementById(id);
 		username.attr("value", getFakeUser(ServerType.HTTP).getUserName());
+		inputHtml.close();
 		return doc;
 	}
 
@@ -188,7 +189,7 @@ public class TrapsGenerator {
 
 		Element pwd = doc.getElementById(pwdId);
 		pwd.attr("value", tmpUser.getPassword());
-
+		inputHtml.close();
 		return doc;
 	}
 	
