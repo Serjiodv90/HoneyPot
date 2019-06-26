@@ -5,12 +5,9 @@
 	dir="rtl">
 
 <head>
-    <!--<meta charset="windows-1255">-->
-    <!-- <meta charset="utf-8" /> -->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Afeka Login</title>
-   <link rel="stylesheet" type="text/css" href="/resources/static/stylesheet.css">    
-   <!--<link href="<c:url value="/resources/stylesheet.css" />" rel="stylesheet">-->
+   <link rel="stylesheet" type="text/css" th:href="@{/stylesheet.css}">    
 </head>
 
 <body>
@@ -21,17 +18,16 @@
             <tr>
                 <td id="main_table_info_cell">
                 <!--  ${SPRING_SECURITY_LAST_EXCEPTION.message}-->
-                    <form action="login" method="post">
+                    <form th:action="@{/login}" method="post">
                         <table id="credentials_table">
                             <tr>
-                                <td colspan=2 id="credentials_table_header"><img src="/resources/static/Images/afeka_logo.png"></td>
+                                <td colspan=2 id="credentials_table_header"><img th:src="@{/Images/afeka_logo.png}"></td>
                             </tr>
                             <tr>
                                 <td colspan=2 id="credentials_table_postheader"></td>
                             </tr>
                             <tr>
-                                <td class="apm-credentials_table_label_cell"><label for='input_1' id='label_input_1'>שם משתמש
-                                </label></td>
+                                <td class="apm-credentials_table_label_cell"><label for='input_1' id='label_input_1'>שם משתמש                                </label></td>
                                 <td class="apm-credentials_table_field_cell"><input type='text' name='username'
                                         class='credentials_input_text' value='' id='input_1' autocomplete='off'/></td>
                             </tr>
@@ -59,6 +55,15 @@
                             <tr id="submit_row">
                                 <td colspan="2" align="center"><input type=submit
                                         class="submit_button submit_button:hover" value="כניסה"></td>
+                            </tr>
+                            
+                            <tr>
+                            	<td colspan="2">
+                        			<div th:style="${error} ? 'display:block' : 'display:none'" id="id01">
+                        				<div th:if="${error}" th:utext="${error}" class="alert alert-danger"></div>
+                        			</div>
+                        		</td>
+                            
                             </tr>
                         </table>
                     </form>

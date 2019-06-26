@@ -1,5 +1,6 @@
 package http.app.logging;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,8 +13,9 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -27,33 +29,22 @@ import http.app.connections.RequestFormat;
 @Component
 public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implements JsonSave {
 
-//	private final String LOGGER_PATH = /*"D:/java/HoneyPot/TrapManagement/Logs/HTTP_tmpLog/"*/"C:\\Users\\DELL\\Documents\\Honeypot\\projects\\HoneyPot\\HttpService\\src\\logFiles\\";
-	private final String LOGGER_PATH = "./src/logFiles/";
+	private final String LOGGER_PATH = "./httpLogFiles/";
 	private final static Logger LOGGER = Logger.getLogger("HTTP Log");
-	//	private final static String JSON_PATH ="C:\\Users\\DELL\\Documents\\workspace-sts-3.9.7.RELEASE\\TrapManagement\\src\\JsonFiles";
-	private final static String JSON_FILE_NAME = "\\HTTPLog.json";
 	ArrayList<RequestFormat> reqArrList = new ArrayList<RequestFormat>();
 	private static Handler fileHandler;
 	private List<JsonObserver> observers = new ArrayList<JsonObserver>();
 	private String ipAddress = "";
+	private Environment env;
 	
-
-//	public void sessionCreated (String ipAddress) {
-//		StringBuffer requestBody = new StringBuffer();
-//		requestBody.append("\tHTTP --> ");
-//		requestBody.append("New connection request from: " + ipAddress);
-//
-//		LOGGER.info(requestBody.toString());
-//		reqArrList.add(new RequestFormat(DateFormatter.getCurrentDateTimeForLog(), requestBody.toString()));
-//	}
+	@Autowired
+	public void setEnvironment(Environment env) {
+		this.env = env;
+	}
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, 
 			Object handler) {
-		
-		
-		
-		System.err.println();
 
 		StringBuffer requestBody = new StringBuffer();
 
@@ -61,18 +52,6 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 
 		requestBody.append("\tHTTP --> ");
 		requestBody.append(request.getMethod() + " ");
-		
-		
-//		System.err.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-//		Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//		if(user instanceof MyUserPrincipal) {
-//			System.err.println(((MyUserPrincipal)user).getUsername());
-//			requestBody.append("\tHTTP --> ");
-//			requestBody.append("POST ");
-//			requestBody.append(" username: " + ((MyUserPrincipal)user).getUsername() 
-//					+ "password: " + ((MyUserPrincipal)user).getPassword());
-//		}
-		
 		
 		// save connection for the first time
 		String tmpIpAddress = request.getHeader("X-FORWARDED-FOR");  
@@ -88,7 +67,6 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 		
 		String date = DateFormatter.getCurrentDateTimeForFile();
 		setLogger(ipAddress, date);
-		//		System.out.println("HttpRequestsInterceptor.preHandle()\nIp Addr: " + ipAddress);
 
 		Map<String, String> params = new HashMap<>();
 		Map<String, String[]> parameterMap = request.getParameterMap();
@@ -102,18 +80,22 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 		}
 
 		LOGGER.info(requestBody.toString());
-		reqArrList.add(new RequestFormat(DateFormatter.getCurrentDateTimeForLog()
-				/*LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))*/,
+		reqArrList.add(new RequestFormat(DateFormatter.getCurrentDateTimeForLog(),
 				requestBody.toString()));
 
 		return true;
 	}
 
 	private void setLogger(String clientIp, String date) {
+		String loggerPath = env.getProperty("http.log.files");
+		File logDir = new File(loggerPath);
+		if(!logDir.exists())
+			logDir.mkdir();
+			
 		if(fileHandler == null)
 			try {
 				LOGGER.setUseParentHandlers(false);
-				fileHandler = new FileHandler(LOGGER_PATH + date + "_" + clientIp/*"httpRequests.log"*/);
+				fileHandler = new FileHandler(loggerPath + date + "_" + clientIp);
 				fileHandler.setFormatter(new LoggerFormatter());
 				LOGGER.addHandler(fileHandler);
 			} catch (SecurityException | IOException e) {
@@ -121,17 +103,6 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 				e.printStackTrace();
 			}
 	}
-
-	//	public void logToJson() {
-	//		try (Writer writer = new FileWriter(JSON_PATH + JSON_FILE_NAME)) {
-	//			Gson gson = new GsonBuilder().create();
-	//			gson.toJson(reqArrList, writer);
-	//			notifyAllRegistered();
-	//		} catch (IOException e) {
-	//			// TODO Auto-generated catch block
-	//			e.printStackTrace();
-	//		}
-	//	}
 
 	@Override
 	public void registerObserver(JsonObserver obs) {

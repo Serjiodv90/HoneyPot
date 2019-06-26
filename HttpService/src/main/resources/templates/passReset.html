@@ -1,15 +1,16 @@
 
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	dir="rtl">
 <head>
 <meta charset="utf-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	
-<link rel="stylesheet" type="text/css" href="/resources/static/stylesheet.css">
+<link rel="stylesheet" type="text/css" th:href="@{/stylesheet.css}">
 
-<script type="text/javascript" src="/resources/static/js/passwordCheck.js"></script>
+<script type="text/javascript" th:src="@{/js/passwordCheck.js}"></script>
 
 
 <title>Reset Password</title>
@@ -17,7 +18,7 @@
 <body>
 
 <div style="height:50%; position: fixed;">
-	<img id="image1" class="img-responsive" src="/resources/static/Images/topAfeka.jpg" width="100%">
+	<img id="image1" class="img-responsive" th:src="@{/Images/topAfeka.jpg}" width="100%">
 </div>
 	
 	<div class="login-page">
@@ -27,7 +28,7 @@
 				<form action="changePassword" method="Post" onsubmit="return validateReg()" dir="rtl">
 	 				<table id="credentials_table">
                     	<tr>
-                        	<td colspan=2 id="credentials_table_header"><img src="/resources/static/Images/afeka_logo.png"></td>
+                        	<td colspan=2 id="credentials_table_header"><img th:src="@{/Images/afeka_logo.png}"></td>
                         </tr>
                         <tr>
                             <td colspan=2 id="credentials_table_postheader"></td>
@@ -62,10 +63,9 @@
                         
                         <tr>
                         	<td colspan="2">
-                        			<div id="myDIV" style="float:left; margin:10px; font-size: 15px; color:red;">
-                        		<c:if test="${not empty error}">
-						  				${error}
-								</c:if>
+                        			<!--  <div id="myDIV" style="float:left; margin:10px; font-size: 15px; color:red;">-->
+                        			<div th:style="${error} ? 'display:block' : 'display:none'">
+                        				<div th:if="${error}" th:utext="${error}" class="alert alert-danger"></div>
                         			</div>
                         
                         	</td>

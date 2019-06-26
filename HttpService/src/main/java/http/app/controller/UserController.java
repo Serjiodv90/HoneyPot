@@ -5,8 +5,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import http.app.MyUserPrincipal;
@@ -24,7 +26,7 @@ public class UserController {
 	HttpRequestsInterceptor httpRequestInterceptor;
 
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String home(HttpServletRequest request) {
+	public String home(@RequestParam(name="error", required=false) String errorStr, HttpServletRequest request,  Model model) {
 		Integer integer = (Integer) request.getSession()
 				.getAttribute("sessionNumber");        // create session if not exists and get attribute
 		if (integer == null) {
@@ -35,8 +37,13 @@ public class UserController {
 			integer++;
 			request.getSession().setAttribute("sessionNumber", integer);            // replace session attribute
 		}
-//		java.util.Map<String, Integer> hitCounter = new HashMap<>();
-//		hitCounter.put("Hit Counter", integer);
+		
+		System.out.println(errorStr);
+
+		if(errorStr != null && !errorStr.isEmpty() && errorStr.equalsIgnoreCase("true")) {
+			model.addAttribute("error", "Incorrect email or password");
+			
+		}
 		
 		return "afekaLogin.html";
 	}
@@ -55,6 +62,7 @@ public class UserController {
 			}
 			
 		}
+		
 		return "AfterLogin.html";
 	}
 	

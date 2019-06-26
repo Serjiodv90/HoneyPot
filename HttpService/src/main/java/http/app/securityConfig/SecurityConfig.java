@@ -27,12 +27,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.csrf().disable()
 			.authorizeRequests().antMatchers("/login", "/forgotPassword", "/changePassword", "/fakeUsers", "/resources/**",
-					"/static/**", "/templates/**").permitAll()
+					"/static/**", "/templates/**", "/Images/**", "/js/**", "/stylesheet.css").permitAll()
 //			.antMatchers("/").hasAuthority("USER")
 			.anyRequest().authenticated()
 			.and()
 			.formLogin()
-			.loginPage("/login").permitAll()
+			.loginPage("/login").failureUrl("/login?error=true").permitAll()
 			.and().logout().invalidateHttpSession(true)
 			.clearAuthentication(true)
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
@@ -50,12 +50,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return provider;
 	}
 
-//	@Override
-//    public void configure(WebSecurity web) throws Exception {
-//        web
-//                .ignoring()
-//                .antMatchers("/resources/**", "/static/**", "/css/**", "/images/**", "/webapp/**");
-//    }
+	@Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .antMatchers("/resources/**", "/stylesheet.css", "/static/**", "/js/**", "/Images/**");
+    }
 //	
 //	@Bean
 //	@Override

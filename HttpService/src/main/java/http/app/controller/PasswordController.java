@@ -15,18 +15,16 @@ import http.app.model.UserService;
 @Controller
 public class PasswordController {
 
-	//	private PasswordService passwordService;
 	private UserService userService;
 
 	@Autowired
-	public PasswordController(/*PasswordService passwordService, */UserService userService) {
-		//		this.passwordService = passwordService;
+	public PasswordController(UserService userService) {
 		this.userService = userService;
 	}
 
 	@RequestMapping(path="/forgotPassword", method=RequestMethod.GET)
 	public String passwordReset() {
-		return "passReset.jsp";
+		return "passReset.html";
 	}
 
 	@RequestMapping(path="/changePassword", method=RequestMethod.POST)
@@ -35,9 +33,9 @@ public class PasswordController {
 
 		if(!userService.resetPassword(user)) {
 			model.addAttribute("error", "User doesn't exist");
-			return "passReset.jsp";
+			return "passReset.html";
 		}
-		return "successChangePassword.jsp";
+		return "successChangePassword.html";
 	}
 
 }
