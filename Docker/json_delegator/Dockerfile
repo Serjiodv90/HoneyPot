@@ -1,11 +1,11 @@
-#Docker file for UserInterface
+#Docker file for JsonDelegator
 
 FROM openjdk:8-jdk-alpine
 
-COPY . /HoneyPot/UserInterface
+COPY . /HoneyPot/JsonDelegator
 
-WORKDIR /HoneyPot/UserInterface
+WORKDIR /HoneyPot/JsonDelegator
 
-ENTRYPOINT ["java", "-jar", "UserInterface-1.0.0.jar", "--spring.config.additional-location=file:DockerApp.properties"]
+ENTRYPOINT ["java", "-jar", "JsonDelegator-1.0.0.jar", "--spring.config.additional-location=file:DockerApp.properties"]
 
 

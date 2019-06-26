@@ -5,23 +5,19 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.FileHandler;
-import java.util.logging.Formatter;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import smtp.app.config.SmtpConfiguration;
 import smtp.app.connection.DateFormatter;
 import smtp.app.connection.JsonDelegatorConnection;
-import smtp.app.connection.JsonObserver;
 import smtp.app.connection.RequestFormat;
 import smtp.app.logging.SmtpLoggerFormatter;
 
@@ -30,7 +26,6 @@ public class SmtpLoggerManager {
 	private final Logger LOGGER = Logger.getLogger(SmtpLoggerFormatter.class.getName());
 	private final String LOGGERFILEPATH = "./Logs/SMTPLogs/";
 	private List<RequestFormat> actionsToStore;
-//	private List<JsonObserver> jsonObservers;
 	private final String ipv4Pattern = "(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])";
 
 	//values in the email body to represent text body or text file attached 
@@ -43,12 +38,9 @@ public class SmtpLoggerManager {
 	public SmtpLoggerManager() {
 		this.LOGGER.setUseParentHandlers(false);
 		this.context = new AnnotationConfigApplicationContext(SmtpConfiguration.class);
-//		this.jsonObservers = new ArrayList<>();
 	}
 
-//	public void registerJsonObserver(JsonObserver observer) { 
-//		this.jsonObservers.add(observer);
-//	}
+
 
 	private void addActionToList(String action) {
 		System.out.println("\nWriting to log\n");
@@ -68,7 +60,6 @@ public class SmtpLoggerManager {
 			fileHandler.setFormatter(new SmtpLoggerFormatter());
 			this.LOGGER.addHandler(fileHandler);
 		} catch (SecurityException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

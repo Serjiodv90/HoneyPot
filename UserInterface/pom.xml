@@ -13,7 +13,6 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	<artifactId>UserInterface</artifactId>
 	<version>1.0.0</version>
 	<name>UserInterface</name>
-	<description>Demo project for Spring Boot</description>
 
 	<properties>
 		<java.version>1.8</java.version>

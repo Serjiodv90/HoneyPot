@@ -1,4 +1,3 @@
-ftp\app\model\FtpHoneypotUsers.class
 ftp\app\connections\DateFormatter.class
 ftp\app\connections\JsonDelegatorConnection.class
 ftp\app\logic\HoneyFtpCommands.class
@@ -10,7 +9,6 @@ ftp\app\logic\HoneyFtpUtils.class
 ftp\app\connections\RequestFormat.class
 ftp\app\testUtils\FtpUploadDownloadUtil.class
 ftp\app\model\FtpUser$FtpPermission.class
-ftp\app\dal\FtpUserDao.class
 ftp\app\controller\FakeUsersRestController.class
 ftp\app\logging\FtpLogFormatter.class
 ftp\app\ConfigurationJsonDelegator.class

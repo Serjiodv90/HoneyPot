@@ -1,9 +1,0 @@
-[ 10-04-2019   20:21:34 ] INFO	FTP --> New connection request from client: 127.0.0.1
-[ 10-04-2019   20:21:37 ] INFO	FTP --> command: User's command: USER, asd
-[ 10-04-2019   20:21:38 ] INFO	FTP --> command: User's command: PASS, qwe
-[ 10-04-2019   20:21:38 ] INFO	FTP --> The user :asd, is trying to connect to FTP server, with password: qwe
-[ 10-04-2019   20:21:51 ] INFO	FTP --> command: User's command: USER, WriteUserName
-[ 10-04-2019   20:21:56 ] INFO	FTP --> command: User's command: PASS, WriteUserPwd
-[ 10-04-2019   20:21:56 ] INFO	FTP --> The user :WriteUserName, is trying to connect to FTP server, with password: WriteUserPwd
-[ 10-04-2019   20:22:01 ] INFO	FTP --> command: User's command: QUIT, null
-[ 10-04-2019   20:22:01 ] INFO	FTP --> Client with ip address: 127.0.0.1, has disconnected from the server

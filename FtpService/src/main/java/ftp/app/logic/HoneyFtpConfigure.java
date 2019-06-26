@@ -9,15 +9,11 @@ import java.io.*;
 import java.util.*;
 import org.apache.ftpserver.*;
 import org.apache.ftpserver.ftplet.*;
-import org.apache.ftpserver.listener.Listener;
 import org.apache.ftpserver.listener.ListenerFactory;
 import org.apache.ftpserver.usermanager.*;
 import org.apache.ftpserver.usermanager.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.data.domain.ExampleMatcher.NullHandler;
 import org.springframework.stereotype.Component;
 
 import ftp.app.model.FtpUser;
@@ -37,9 +33,6 @@ public class HoneyFtpConfigure {
 	 * @param ftpUsersPropsFile can be null, or eg "target / FtpUsers.properties"
 	 * @param maxLogins maximum number of logins (0 for default value)
 	 */ 
-
-	//	private static Listener listener;
-
 
 	private FtpServerFactory serverFactory;
 	private PropertiesUserManagerFactory userManagerFactory;
@@ -61,8 +54,8 @@ public class HoneyFtpConfigure {
 
 		File fhd = new File (ftpHomeDir);
 		System.out.println("\n\nIN CreateFtpServer, ftmHome: " + fhd);
-		if (!fhd.exists ())
-			fhd.mkdirs ();
+		if (!fhd.exists())
+			fhd.mkdirs();
 
 		ListenerFactory listenerFactory = new ListenerFactory ();
 		listenerFactory.setPort (ftpPort);
@@ -71,8 +64,15 @@ public class HoneyFtpConfigure {
 		userManagerFactory.setPasswordEncryptor (new SaltedPasswordEncryptor ());
 		if (ftpUsersPropsFile != null && ftpUsersPropsFile.trim (). length ()> 0) {
 			File upf = new File (ftpUsersPropsFile);
-			if (!upf.exists ()) 
-				upf.createNewFile ();
+			System.out.println("\n\nFile Name: " + upf.getName());
+			File containingFolder = new File(ftpUsersPropsFile.replace(upf.getName(), ""));
+			
+			if(!containingFolder.exists())
+				containingFolder.mkdir();
+			if (!upf.exists()) 
+				upf.createNewFile();
+			
+				
 			userManagerFactory.setFile(upf);
 		}
 		

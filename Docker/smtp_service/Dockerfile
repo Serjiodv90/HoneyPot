@@ -1,11 +1,11 @@
-#Docker file for UserInterface
+#Docker file for SmtpService
 
 FROM openjdk:8-jdk-alpine
 
-COPY . /HoneyPot/UserInterface
+COPY . /HoneyPot/SmtpService
 
-WORKDIR /HoneyPot/UserInterface
+WORKDIR /HoneyPot/SmtpService
 
-ENTRYPOINT ["java", "-jar", "UserInterface-1.0.0.jar", "--spring.config.additional-location=file:DockerApp.properties"]
+ENTRYPOINT ["java", "-jar", "SmtpService-1.0.0.jar", "--spring.config.additional-location=file:DockerApp.properties"]
 
 

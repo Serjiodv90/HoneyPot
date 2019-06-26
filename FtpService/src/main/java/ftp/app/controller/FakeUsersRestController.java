@@ -1,6 +1,5 @@
 package ftp.app.controller;
 
-import java.lang.reflect.Method;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

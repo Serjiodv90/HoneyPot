@@ -1,3 +1,0 @@
-[ 10-04-2019   20:19:16 ] INFO	FTP --> New connection request from client: 127.0.0.1
-[ 10-04-2019   20:19:18 ] INFO	FTP --> command: User's command: USER, null
-[ 10-04-2019   20:19:18 ] INFO	FTP --> Client with ip address: 127.0.0.1, has disconnected from the server
