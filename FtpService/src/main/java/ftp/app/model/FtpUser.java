@@ -1,10 +1,9 @@
 package ftp.app.model;
 
-import org.omg.CORBA.PRIVATE_MEMBER;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /*
  * This class represents a single ftp user data.

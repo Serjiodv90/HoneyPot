@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="ftp.app.test.FtpServiceApplicationTests" time="4.819" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="ftp.app.test.FtpServiceApplicationTests" time="4.275" tests="1" errors="1" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -19,7 +19,7 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jre1.8.0_191\bin"/>
-    <property name="sun.java.command" value="C:\Users\sergei\AppData\Local\Temp\surefire5492714017534388638\surefirebooter6170825973584200870.jar C:\Users\sergei\AppData\Local\Temp\surefire5492714017534388638 2019-06-25T21-14-12_467-jvmRun1 surefire4940092246977359410tmp surefire_03217274996926883486tmp"/>
+    <property name="sun.java.command" value="C:\Users\sergei\AppData\Local\Temp\surefire8140274812598188457\surefirebooter7651970095795935815.jar C:\Users\sergei\AppData\Local\Temp\surefire8140274812598188457 2019-06-26T16-34-02_711-jvmRun1 surefire5015653708215148650tmp surefire_02316770982093431916tmp"/>
     <property name="surefire.test.class.path" value="D:\java\HoneyPot\FtpService\target\test-classes;D:\java\HoneyPot\FtpService\target\classes;C:\Users\sergei\.m2\repository\org\springframework\boot\spring-boot-starter-web\2.1.1.RELEASE\spring-boot-starter-web-2.1.1.RELEASE.jar;C:\Users\sergei\.m2\repository\org\springframework\boot\spring-boot-starter\2.1.1.RELEASE\spring-boot-starter-2.1.1.RELEASE.jar;C:\Users\sergei\.m2\repository\org\springframework\boot\spring-boot\2.1.1.RELEASE\spring-boot-2.1.1.RELEASE.jar;C:\Users\sergei\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\2.1.1.RELEASE\spring-boot-autoconfigure-2.1.1.RELEASE.jar;C:\Users\sergei\.m2\repository\org\springframework\boot\spring-boot-starter-logging\2.1.1.RELEASE\spring-boot-starter-logging-2.1.1.RELEASE.jar;C:\Users\sergei\.m2\repository\ch\qos\logback\logback-classic\1.2.3\logback-classic-1.2.3.jar;C:\Users\sergei\.m2\repository\ch\qos\logback\logback-core\1.2.3\logback-core-1.2.3.jar;C:\Users\sergei\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.11.1\log4j-to-slf4j-2.11.1.jar;C:\Users\sergei\.m2\repository\org\apache\logging\log4j\log4j-api\2.11.1\log4j-api-2.11.1.jar;C:\Users\sergei\.m2\repository\org\slf4j\jul-to-slf4j\1.7.25\jul-to-slf4j-1.7.25.jar;C:\Users\sergei\.m2\repository\javax\annotation\javax.annotation-api\1.3.2\javax.annotation-api-1.3.2.jar;C:\Users\sergei\.m2\repository\org\yaml\snakeyaml\1.23\snakeyaml-1.23.jar;C:\Users\sergei\.m2\repository\org\springframework\boot\spring-boot-starter-json\2.1.1.RELEASE\spring-boot-starter-json-2.1.1.RELEASE.jar;C:\Users\sergei\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.9.7\jackson-databind-2.9.7.jar;C:\Users\sergei\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.9.0\jackson-annotations-2.9.0.jar;C:\Users\sergei\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.9.7\jackson-core-2.9.7.jar;C:\Users\sergei\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.9.7\jackson-datatype-jdk8-2.9.7.jar;C:\Users\sergei\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.9.7\jackson-datatype-jsr310-2.9.7.jar;C:\Users\sergei\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.9.7\jackson-module-parameter-names-2.9.7.jar;C:\Users\sergei\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\2.1.1.RELEASE\spring-boot-starter-tomcat-2.1.1.RELEASE.jar;C:\Users\sergei\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\9.0.13\tomcat-embed-core-9.0.13.jar;C:\Users\sergei\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\9.0.13\tomcat-embed-el-9.0.13.jar;C:\Users\sergei\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\9.0.13\tomcat-embed-websocket-9.0.13.jar;C:\Users\sergei\.m2\repository\org\hibernate\validator\hibernate-validator\6.0.13.Final\hibernate-validator-6.0.13.Final.jar;C:\Users\sergei\.m2\repository\javax\validation\validation-api\2.0.1.Final\validation-api-2.0.1.Final.jar;C:\Users\sergei\.m2\repository\org\jboss\logging\jboss-logging\3.3.2.Final\jboss-logging-3.3.2.Final.jar;C:\Users\sergei\.m2\repository\com\fasterxml\classmate\1.4.0\classmate-1.4.0.jar;C:\Users\sergei\.m2\repository\org\springframework\spring-web\5.1.3.RELEASE\spring-web-5.1.3.RELEASE.jar;C:\Users\sergei\.m2\repository\org\springframework\spring-beans\5.1.3.RELEASE\spring-beans-5.1.3.RELEASE.jar;C:\Users\sergei\.m2\repository\org\springframework\spring-webmvc\5.1.3.RELEASE\spring-webmvc-5.1.3.RELEASE.jar;C:\Users\sergei\.m2\repository\org\springframework\spring-aop\5.1.3.RELEASE\spring-aop-5.1.3.RELEASE.jar;C:\Users\sergei\.m2\repository\org\springframework\spring-context\5.1.3.RELEASE\spring-context-5.1.3.RELEASE.jar;C:\Users\sergei\.m2\repository\org\springframework\spring-expression\5.1.3.RELEASE\spring-expression-5.1.3.RELEASE.jar;C:\Users\sergei\.m2\repository\org\springframework\spring-core\5.1.3.RELEASE\spring-core-5.1.3.RELEASE.jar;C:\Users\sergei\.m2\repository\org\springframework\spring-jcl\5.1.3.RELEASE\spring-jcl-5.1.3.RELEASE.jar;C:\Users\sergei\.m2\repository\org\springframework\boot\spring-boot-starter-test\2.1.1.RELEASE\spring-boot-starter-test-2.1.1.RELEASE.jar;C:\Users\sergei\.m2\repository\org\springframework\boot\spring-boot-test\2.1.1.RELEASE\spring-boot-test-2.1.1.RELEASE.jar;C:\Users\sergei\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\2.1.1.RELEASE\spring-boot-test-autoconfigure-2.1.1.RELEASE.jar;C:\Users\sergei\.m2\repository\com\jayway\jsonpath\json-path\2.4.0\json-path-2.4.0.jar;C:\Users\sergei\.m2\repository\net\minidev\json-smart\2.3\json-smart-2.3.jar;C:\Users\sergei\.m2\repository\net\minidev\accessors-smart\1.2\accessors-smart-1.2.jar;C:\Users\sergei\.m2\repository\org\ow2\asm\asm\5.0.4\asm-5.0.4.jar;C:\Users\sergei\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\sergei\.m2\repository\org\assertj\assertj-core\3.11.1\assertj-core-3.11.1.jar;C:\Users\sergei\.m2\repository\org\mockito\mockito-core\2.23.4\mockito-core-2.23.4.jar;C:\Users\sergei\.m2\repository\net\bytebuddy\byte-buddy\1.9.5\byte-buddy-1.9.5.jar;C:\Users\sergei\.m2\repository\net\bytebuddy\byte-buddy-agent\1.9.5\byte-buddy-agent-1.9.5.jar;C:\Users\sergei\.m2\repository\org\objenesis\objenesis\2.6\objenesis-2.6.jar;C:\Users\sergei\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\sergei\.m2\repository\org\hamcrest\hamcrest-library\1.3\hamcrest-library-1.3.jar;C:\Users\sergei\.m2\repository\org\skyscreamer\jsonassert\1.5.0\jsonassert-1.5.0.jar;C:\Users\sergei\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\sergei\.m2\repository\org\springframework\spring-test\5.1.3.RELEASE\spring-test-5.1.3.RELEASE.jar;C:\Users\sergei\.m2\repository\org\xmlunit\xmlunit-core\2.6.2\xmlunit-core-2.6.2.jar;C:\Users\sergei\.m2\repository\org\springframework\boot\spring-boot-starter-data-mongodb\2.1.1.RELEASE\spring-boot-starter-data-mongodb-2.1.1.RELEASE.jar;C:\Users\sergei\.m2\repository\org\mongodb\mongodb-driver\3.8.2\mongodb-driver-3.8.2.jar;C:\Users\sergei\.m2\repository\org\mongodb\bson\3.8.2\bson-3.8.2.jar;C:\Users\sergei\.m2\repository\org\mongodb\mongodb-driver-core\3.8.2\mongodb-driver-core-3.8.2.jar;C:\Users\sergei\.m2\repository\org\springframework\data\spring-data-mongodb\2.1.3.RELEASE\spring-data-mongodb-2.1.3.RELEASE.jar;C:\Users\sergei\.m2\repository\org\springframework\spring-tx\5.1.3.RELEASE\spring-tx-5.1.3.RELEASE.jar;C:\Users\sergei\.m2\repository\org\springframework\data\spring-data-commons\2.1.3.RELEASE\spring-data-commons-2.1.3.RELEASE.jar;C:\Users\sergei\.m2\repository\commons-net\commons-net\3.3\commons-net-3.3.jar;C:\Users\sergei\.m2\repository\org\apache\ftpserver\ftpserver-core\1.0.6\ftpserver-core-1.0.6.jar;C:\Users\sergei\.m2\repository\org\apache\ftpserver\ftplet-api\1.0.6\ftplet-api-1.0.6.jar;C:\Users\sergei\.m2\repository\org\apache\mina\mina-core\2.0.4\mina-core-2.0.4.jar;C:\Users\sergei\.m2\repository\org\slf4j\slf4j-api\1.7.12\slf4j-api-1.7.12.jar;C:\Users\sergei\.m2\repository\org\slf4j\slf4j-log4j12\1.7.12\slf4j-log4j12-1.7.12.jar;C:\Users\sergei\.m2\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\sergei"/>
@@ -32,7 +32,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\sergei\AppData\Local\Temp\surefire5492714017534388638\surefirebooter6170825973584200870.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\sergei\AppData\Local\Temp\surefire8140274812598188457\surefirebooter7651970095795935815.jar"/>
     <property name="sun.boot.class.path" value="C:\Program Files\Java\jre1.8.0_191\lib\resources.jar;C:\Program Files\Java\jre1.8.0_191\lib\rt.jar;C:\Program Files\Java\jre1.8.0_191\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_191\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_191\lib\jce.jar;C:\Program Files\Java\jre1.8.0_191\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_191\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_191\classes"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -62,5 +62,195 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="contextLoads" classname="ftp.app.test.FtpServiceApplicationTests" time="0.251"/>
+  <testcase name="contextLoads" classname="ftp.app.test.FtpServiceApplicationTests" time="0.001">
+    <error message="Failed to load ApplicationContext" type="java.lang.IllegalStateException">java.lang.IllegalStateException: Failed to load ApplicationContext
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'honeyFtpUtils': Invocation of init method failed; nested exception is java.io.IOException: The system cannot find the path specified
+Caused by: java.io.IOException: The system cannot find the path specified
+</error>
+    <system-out><![CDATA[16:34:04.516 [main] DEBUG org.springframework.test.context.junit4.SpringJUnit4ClassRunner - SpringJUnit4ClassRunner constructor called with [class ftp.app.test.FtpServiceApplicationTests]
+16:34:04.522 [main] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+16:34:04.531 [main] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+16:34:04.553 [main] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [ftp.app.test.FtpServiceApplicationTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+16:34:04.567 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [ftp.app.test.FtpServiceApplicationTests], using SpringBootContextLoader
+16:34:04.572 [main] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [ftp.app.test.FtpServiceApplicationTests]: class path resource [ftp/app/test/FtpServiceApplicationTests-context.xml] does not exist
+16:34:04.573 [main] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [ftp.app.test.FtpServiceApplicationTests]: class path resource [ftp/app/test/FtpServiceApplicationTestsContext.groovy] does not exist
+16:34:04.573 [main] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [ftp.app.test.FtpServiceApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+16:34:04.574 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [ftp.app.test.FtpServiceApplicationTests]: FtpServiceApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+16:34:04.622 [main] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [ftp.app.test.FtpServiceApplicationTests]
+16:34:04.699 [main] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [D:\java\HoneyPot\FtpService\target\classes\ftp\app\FtpServiceApplication.class]
+16:34:04.701 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration ftp.app.FtpServiceApplication for test class ftp.app.test.FtpServiceApplicationTests
+16:34:04.802 [main] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [ftp.app.test.FtpServiceApplicationTests]: using defaults.
+16:34:04.803 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+16:34:04.833 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@3754a4bf, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@62379589, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@4afcd809, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@175c2241, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5bf0d49, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5b7a5baa, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@776aec5c, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@1d296da, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@7c7a06ec, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@75d4a5c2, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@557caf28, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@408d971b]
+16:34:04.835 [main] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [ftp.app.test.FtpServiceApplicationTests]
+16:34:04.836 [main] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [ftp.app.test.FtpServiceApplicationTests]
+16:34:04.838 [main] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [ftp.app.test.FtpServiceApplicationTests]
+16:34:04.838 [main] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [ftp.app.test.FtpServiceApplicationTests]
+16:34:04.839 [main] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [ftp.app.test.FtpServiceApplicationTests]
+16:34:04.839 [main] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [ftp.app.test.FtpServiceApplicationTests]
+16:34:04.845 [main] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@3fc2959f testClass = FtpServiceApplicationTests, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@5aa9e4eb testClass = FtpServiceApplicationTests, locations = '{}', classes = '{class ftp.app.FtpServiceApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@4cf4d528, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@2641e737, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@103f852, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@73d4cc9e], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true]], class annotated with @DirtiesContext [false] with mode [null].
+16:34:04.847 [main] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [ftp.app.test.FtpServiceApplicationTests]
+16:34:04.848 [main] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [ftp.app.test.FtpServiceApplicationTests]
+16:34:04.884 [main] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=-1}
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.1.1.RELEASE)
+
+2019-06-26 16:34:05.228  INFO 17924 --- [           main] ftp.app.test.FtpServiceApplicationTests  : Starting FtpServiceApplicationTests on Serioga with PID 17924 (started by sergei in D:\java\HoneyPot\FtpService)
+2019-06-26 16:34:05.230  INFO 17924 --- [           main] ftp.app.test.FtpServiceApplicationTests  : No active profile set, falling back to default profiles: default
+2019-06-26 16:34:05.923  INFO 17924 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-26 16:34:06.010  INFO 17924 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 82ms. Found 1 repository interfaces.
+2019-06-26 16:34:07.582  INFO 17924 --- [           main] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2019-06-26 16:34:07.582  INFO 17924 --- [           main] org.mongodb.driver.cluster               : Adding discovered server localhost:27017 to client view of cluster
+2019-06-26 16:34:07.663  INFO 17924 --- [localhost:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:1, serverValue:25}] to localhost:27017
+2019-06-26 16:34:07.668  INFO 17924 --- [localhost:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 0, 0]}, minWireVersion=0, maxWireVersion=7, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=2778687}
+2019-06-26 16:34:07.669  INFO 17924 --- [localhost:27017] org.mongodb.driver.cluster               : Discovered cluster type of STANDALONE
+
+
+IN CreateFtpServer, ftmHome: FtpHome
+2019-06-26 16:34:08.059  WARN 17924 --- [           main] o.s.w.c.s.GenericWebApplicationContext   : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'honeyFtpUtils': Invocation of init method failed; nested exception is java.io.IOException: The system cannot find the path specified
+2019-06-26 16:34:08.071  INFO 17924 --- [           main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-06-26 16:34:08.085 ERROR 17924 --- [           main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'honeyFtpUtils': Invocation of init method failed; nested exception is java.io.IOException: The system cannot find the path specified
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:139) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:419) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1737) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:576) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:846) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:863) ~[spring-context-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546) ~[spring-context-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775) ~[spring-boot-2.1.1.RELEASE.jar:2.1.1.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) ~[spring-boot-2.1.1.RELEASE.jar:2.1.1.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316) ~[spring-boot-2.1.1.RELEASE.jar:2.1.1.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:127) [spring-boot-test-2.1.1.RELEASE.jar:2.1.1.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:365) [surefire-junit4-2.22.1.jar:2.22.1]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273) [surefire-junit4-2.22.1.jar:2.22.1]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238) [surefire-junit4-2.22.1.jar:2.22.1]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159) [surefire-junit4-2.22.1.jar:2.22.1]
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384) [surefire-booter-2.22.1.jar:2.22.1]
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345) [surefire-booter-2.22.1.jar:2.22.1]
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126) [surefire-booter-2.22.1.jar:2.22.1]
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418) [surefire-booter-2.22.1.jar:2.22.1]
+Caused by: java.io.IOException: The system cannot find the path specified
+	at java.io.WinNTFileSystem.createFileExclusively(Native Method) ~[na:1.8.0_191]
+	at java.io.File.createNewFile(Unknown Source) ~[na:1.8.0_191]
+	at ftp.app.logic.HoneyFtpConfigure.createFtpServer(HoneyFtpConfigure.java:75) ~[classes/:na]
+	at ftp.app.logic.HoneyFtpUtils.startFtpServer(HoneyFtpUtils.java:45) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_191]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_191]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_191]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[na:1.8.0_191]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleElement.invoke(InitDestroyAnnotationBeanPostProcessor.java:363) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeInitMethods(InitDestroyAnnotationBeanPostProcessor.java:307) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:136) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	... 44 common frames omitted
+
+2019-06-26 16:34:08.088 ERROR 17924 --- [           main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@3754a4bf] to prepare test instance [ftp.app.test.FtpServiceApplicationTests@244e619a]
+
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125) ~[spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) ~[spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) ~[spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) ~[spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) ~[spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:365) [surefire-junit4-2.22.1.jar:2.22.1]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:273) [surefire-junit4-2.22.1.jar:2.22.1]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:238) [surefire-junit4-2.22.1.jar:2.22.1]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:159) [surefire-junit4-2.22.1.jar:2.22.1]
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384) [surefire-booter-2.22.1.jar:2.22.1]
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345) [surefire-booter-2.22.1.jar:2.22.1]
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126) [surefire-booter-2.22.1.jar:2.22.1]
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418) [surefire-booter-2.22.1.jar:2.22.1]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'honeyFtpUtils': Invocation of init method failed; nested exception is java.io.IOException: The system cannot find the path specified
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:139) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:419) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1737) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:576) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:846) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:863) ~[spring-context-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546) ~[spring-context-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775) ~[spring-boot-2.1.1.RELEASE.jar:2.1.1.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) ~[spring-boot-2.1.1.RELEASE.jar:2.1.1.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316) ~[spring-boot-2.1.1.RELEASE.jar:2.1.1.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:127) ~[spring-boot-test-2.1.1.RELEASE.jar:2.1.1.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) ~[spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) ~[spring-test-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	... 27 common frames omitted
+Caused by: java.io.IOException: The system cannot find the path specified
+	at java.io.WinNTFileSystem.createFileExclusively(Native Method) ~[na:1.8.0_191]
+	at java.io.File.createNewFile(Unknown Source) ~[na:1.8.0_191]
+	at ftp.app.logic.HoneyFtpConfigure.createFtpServer(HoneyFtpConfigure.java:75) ~[classes/:na]
+	at ftp.app.logic.HoneyFtpUtils.startFtpServer(HoneyFtpUtils.java:45) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_191]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_191]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_191]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[na:1.8.0_191]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleElement.invoke(InitDestroyAnnotationBeanPostProcessor.java:363) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeInitMethods(InitDestroyAnnotationBeanPostProcessor.java:307) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeInitialization(InitDestroyAnnotationBeanPostProcessor.java:136) ~[spring-beans-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	... 44 common frames omitted
+
+]]></system-out>
+    <system-err><![CDATA[SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/C:/Users/sergei/.m2/repository/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/C:/Users/sergei/.m2/repository/org/slf4j/slf4j-log4j12/1.7.12/slf4j-log4j12-1.7.12.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [ch.qos.logback.classic.util.ContextSelectorStaticBinder]
+JsonDelegatorConnection.setRestTemplate()
+]]></system-err>
+  </testcase>
 </testsuite>

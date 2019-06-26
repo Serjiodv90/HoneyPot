@@ -8,7 +8,6 @@ ftp\app\model\FtpUsersService.class
 ftp\app\logic\HoneyFtpConfigure.class
 ftp\app\logic\HoneyFtpUtils.class
 ftp\app\connections\RequestFormat.class
-ftp\app\FtpServerApplication.class
 ftp\app\testUtils\FtpUploadDownloadUtil.class
 ftp\app\model\FtpUser$FtpPermission.class
 ftp\app\dal\FtpUserDao.class
@@ -16,3 +15,4 @@ ftp\app\controller\FakeUsersRestController.class
 ftp\app\logging\FtpLogFormatter.class
 ftp\app\ConfigurationJsonDelegator.class
 ftp\app\model\FtpUser.class
+ftp\app\FtpServiceApplication.class
