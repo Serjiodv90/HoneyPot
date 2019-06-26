@@ -33,7 +33,7 @@ public class HttpSessionConfig {
             @Override
             public void sessionDestroyed(HttpSessionEvent se) {         // This method will be automatically called when session destroyed
                 System.out.println("Session Destroyed, Session id:" + se.getSession().getId());
-                httpRequestInterceptor.notifyAllRegistered();/*logToJson();*/
+                httpRequestInterceptor.sendToJsonDelegator();/*logToJson();*/
             }
         };
     }

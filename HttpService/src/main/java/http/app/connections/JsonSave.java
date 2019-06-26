@@ -10,5 +10,5 @@ public interface JsonSave {
 //	public abstract void logToJson();
 	
 	public abstract void registerObserver(JsonObserver obs);
-	public abstract void notifyAllRegistered();
+	public abstract void sendToJsonDelegator();
 }

@@ -21,6 +21,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import http.app.MyUserPrincipal;
 import http.app.connections.DateFormatter;
+import http.app.connections.JsonDelegatorConnection;
 import http.app.connections.JsonObserver;
 import http.app.connections.JsonSave;
 import http.app.connections.RequestFormat;
@@ -35,10 +36,13 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 	private static Handler fileHandler;
 	private List<JsonObserver> observers = new ArrayList<JsonObserver>();
 	private String ipAddress = "";
+	
+	private JsonDelegatorConnection connection;
 	private Environment env;
 	
 	@Autowired
-	public void setEnvironment(Environment env) {
+	public HttpRequestsInterceptor(JsonDelegatorConnection connection, Environment env) {
+		this.connection = connection;
 		this.env = env;
 	}
 
@@ -112,12 +116,8 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 	}
 
 	@Override
-	public void notifyAllRegistered() {
-		System.out.println("notifyall");
-		for(JsonObserver obs : observers) {
-			System.out.println("in loop obs");
-			obs.notifyJsonSaved(reqArrList);
-		}
+	public void sendToJsonDelegator() {
+		connection.sendJsonToJsonDelegator(reqArrList.toArray(new RequestFormat[reqArrList.size()]));
 
 	}
 
