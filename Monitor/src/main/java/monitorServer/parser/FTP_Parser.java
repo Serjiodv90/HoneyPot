@@ -1,12 +1,10 @@
 package monitorServer.parser;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+
 import org.springframework.stereotype.Component;
 
 import monitorServer.RequestFormat;
@@ -19,11 +17,7 @@ public class FTP_Parser implements JsonToReportParser{
 	private final String timePatter = "(\\d\\d:\\d\\d:\\d\\d)";
 	private Report report;
 
-	//	@Bean
-	//	@Autowired
-	//	public void setReport(Report report) {
-	//		this.report = report;
-	//	}
+
 	
 	
 	private String formatCommandDescription(String cmd) {
@@ -38,7 +32,6 @@ public class FTP_Parser implements JsonToReportParser{
 		
 		String cmdDescription = HoneyFtpCommands.getCommandDescription(reqCmd);
 		if(!cmdDescription.isEmpty() && !cmdAndName[1].contains("null")) {
-//			if()
 			String cmdForReport = formatCommandDescription("Client " + cmdDescription);
 			cmdForReport += "\t" + cmdAndName[1];
 			
@@ -59,12 +52,12 @@ public class FTP_Parser implements JsonToReportParser{
 		Pattern ipPattern = Pattern.compile(this.ipv4Pattern, Pattern.CASE_INSENSITIVE);
 		Pattern timePattern = Pattern.compile(this.timePatter, Pattern.CASE_INSENSITIVE);
 
-		this.report = new Report(/*reqArrList.get(0).getDate(), */ServerType.FTP.name());
+		this.report = new Report(ServerType.FTP.name());
 
 		//headline!
 		String content = reqArrList.get(0).getDate().replaceAll("[\\[|\\]]", " ").replace("_", "\t").trim() + "\t" + this.report.getType() + "\n\n";
 		Matcher ipMatcher = ipPattern.matcher(reqArrList.get(0).getRequest());
-		String ipAddress = ""/*= matcher.group()*/;
+		String ipAddress = "";
 
 
 		if(true == ipMatcher.find())
@@ -128,10 +121,6 @@ public class FTP_Parser implements JsonToReportParser{
 		return this.report;
 	}
 
-	@Override
-	public void storeReport() {
-		// TODO Auto-generated method stub
 
-	}
 
 }

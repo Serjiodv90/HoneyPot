@@ -49,6 +49,7 @@ private SmtpLoggerManager loggerManager;
 	@Override
 	public void done() {
 		System.out.println("That's it!!!");
+		this.loggerManager.done();
 	}
 
 }

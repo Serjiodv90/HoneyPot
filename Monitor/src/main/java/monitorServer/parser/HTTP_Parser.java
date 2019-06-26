@@ -81,11 +81,6 @@ public class HTTP_Parser implements JsonToReportParser{
 		
 	}
 
-	@Override
-	public void storeReport() {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 }
