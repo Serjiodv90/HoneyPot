@@ -5,6 +5,8 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,12 +52,11 @@ public class OrganizationService {
 		initOrganizationUsers(organizationDetails);
 		System.out.println("\n\nFake users after: " + organizationDetails.getFakeUsers());
 		
-//		this.conncetionsToServices.sendFakeUsersToHttp((ArrayList<FakeUser>) Stream.concat(this.fakeUsersHttp.stream(), this.commonCredentials.stream())
-//																.collect(Collectors.toList()));					
-				//fakeUsersHttp);
+		this.conncetionsToServices.sendFakeUsersToHttp((ArrayList<FakeUser>) Stream.concat(this.fakeUsersHttp.stream(), this.commonCredentials.stream())
+																.collect(Collectors.toList()));					
 		
-//		this.conncetionsToServices.sendFakeUsersToFtp((ArrayList<FakeUser>) Stream.concat(this.fakeUsersFtp.stream(), this.commonCredentials.stream())
-//															.collect(Collectors.toList()));
+		this.conncetionsToServices.sendFakeUsersToFtp((ArrayList<FakeUser>) Stream.concat(this.fakeUsersFtp.stream(), this.commonCredentials.stream())
+															.collect(Collectors.toList()));
 		
 		this.trapGenerator.setFakeUsers(this.fakeUsersHttp, this.fakeUsersFtp, this.commonCredentials);
 		
