@@ -81,7 +81,7 @@ public class JsonFilesManager implements JsonObserver {
 	public void notifyJsonSaved(List<RequestFormat> reqArrList) {
 		System.out.println("In Manager- Saved!!");
 		JsonDelegatorConnection connection = new JsonDelegatorConnection();
-		connection.sendJson(reqArrList);
+//		connection.sendJson(reqArrList);
 		
 	}
 	

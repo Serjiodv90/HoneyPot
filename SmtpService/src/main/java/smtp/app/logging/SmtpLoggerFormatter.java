@@ -17,7 +17,7 @@ public class SmtpLoggerFormatter extends Formatter{
 
 		
 		buf.append("[ " + date + " ]");
-		buf.append(" " + record.getLevel());
+		buf.append(" " + record.getLevel() + "\t");
 		buf.append(formatMessage(record));
 		buf.append("\n");
 		

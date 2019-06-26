@@ -18,16 +18,18 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import smtp.app.model.SMTP_Config;
+import org.springframework.boot.CommandLineRunner;
 
 
-public class SmtpServerApplication {
+
+public class SmtpServerTesting implements CommandLineRunner{
 	
 	private static Session session;
 
-	public static void main(String[] args) throws InterruptedException {
+	@Override
+	public void run(String... args) throws InterruptedException {
 
-		new SMTP_Config().run();
+	//	new SMTP_Config().run();
 		Thread.sleep(5000);
 
 
@@ -38,7 +40,7 @@ public class SmtpServerApplication {
 		//testing client for smtp via localhost smtp server
 		//in case of real smtp server,authentication needed, as registered users and of course knwon host domain
 		configSession();
-//		sendTextMail();
+		sendTextMail();
 		sendMailWithFile();
 		
 		
@@ -121,7 +123,7 @@ public class SmtpServerApplication {
 	         // Part two is attachment
 	         messageBodyPart = new MimeBodyPart();
 	         //Universal-USB-Installer-1.9.8.7.exe
-	         String filename = "D:/java/HoneyPot/TrapManagement/target/SMTP_Test/smtpSendFile.txt";
+	         String filename = "./SMTP_Test/Universal-USB-Installer-1.9.8.7.exe";//"smtpSendFile.txt;
 	         DataSource source = new FileDataSource(filename);
 	         messageBodyPart.setDataHandler(new DataHandler(source));
 	         messageBodyPart.setFileName(filename);
@@ -140,5 +142,6 @@ public class SmtpServerApplication {
 	      }
 		
 	}
+
 
 }

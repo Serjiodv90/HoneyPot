@@ -32,26 +32,23 @@ private SmtpLoggerManager loggerManager;
 	@Override
 	public void from(String from) throws RejectException {
 		System.out.println("From: " + from);
+		this.loggerManager.mailFrom(from);
 	}
 
 	@Override
 	public void recipient(String recipient) throws RejectException {
 		System.out.println("Recipient: " + recipient);
-
+		this.loggerManager.rcptTo(recipient);
 	}
 
 	@Override
 	public void data(InputStream data) throws RejectException, TooMuchDataException, IOException {
-//		System.out.println("Data: " + data);
-		
 		this.loggerManager.data(data);
-		
 	}
 
 	@Override
 	public void done() {
 		System.out.println("That's it!!!");
-
 	}
 
 }

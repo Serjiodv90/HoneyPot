@@ -31,7 +31,6 @@ public class HoneyFtpUtils {
 	@Value("${ftpServer.writeUserPwd:WriteUserPwd}")
 	private  String WRITE_USER_PWD = "WriteUserPwd";
 	
-//	private  FtpServer ftpServer;
 	private HoneyFtpConfigure ftpConfigure;
 	
 	@Autowired
@@ -39,7 +38,6 @@ public class HoneyFtpUtils {
 		this.ftpConfigure = ftpConfigure;
 	}
 
-	//for ALPHA version
 	@PostConstruct
 	public void startFtpServer () throws FtpException, IOException
 	{

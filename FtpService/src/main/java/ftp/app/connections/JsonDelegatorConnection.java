@@ -19,7 +19,6 @@ import org.springframework.web.client.RestTemplate;
 public class JsonDelegatorConnection {
 	
 	
-	private RestTemplate rest;
 	private String hostName;
 	private String hostPort;
 	private String hostPath;
@@ -60,7 +59,6 @@ public class JsonDelegatorConnection {
 	public RequestFormat[] sendJsonToJsonDelegator(RequestFormat[] requestArr) {
 		String url = this.protocol + "://" + this.hostName + ":" + this.hostPort + this.hostPath;
 		System.err.println("In try to connect\nURL: " + url);
-		System.err.println("\n\nRest ya ben zonaaaa: " + rest + "\n\n");
 		return restTemplate.postForObject(url, requestArr, RequestFormat[].class);
 	}
 	

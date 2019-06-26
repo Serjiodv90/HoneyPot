@@ -68,7 +68,6 @@ public class HoneyFtpConfigure {
 		listenerFactory.setPort (ftpPort);
 		UserManager userManager = userManagerFactory.createUserManager ();
 
-//		userManagerFactory = new PropertiesUserManagerFactory ();
 		userManagerFactory.setPasswordEncryptor (new SaltedPasswordEncryptor ());
 		if (ftpUsersPropsFile != null && ftpUsersPropsFile.trim (). length ()> 0) {
 			File upf = new File (ftpUsersPropsFile);
@@ -76,33 +75,7 @@ public class HoneyFtpConfigure {
 				upf.createNewFile ();
 			userManagerFactory.setFile(upf);
 		}
-		//
-		//		// Create a read-only user and a user with write permission:
-		//		UserManager userManager = userManagerFactory.createUserManager ();
-		//		BaseUser userRd = new BaseUser ();
-		//		userRd.setName (readUserName);
-		//		userRd.setPassword (readUserPwd);
-		//		userRd.setHomeDirectory (ftpHomeDir);
-		//		
-		//		BaseUser userWr = new BaseUser ();
-		//		userWr.setName (writeUserName);
-		//		userWr.setPassword (writeUserPwd);
-		//		userWr.setHomeDirectory (ftpHomeDir);
-		//		
-		//		if (maxIdleTimeSec > 0) {
-		//			userRd.setMaxIdleTime (maxIdleTimeSec);
-		//			userWr.setMaxIdleTime (maxIdleTimeSec);
-		//		}
-
-		//		List <Authority> authorities = new ArrayList <Authority> ();
-		//		authorities.add (new WritePermission ());
-		//		userWr.setAuthorities (authorities);
-		//		
-		//		userManager.save (userRd);
-		//		userManager.save (userWr);
-		//
-//		serverFactory = new FtpServerFactory ();
-//				listener = listenerFactory.createListener ();
+		
 				serverFactory.addListener ("default", listenerFactory.createListener());
 				serverFactory.setUserManager (userManager);
 
@@ -120,10 +93,6 @@ public class HoneyFtpConfigure {
 	}
 
 	public void addFtpUsers(List<FtpUser> users)  {
-//		UserManager userManager = userManagerFactory.createUserManager ();
-//
-//		List <Authority> authorities = new ArrayList <Authority> ();
-//		authorities.add (new WritePermission ());
 
 		for (FtpUser ftpUser : users) {
 			
@@ -136,32 +105,10 @@ public class HoneyFtpConfigure {
 			
 		}
 
-		//		BaseUser userRd = new BaseUser ();
-		//		userRd.setName (readUserName);
-		//		userRd.setPassword (readUserPwd);
-		//		userRd.setHomeDirectory (ftpHomeDir);
-		//		
-		//		BaseUser userWr = new BaseUser ();
-		//		userWr.setName (writeUserName);
-		//		userWr.setPassword (writeUserPwd);
-		//		userWr.setHomeDirectory (ftpHomeDir);
-		//		
-		//		if (maxIdleTimeSec > 0) {
-		//			userRd.setMaxIdleTime (maxIdleTimeSec);
-		//			userWr.setMaxIdleTime (maxIdleTimeSec);
-		//		}
-
-		//		
-		//		userWr.setAuthorities (authorities);
-		//		
-		//		userManager.save (userRd);
-		//		userManager.save (userWr);
-
 	}
 
 	public void addFtpUser(FtpUser ftpUser) throws FtpException {
-		UserManager userManager = userManagerFactory.createUserManager ();//this.serverFactory.getUserManager();// 
-
+		UserManager userManager = userManagerFactory.createUserManager ();
 		System.out.println("\n\nAdding new user to ftp: " + ftpUser);
 		
 		List <Authority> authorities = new ArrayList <Authority> ();
