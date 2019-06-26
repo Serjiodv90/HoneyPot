@@ -28,7 +28,7 @@ import smtp.app.logging.SmtpLoggerFormatter;
 public class SmtpLoggerManager {
 
 	private final Logger LOGGER = Logger.getLogger(SmtpLoggerFormatter.class.getName());
-	private final String LOGGERFILEPATH = "./Logs/SMTP_tmpLog/";
+	private final String LOGGERFILEPATH = "./Logs/SMTPLogs/";
 	private List<RequestFormat> actionsToStore;
 //	private List<JsonObserver> jsonObservers;
 	private final String ipv4Pattern = "(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])";

@@ -28,7 +28,7 @@ public class FtpLoggerManager {
 
 
 	private final Logger logger = Logger.getLogger(FtpLoggerManager.class.getName());
-	private final String LOGGERFILEPATH = "D:\\java\\HoneyPot\\TrapManagement\\Logs\\FTP_tmpLog\\";
+	private final String LOGGERFILEPATH = "./Logs/FTPLogs/";
 	private List<RequestFormat> actionsToStore;
 	private JsonDelegatorConnection delegator;
 	
