@@ -19,9 +19,10 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 
-
+@Component
 public class SmtpServerTesting implements CommandLineRunner{
 	
 	private static Session session;
@@ -102,8 +103,7 @@ public class SmtpServerTesting implements CommandLineRunner{
 	         message.setFrom(new InternetAddress(senderMailId));
 
 	         // Set To: header field of the header.
-	         message.setRecipients(Message.RecipientType.TO,
-	            InternetAddress.parse(destmailId));
+	         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destmailId));
 
 	         // Set Subject: header field
 	         message.setSubject("Testing Subject");
