@@ -21,10 +21,10 @@ public class SmtpConfiguration {
 		return new SMTPServer(new MessageHandlerFactoryImpl());
 	}
 	
-	@Bean(name="JsonDelegatorConnection")
-	@Scope("singleton")
-	public JsonDelegatorConnection jsonDelegatorConnection() {
-		return new JsonDelegatorConnection();
-	}
+//	@Bean(name="JsonDelegatorConnection")
+//	@Scope("singleton")
+//	public JsonDelegatorConnection jsonDelegatorConnection() {
+//		return new JsonDelegatorConnection();
+//	}
 
 }

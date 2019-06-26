@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import ftp.app.ConfigurationJsonDelegator;
+import ftp.app.SpringContext;
 import ftp.app.connections.DateFormatter;
 import ftp.app.connections.JsonDelegatorConnection;
 import ftp.app.connections.RequestFormat;
@@ -121,8 +122,10 @@ public class FtpLoggerManager {
 		//		this.delegator = new JsonDelegatorConnection();
 //		System.err.println("FtpLoggerManager.delegateJson()\nDelegator: " + this.delegator.getHostName());
 
-				((JsonDelegatorConnection)(context.getBean("JsonDelegatorConnection")))
-		/*this.delegator*/.sendJsonToJsonDelegator(this.actionsToStore.toArray(new RequestFormat[this.actionsToStore.size()]));
+		JsonDelegatorConnection beanInstance = SpringContext.getBean(JsonDelegatorConnection.class);
+		
+//				((JsonDelegatorConnection)(context.getBean("JsonDelegatorConnection")))
+		beanInstance/*this.delegator*/.sendJsonToJsonDelegator(this.actionsToStore.toArray(new RequestFormat[this.actionsToStore.size()]));
 	}
 
 

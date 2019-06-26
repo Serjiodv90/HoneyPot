@@ -9,32 +9,86 @@ services:
     environment:
      - MONGO_INITDB_ROOT_USERNAME=root
      - MONGO_INITDB_ROOT_PASSWORD=example
+    ports:
+     - "27017:27017"
 
-  monitor_server:
+  monitorserver:
+    container_name: 'monitorserver'
     build: 'monitor_server'
     depends_on:
      - "maindb"
     ports:
      - "8085:8085"
       
-  traps_generator:
+  trapsgeneratorservice:
+    container_name: 'trapsgeneratorservice'
     build: 'traps_generator'
     depends_on:
      - "maindb"
+     - "httpservice"
+     - "ftpservice"
     volumes:
-     - .\TrapsZip:/HoneyPot/TrapsZip
+     - TrapsZip:/HoneyPot/TrapsGenerator/TrapsZip
     ports:
      - "8090:8090"
         
-  user_interface:
+  userinterface:
+    container_name: 'user_interface'
     build: 'user_interface'
     depends_on:
      - "maindb"
-     - "traps_generator"
-     - "monitor_server"
+     - "trapsgeneratorservice"
+     - "monitorserver"
     volumes:
-     - .\TrapsZip:/HoneyPot/TrapsZip
+     - TrapsZip:/HoneyPot/UserInterface/TrapsZip
     ports:
      - "8080:8080"
+    links:
+     - trapsgeneratorservice:trapsgeneratorservice
+     - monitorserver:monitorserver
+     
+     
+  jsondelegator:
+    container_name: 'jsondelegator'
+    build: 'json_delegator'
+    depends_on:
+     - "monitorserver"
+    ports:
+     - "8091:8091"
+     
+  httpservice:
+    container_name: 'httpservice'
+    build: 'http_service'
+    depends_on:
+     - "maindb"
+     - "jsondelegator"
+    ports:
+     - "8092:8092"
+     
+  ftpservice:
+    container_name: 'ftpservice'
+    build: 'ftp_service'
+    depends_on:
+     - "jsondelegator"
+    ports:
+     - "8093:8093"
+     - "21:21"
+     
+  smtpservice:
+    container_name: 'smtpservice'
+    build: 'smtp_service'
+    depends_on:
+     - "jsondelegator"
+    ports:
+     - "25:25"
+     
+     
+volumes:
+  TrapsZip:
+  
+
+     
+   
+     
 
   

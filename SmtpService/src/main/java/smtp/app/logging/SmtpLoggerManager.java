@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import smtp.app.SpringContext;
 import smtp.app.config.SmtpConfiguration;
 import smtp.app.connection.DateFormatter;
 import smtp.app.connection.JsonDelegatorConnection;
@@ -127,8 +128,11 @@ public class SmtpLoggerManager {
 	}
 
 	private void delegateJson() {
-		((JsonDelegatorConnection)(this.context.getBean("JsonDelegatorConnection")))
-		.sendJsonToJsonDelegator(this.actionsToStore.toArray(new RequestFormat[this.actionsToStore.size()]));
+//		((JsonDelegatorConnection)(this.context.getBean("JsonDelegatorConnection")))
+//		.sendJsonToJsonDelegator(this.actionsToStore.toArray(new RequestFormat[this.actionsToStore.size()]));
+//		
+		JsonDelegatorConnection beanInstance = SpringContext.getBean(JsonDelegatorConnection.class);
+		beanInstance.sendJsonToJsonDelegator(this.actionsToStore.toArray(new RequestFormat[this.actionsToStore.size()]));
 	}
 
 }

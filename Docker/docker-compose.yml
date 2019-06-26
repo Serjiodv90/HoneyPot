@@ -54,7 +54,7 @@ services:
     depends_on:
      - "monitorserver"
     ports:
-     - "8091:8091
+     - "8091:8091"
      
   httpservice:
     container_name: 'httpservice'

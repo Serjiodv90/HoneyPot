@@ -9,6 +9,7 @@ ftp\app\logic\HoneyFtpUtils.class
 ftp\app\connections\RequestFormat.class
 ftp\app\testUtils\FtpUploadDownloadUtil.class
 ftp\app\model\FtpUser$FtpPermission.class
+ftp\app\SpringContext.class
 ftp\app\controller\FakeUsersRestController.class
 ftp\app\logging\FtpLogFormatter.class
 ftp\app\ConfigurationJsonDelegator.class

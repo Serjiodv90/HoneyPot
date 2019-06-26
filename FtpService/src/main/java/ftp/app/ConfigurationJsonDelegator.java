@@ -11,7 +11,7 @@ import ftp.app.logging.FtpLoggerManager;
 
 @Configuration
 public class ConfigurationJsonDelegator {
-
+	
 	
 	
 	@Bean(name="FtpLoggerManager")
@@ -19,12 +19,12 @@ public class ConfigurationJsonDelegator {
 	public FtpLoggerManager ftpLoggerManager () {
 		return new FtpLoggerManager();
 	}
-	
-	@Bean(name="JsonDelegatorConnection")
-	@Scope("singleton")
-	public JsonDelegatorConnection jsonDelegatorConnection () {
-		return new JsonDelegatorConnection();
-	}
+//	
+//	@Bean(name="JsonDelegatorConnection")
+//	@Scope("prototype")
+//	public JsonDelegatorConnection jsonDelegatorConnection () {
+//		return new JsonDelegatorConnection();
+//	}
 	
 	@Bean(name="FtpServerFactory")
 	@Scope("singleton")

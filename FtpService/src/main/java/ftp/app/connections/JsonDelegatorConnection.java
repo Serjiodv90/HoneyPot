@@ -3,12 +3,14 @@ package ftp.app.connections;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
-//@Configuration
+//@Configuration 
 public class JsonDelegatorConnection {
 	
 	
@@ -17,6 +19,13 @@ public class JsonDelegatorConnection {
 	private String hostPath;
 	private String protocol;
 	private RestTemplate restTemplate;
+	
+	Environment env;
+	
+	@Autowired
+	public void setEnv(Environment env) {
+		this.env = env;
+	}
 	
 	@PostConstruct
 	public void setRestTemplate() {
@@ -51,7 +60,10 @@ public class JsonDelegatorConnection {
 	
 	public RequestFormat[] sendJsonToJsonDelegator(RequestFormat[] requestArr) {
 		String url = this.protocol + "://" + this.hostName + ":" + this.hostPort + this.hostPath;
+		
+		System.err.println("\n\nPROPOERY jsonDelegator.host: " + env.getProperty("jsonDelegator.host"));
 		System.err.println("In try to connect\nURL: " + url);
+		
 		return restTemplate.postForObject(url, requestArr, RequestFormat[].class);
 	}
 	
