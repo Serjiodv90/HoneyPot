@@ -8,33 +8,20 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
-import java.util.PrimitiveIterator.OfDouble;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.security.access.method.P;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.context.Theme;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-
-import reactor.netty.http.server.HttpServerResponse;
 import userInterfaceService.connections.monitor.MonitorConnection;
 import userInterfaceService.connections.trapManagement.TrapManagementConnection;
-import userInterfaceService.domain.OrganizationDetails;
 import userInterfaceService.domain.OrganizationUser;
 import userInterfaceService.domain.Report;
 import userInterfaceService.service.CustomUserDetailsService;
@@ -45,7 +32,6 @@ public class DashboardController {
 	
 	private MonitorConnection monitorConnection;
 	private TrapManagementConnection trapManagementConnection;
-//	private final String TRAPS_FILE_NAME = "templates.rar";
 	private Environment env;
 	private CustomUserDetailsService userService;
 	
@@ -54,6 +40,7 @@ public class DashboardController {
 								TrapManagementConnection trapManagementConnection, 
 								CustomUserDetailsService userService,
 								Environment env) {
+		
 		this.monitorConnection = monitorConnection;
 		this.trapManagementConnection = trapManagementConnection;
 		this.userService = userService;
@@ -67,7 +54,6 @@ public class DashboardController {
     		method = RequestMethod.POST)
     public ModelAndView getReports(String type, String fromDate) {
    
-        System.err.println("n\nIn Reports controller\nType: " + type + "From date: " + fromDate + "\n\n");
         Report[] reports;
         
         if(type != null && !type.isEmpty() && !type.equalsIgnoreCase("all")) {
@@ -84,18 +70,10 @@ public class DashboardController {
     	ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("reports", reports);
         modelAndView.setViewName("dashboard");
-        
-        
-        
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         OrganizationUser user = userService.findUserByEmail(auth.getName());
         
-        System.err.println("\n\ncurrent user: " + user);
-        
         modelAndView.addObject("currentUser", user);
-        
-    	
-//        System.err.println("\n\nReport: " + reports[0] + "\n\n");
         
     	return modelAndView;
     }
@@ -104,19 +82,12 @@ public class DashboardController {
     @RequestMapping(value="/download", method=RequestMethod.GET)
     public void downloadTraps (HttpServletResponse response) throws IOException {
     	
-    	
-    	
     	String trapsZipFilePath = this.trapManagementConnection.getTrapsDownloadPathFromTrapManagement();
     	if(!this.env.getProperty("service.machine").equalsIgnoreCase("localhost"))
     		trapsZipFilePath = System.getProperty("user.dir") + trapsZipFilePath;
-    	
-//    	ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-//    	File trapsZipFile = new File(classLoader.getResource(this.TRAPS_FILE_NAME).getFile());
-    	
     	File trapsZipFile = new File(trapsZipFilePath);
     	
     	if(!trapsZipFile.exists()) {
-    		System.err.println("NO FILE BITCH!");
     		String errorMsg = "Sorry No File Exists!";
     		OutputStream outputStream = response.getOutputStream();
     		outputStream.write(errorMsg.getBytes(Charset.forName("UTF-8")));
@@ -125,7 +96,6 @@ public class DashboardController {
     	
     	String mimeType = URLConnection.guessContentTypeFromName(trapsZipFile.getName());
     	if(mimeType == null) {
-    		System.err.println("couldn't guess type mime");
     		mimeType = "application/octet-stream";
     	}
     	

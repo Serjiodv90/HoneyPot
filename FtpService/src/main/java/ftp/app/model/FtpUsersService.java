@@ -24,7 +24,6 @@ public class FtpUsersService {
 	public void saveAllFtpUsers(FtpUser[] users) {
 		for (FtpUser user : users) {
 			this.saveFtpUser(user);
-			System.err.println("FtpUsersService.saveAllFtpUsers()\nUser: " + user);
 		}
 		
 	}
@@ -33,7 +32,6 @@ public class FtpUsersService {
 		try {
 			this.honeyFtpConfigure.addFtpUser(user);
 		} catch (FtpException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

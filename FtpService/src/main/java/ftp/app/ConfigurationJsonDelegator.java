@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
-import ftp.app.connections.JsonDelegatorConnection;
 import ftp.app.logging.FtpLoggerManager;
 
 @Configuration
@@ -19,13 +18,7 @@ public class ConfigurationJsonDelegator {
 	public FtpLoggerManager ftpLoggerManager () {
 		return new FtpLoggerManager();
 	}
-//	
-//	@Bean(name="JsonDelegatorConnection")
-//	@Scope("prototype")
-//	public JsonDelegatorConnection jsonDelegatorConnection () {
-//		return new JsonDelegatorConnection();
-//	}
-	
+
 	@Bean(name="FtpServerFactory")
 	@Scope("singleton")
 	public FtpServerFactory ftpServerFactory() {

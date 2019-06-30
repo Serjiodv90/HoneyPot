@@ -1,25 +1,13 @@
 package ftp.app.testUtils;
 
-import java.awt.image.ImagingOpException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.apache.commons.net.ftp.FTPClient;
 
-
-/**
-* FTP utility based on Apache FTP client:
-* {@link " http://commons.apache.org/net/apidocs/org/apache/commons/net/ftp/FTPClient.html "}
-*/ 
-
 public class FtpUploadDownloadUtil {
 
-	/*
-    * FTP file list.
-    * @return string array of filenames on the FTP server
-    */ 
-    
    public static String [] list (String host, int port, String usr, String pwd) throws IOException
    {
       FTPClient ftpClient = new FTPClient();
@@ -45,7 +33,6 @@ public class FtpUploadDownloadUtil {
          String host, int port, String usr, String pwd, boolean showMessages) throws IOException
    {
 	   
-	   System.out.println("User: " +usr+",  trying to download!!");
 	  FTPClient ftpClient = new FTPClient ();
       FileOutputStream fos = null;
       boolean resultOk = true;
@@ -100,7 +87,6 @@ public class FtpUploadDownloadUtil {
    public static String connectToFtp(String host, int port, String usr, String pwd) {
 	   
 	   FTPClient client = new FTPClient();
-	   boolean result = true;
 	   
 	   try {
 		   client.connect(host, port);

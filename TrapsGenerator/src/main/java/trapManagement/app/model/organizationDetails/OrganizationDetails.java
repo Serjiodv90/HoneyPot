@@ -10,23 +10,12 @@ import trapManagement.app.model.fakeTrapUsers.FakeUser;
 @Document(collection="Organization_details")
 public class OrganizationDetails {
 	
-//	private String organization;
 	private String id;
 	private String emailPostfix;
 	private List<FakeUser> fakeUsers;
 	
 	public OrganizationDetails() {
-		// TODO Auto-generated constructor stub
 	}
-//
-//	@Id
-//	public String getOrganization() {
-//		return organization;
-//	}
-//
-//	public void setOrganization(String organization) {
-//		this.organization = organization;
-//	}
 
 	@Id
 	public String getId() {

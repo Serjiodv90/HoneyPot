@@ -33,11 +33,6 @@ public class SmtpServerTesting implements CommandLineRunner{
 	//	new SMTP_Config().run();
 		Thread.sleep(5000);
 
-
-		//test
-		System.err.println("After start of smtp");
-
-
 		//testing client for smtp via localhost smtp server
 		//in case of real smtp server,authentication needed, as registered users and of course knwon host domain
 		configSession();
@@ -73,7 +68,6 @@ public class SmtpServerTesting implements CommandLineRunner{
 		String destmailId = "iliasap4@gmail.com";
 		String senderMailId = "serii.d14@gmail.com";
 
-		System.err.println("before try");
 
 		try {
 			Message message = new MimeMessage(session);
@@ -84,7 +78,6 @@ public class SmtpServerTesting implements CommandLineRunner{
 
 			//send the mime message
 			Transport.send(message);
-			System.out.println("\n\nmail sent!!!\n\n");
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
@@ -134,8 +127,6 @@ public class SmtpServerTesting implements CommandLineRunner{
 
 	         // Send message
 	         Transport.send(message);
-
-	         System.out.println("Sent message successfully....");
 	  
 	      } catch (MessagingException e) {
 	         throw new RuntimeException(e);

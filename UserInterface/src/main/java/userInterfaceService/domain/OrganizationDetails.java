@@ -6,26 +6,12 @@ import java.util.List;
 
 
 public class OrganizationDetails {
-	//	private String organization;
 	private String emailPostfix;
 	private List<FakeUser> fakeUsers;
 
-	
-	
-	
 	public OrganizationDetails() {
 		this.fakeUsers = new ArrayList<>(20);
-		// TODO Auto-generated constructor stub
 	}
-
-	//	@Id
-	//	public String getOrganization() {
-	//		return organization;
-	//	}
-	//
-	//	public void setOrganization(String organization) {
-	//		this.organization = organization;
-	//	}
 
 	public List<FakeUser> getFakeUsers() {
 		return fakeUsers;

@@ -15,13 +15,7 @@ public class SMTP_Config {
 	private SMTPServer smtpServer;
 	private int SMTP_Port;
 	private String SMTP_Host;
-	
-	
 
-//	public  SMTP_Config() {
-//		this.smtpServer = new SMTPServer(new MessageHandlerFactoryImpl());
-//	}
-	
 	@Autowired
 	public  SMTP_Config(SMTPServer smtpServer) {
 		System.out.println("SMTP_Config.SMTP_Config()");
@@ -45,8 +39,6 @@ public class SMTP_Config {
 		this.smtpServer.setHostName(SMTP_Host);
 		this.smtpServer.setPort(SMTP_Port);
 		this.smtpServer.start();
-
-		System.out.println("TempSmtpConfig.run()\nSmtp started on host: " + this.smtpServer.getHostName() + "\nPort: " + this.smtpServer.getPort());
 	}
 
 }

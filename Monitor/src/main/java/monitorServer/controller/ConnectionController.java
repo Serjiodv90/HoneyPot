@@ -1,13 +1,11 @@
 package monitorServer.controller;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,7 +36,6 @@ public class ConnectionController {
 			produces=MediaType.APPLICATION_JSON_VALUE
 			)
 	public RequestFormat[] getJsonFile(@RequestBody RequestFormat[] reqArrList) {
-		System.out.println("In monitor");
 		this.reportStorage.createReport(new ArrayList<>(Arrays.asList(reqArrList)));
 		return reqArrList;
 	}

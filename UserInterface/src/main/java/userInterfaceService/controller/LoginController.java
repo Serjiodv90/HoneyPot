@@ -1,23 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package userInterfaceService.controller;
 
-import userInterfaceService.connections.monitor.MonitorConnection;
 import userInterfaceService.connections.trapManagement.TrapManagementConnection;
 import userInterfaceService.domain.FakeUser;
 import userInterfaceService.domain.OrganizationDetails;
 import userInterfaceService.domain.OrganizationUser;
-import userInterfaceService.domain.Report;
 import userInterfaceService.service.CustomUserDetailsService;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
-
-import org.hibernate.validator.internal.util.privilegedactions.GetAnnotationAttribute;
-import org.hibernate.validator.internal.util.privilegedactions.NewInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.FlashMap;
@@ -55,14 +44,12 @@ public class LoginController {
         	modelAndView.addObject("badLogin", "Incorrect email or password");
         
         modelAndView.setViewName("login");
-        System.out.println("LoginController.login()\n" + modelAndView.toString());
         return modelAndView;
     }
     
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public ModelAndView signup() {
-    	System.out.println("LoginController.signup()");
     	
         ModelAndView modelAndView = new ModelAndView();
         OrganizationUser user = new OrganizationUser();
@@ -74,18 +61,12 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public ModelAndView createNewUser(@Valid OrganizationUser user, BindingResult bindingResult) {
-    	System.out.println("LoginController.createNewUser()");
-    	
+    public ModelAndView createNewUser(@Valid OrganizationUser user, BindingResult bindingResult) {    	
         ModelAndView modelAndView = new ModelAndView();
-        
         OrganizationUser organizationExists = userService.findUserByOrganization(user.getOrganization());
         
-        
         if (organizationExists != null) {
-        	
-        	System.out.println("Organization already exists!");
-        	
+
             bindingResult
                     .rejectValue("organization", "error.user",
                             "There is already a user registered with the username provided");	//by the name of the field, access to errors 
@@ -94,7 +75,6 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("signup");
         } else {
-        	System.out.println("user doesn't exist: \n" + user);
         	
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
@@ -117,16 +97,9 @@ public class LoginController {
     @RequestMapping(value="/storeDetails", method=RequestMethod.POST)
     public ModelAndView setOrganizationDetails(OrganizationDetails details, BindingResult bindingResult,
     		@ModelAttribute("organizationUser") OrganizationUser user, SessionStatus status) {
-    	
-    	System.out.println("LoginController.setOrganizationDetails()");
-    	System.err.println("Print the fucking user: " + user);
-    	System.out.println("\nDetails: \n" + details);
-    	
+
     	status.setComplete();
-    	
-    	System.err.println("\n\nSending to trap management...");
-    	this.trapManagementConnection.sendOrganizationDetailsToTrapManagement(details);
-    	
+       	this.trapManagementConnection.sendOrganizationDetailsToTrapManagement(details);
     	
     	ModelAndView modelAndView = new ModelAndView();
     	modelAndView.setViewName("redirect:/login");	//set the url - dashboard
@@ -136,33 +109,10 @@ public class LoginController {
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public ModelAndView dashboard(ModelAndView modelAndView) {
-//        ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         OrganizationUser user = userService.findUserByEmail(auth.getName());
-        
-        System.out.println("LoginController.dashboard()");
-        System.err.println("Auth user: " + user);
-        
         modelAndView.addObject("currentUser", user);
-//        modelAndView.addObject("type", new String());
-//        modelAndView.addObject("fullName", "Welcome " + user.getFullname());
-//        modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
         modelAndView.setViewName("dashboard");
         return modelAndView;
     }
-    
-    
-//    @RequestMapping(value = {"/","/home"}, method = RequestMethod.GET)
-//    public ModelAndView home() {
-//    	System.out.println("LoginController.home()");
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("login");	// the name of the html FILE!!!!!
-//        return modelAndView;
-//    }
-    
-    
-    
-    
-
-
 }

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
-//@Configuration 
 public class JsonDelegatorConnection {
 	
 	
@@ -60,10 +59,6 @@ public class JsonDelegatorConnection {
 	
 	public RequestFormat[] sendJsonToJsonDelegator(RequestFormat[] requestArr) {
 		String url = this.protocol + "://" + this.hostName + ":" + this.hostPort + this.hostPath;
-		
-		System.err.println("\n\nPROPOERY jsonDelegator.host: " + env.getProperty("jsonDelegator.host"));
-		System.err.println("In try to connect\nURL: " + url);
-		
 		return restTemplate.postForObject(url, requestArr, RequestFormat[].class);
 	}
 	

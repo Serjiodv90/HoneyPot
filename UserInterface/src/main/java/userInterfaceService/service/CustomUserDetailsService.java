@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package userInterfaceService.service;
 
 import userInterfaceService.domain.OrganizationUser;
@@ -45,7 +41,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     public void saveUser(OrganizationUser user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-//        user.setEnabled(true);
         Role userRole = roleRepository.findByRole("USER");
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
         userRepository.save(user);
@@ -53,7 +48,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    	System.out.println("CustomUserDetailsService.loadUserByUsername()\nEmail: " + email);
         OrganizationUser user = userRepository.findByEmail(email);  
         if(user != null) {
         	List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());

@@ -48,7 +48,6 @@ public class MonitorConnection {
 					 this.hostPort +
 					 this.hostPath;
 		
-		System.err.println("URL: " + url );
 		return this.restTemplate.getForObject(url, Report[].class);		
 	}
 	

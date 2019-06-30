@@ -33,18 +33,14 @@ public class SmtpLoggerManager {
 	private final String CONTENT_TYPE_FIELD = "Content-Type:";
 	private final String CONTENT_TYPE_TEXT_VALUE = "text/plain;";
 	private final String lAST_LINE_OF_MULTIPART_BEFORE_FILE = "filename";
-	
-	private ApplicationContext context;
 
 	public SmtpLoggerManager() {
 		this.LOGGER.setUseParentHandlers(false);
-		this.context = new AnnotationConfigApplicationContext(SmtpConfiguration.class);
 	}
 
 
 
 	private void addActionToList(String action) {
-		System.out.println("\nWriting to log\n");
 		this.actionsToStore.add(new RequestFormat(DateFormatter.getCurrentDateTimeForLog(), action));
 		this.LOGGER.info(action);
 	}
@@ -56,7 +52,6 @@ public class SmtpLoggerManager {
 			if(!logsDir.exists())
 				logsDir.mkdirs();
 
-			System.err.println("\n\nLogs Dir: " + logsDir + "root folder: " + new File("."));
 			fileHandler = new FileHandler(LOGGERFILEPATH.concat(filePath));
 			fileHandler.setFormatter(new SmtpLoggerFormatter());
 			this.LOGGER.addHandler(fileHandler);
@@ -119,18 +114,14 @@ public class SmtpLoggerManager {
 		}
 
 		emailContent = "Email Content:\n" + emailContent;
-		System.out.println("Content: " + emailContent);
 		addActionToList(emailContent);
 	}
-	
+
 	public void done() {
 		delegateJson();
 	}
 
 	private void delegateJson() {
-//		((JsonDelegatorConnection)(this.context.getBean("JsonDelegatorConnection")))
-//		.sendJsonToJsonDelegator(this.actionsToStore.toArray(new RequestFormat[this.actionsToStore.size()]));
-//		
 		JsonDelegatorConnection beanInstance = SpringContext.getBean(JsonDelegatorConnection.class);
 		beanInstance.sendJsonToJsonDelegator(this.actionsToStore.toArray(new RequestFormat[this.actionsToStore.size()]));
 	}

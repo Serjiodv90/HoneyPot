@@ -1,10 +1,5 @@
 package ftp.app.model;
 
-/*
- * This class represents a single ftp user data.
- */
-
-
 public class FtpUser {
 
 	private String userName;

@@ -11,9 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.util.AntPathMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -28,7 +26,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.authorizeRequests().antMatchers("/login", "/forgotPassword", "/changePassword", "/fakeUsers", "/resources/**",
 					"/static/**", "/templates/**", "/Images/**", "/js/**", "/stylesheet.css").permitAll()
-//			.antMatchers("/").hasAuthority("USER")
 			.anyRequest().authenticated()
 			.and()
 			.formLogin()
@@ -42,11 +39,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	public AuthenticationProvider authProvider() { 
-		System.err.println("in authProvider()");
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 		provider.setUserDetailsService(userDetailsService);
 		provider.setPasswordEncoder(new BCryptPasswordEncoder());
-		 //Bcrypt hashes the password within a few rounds
 		return provider;
 	}
 
@@ -56,30 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .ignoring()
                 .antMatchers("/resources/**", "/stylesheet.css", "/static/**", "/js/**", "/Images/**");
     }
-//	
-//	@Bean
-//	@Override
-//	protected UserDetailsService userDetailsService() {
-//
-//
-//		List<UserDetails> users = new ArrayList<>();
-//		users.add(User.withDefaultPasswordEncoder().username("tair").password("1234").roles("USER").build());
-//		
-//		return new InMemoryUserDetailsManager(users);
-//		
-//	}
-	
-//	@Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.authenticationProvider(authProvider());
-//        
-//    }
-	
-	
-//	@Bean
-//	private UserService userServiceConf() {
-//		return new UserService(dao)
-//	}
+
 	
 	
 

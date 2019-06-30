@@ -20,7 +20,6 @@ public class JsonDelegatorConnection {
 	
 	@PostConstruct
 	public void setRestTemplate() {
-		System.err.println("JsonDelegatorConnection.setRestTemplate()");
 		this.restTemplate = new RestTemplate();
 	}
 	
@@ -43,7 +42,6 @@ public class JsonDelegatorConnection {
 	
 	public RequestFormat[] sendJsonToJsonDelegator(RequestFormat[] requestArr) {
 		String url = this.protocol + "://" + this.hostName + ":" + this.hostPort + this.hostPath;
-		System.err.println("In try to connect\nURL: " + url);
 		return restTemplate.postForObject(url, requestArr, RequestFormat[].class);
 	}
 	

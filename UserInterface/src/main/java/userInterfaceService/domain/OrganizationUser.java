@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package userInterfaceService.domain;
 
 import java.util.Set;
@@ -22,16 +18,12 @@ public class OrganizationUser {
 	private String organization;
 	
 	@Indexed(unique = true, direction = IndexDirection.DESCENDING)
-//	@Pattern(regexp="^([\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4})?$", message="Wrong email")
 	private String email;
 	private String password;
 	
 	@DBRef
 	private Set<Role> roles;
 
-	
-	
-	
 	@Id
 	public String getOrganization() {
 		return organization;

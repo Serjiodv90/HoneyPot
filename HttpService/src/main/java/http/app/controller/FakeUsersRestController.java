@@ -27,8 +27,6 @@ public class FakeUsersRestController {
 			produces=MediaType.APPLICATION_JSON_VALUE,
 			consumes=MediaType.APPLICATION_JSON_VALUE)
 	public User[] fakeUsers(@RequestBody User[] users) {
-
-		System.err.println("FakeUsersRestController");
 		return userService.save(users);
 		 
 	}

@@ -18,8 +18,8 @@ public class FTP_Parser implements JsonToReportParser{
 	private Report report;
 
 
-	
-	
+
+
 	private String formatCommandDescription(String cmd) {
 		return String.format("%-35s", cmd);
 	}
@@ -27,23 +27,18 @@ public class FTP_Parser implements JsonToReportParser{
 	private String getCmdDescription(String request) {
 		String [] cmdAndName = request.split(":")[2].split(",");	//contains the action description and the action target (e.x. file name) 
 		String reqCmd = cmdAndName[0].trim();
-		
-		System.err.println("\nrequest: " + request);
-		
+
 		String cmdDescription = HoneyFtpCommands.getCommandDescription(reqCmd);
 		if(!cmdDescription.isEmpty() && !cmdAndName[1].contains("null")) {
 			String cmdForReport = formatCommandDescription("Client " + cmdDescription);
 			cmdForReport += "\t" + cmdAndName[1];
-			
-			System.err.println("FTP_Parser.getCmdDescription()\tcmdAndName: " + cmdForReport);
-
 			return  cmdForReport ;
 		}
 		else 
 			return "";
-			
-		
-		
+
+
+
 	}
 
 	@Override
@@ -112,12 +107,7 @@ public class FTP_Parser implements JsonToReportParser{
 					}
 				}
 			}
-
-
 		}
-
-		System.out.println("Report: \n\n#####################################################################\n\n" + this.report);
-
 		return this.report;
 	}
 

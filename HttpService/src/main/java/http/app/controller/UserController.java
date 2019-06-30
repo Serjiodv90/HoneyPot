@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import http.app.MyUserPrincipal;
 import http.app.logging.HttpRequestsInterceptor;
@@ -18,8 +17,6 @@ import http.app.model.UserService;
 @Controller
 public class UserController {
 
-//	@Autowired
-//	UserDao dao;
 	@Autowired
 	UserService service;
 	@Autowired
@@ -38,8 +35,6 @@ public class UserController {
 			request.getSession().setAttribute("sessionNumber", integer);            // replace session attribute
 		}
 		
-		System.out.println(errorStr);
-
 		if(errorStr != null && !errorStr.isEmpty() && errorStr.equalsIgnoreCase("true")) {
 			model.addAttribute("error", "Incorrect email or password");
 			
@@ -50,10 +45,8 @@ public class UserController {
 
 	@RequestMapping(value= {"/", "/home"})
 	public String press(HttpServletRequest request) {
-		System.err.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if(user instanceof MyUserPrincipal) {
-			System.err.println(((MyUserPrincipal)user).getUsername());
 			String uName = (String) request.getSession()
 					.getAttribute("userName");
 			if(uName == null) {
@@ -65,12 +58,7 @@ public class UserController {
 		
 		return "AfterLogin.html";
 	}
-	
 
-//	@RequestMapping(value="/login", method=RequestMethod.POST)
-//	public String login(User user) {
-//		return service.login(user);
-//	}
 	
 	@RequestMapping(value="/logout-success")
 	public String logoutPage() {

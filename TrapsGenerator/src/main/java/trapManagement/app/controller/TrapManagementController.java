@@ -20,7 +20,6 @@ public class TrapManagementController {
 	@Autowired
 	public TrapManagementController(OrganizationService organizationService) {
 		this.organizationService = organizationService; 
-		System.err.println("kukukaka");
 	}
 	
 	
@@ -31,7 +30,6 @@ public class TrapManagementController {
 			consumes=MediaType.APPLICATION_JSON_VALUE
 			)
 	public OrganizationDetails registerOrganization(@RequestBody OrganizationDetails organizationDetails) {
-		System.err.println("\n\nTrapManagementController.registerOrganization()\n" + organizationDetails);
 		return this.organizationService.createOrganizationUser(organizationDetails);
 	}
 	

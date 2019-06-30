@@ -17,27 +17,22 @@ private MessageContext messageContext;
 private SmtpLoggerManager loggerManager;
 	
 	public MessageHandlerImpl() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public MessageHandlerImpl (MessageContext context) {
-		System.out.println("MessageHandlerImpl.MessageHandlerImpl()");
 		this.messageContext = context; 
 		String clientIp = this.messageContext.getRemoteAddress().toString();
-		System.out.println("Sender addrs: " + clientIp);
 		this.loggerManager = new SmtpLoggerManager();
 		this.loggerManager.onConnect(clientIp);
 	}
 	
 	@Override
 	public void from(String from) throws RejectException {
-		System.out.println("From: " + from);
 		this.loggerManager.mailFrom(from);
 	}
 
 	@Override
 	public void recipient(String recipient) throws RejectException {
-		System.out.println("Recipient: " + recipient);
 		this.loggerManager.rcptTo(recipient);
 	}
 
@@ -48,7 +43,6 @@ private SmtpLoggerManager loggerManager;
 
 	@Override
 	public void done() {
-		System.out.println("That's it!!!");
 		this.loggerManager.done();
 	}
 

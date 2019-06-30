@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package userInterfaceService.config;
 
 import java.io.IOException;
@@ -13,8 +9,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Component
 public class CustomizeAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
@@ -24,11 +18,9 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
     public void onAuthenticationSuccess(HttpServletRequest request,
             HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
-        System.out.println("CustomizeAuthenticationSuccessHandler.onAuthenticationSuccess()");
     	
         //set our response to OK status
         response.setStatus(HttpServletResponse.SC_OK);
-        System.out.println(authentication.getAuthorities());
         
         for (GrantedAuthority auth : authentication.getAuthorities()) {
             if ("USER".equals(auth.getAuthority())) {

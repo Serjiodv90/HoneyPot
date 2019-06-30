@@ -40,7 +40,6 @@ public class OrganizationService {
 		try {
 			return this.trapGenerator.getAllTrapsZipFileName();
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -48,10 +47,7 @@ public class OrganizationService {
 	
 	public OrganizationDetails createOrganizationUser(OrganizationDetails organizationDetails) {	
 		
-		System.out.println("\n\nFake users before: " + organizationDetails.getFakeUsers());
-		initOrganizationUsers(organizationDetails);
-		System.out.println("\n\nFake users after: " + organizationDetails.getFakeUsers());
-		
+		initOrganizationUsers(organizationDetails);		
 		this.conncetionsToServices.sendFakeUsersToHttp((ArrayList<FakeUser>) Stream.concat(this.fakeUsersHttp.stream(), this.commonCredentials.stream())
 																.collect(Collectors.toList()));					
 		
@@ -62,7 +58,6 @@ public class OrganizationService {
 		
 		
 		this.trapGenerator.createTraps();
-		System.err.println("\n\nI'm done...sending to controller...\nThread: " + Thread.currentThread() + "\n");
 		return this.oraganizationDao.save(organizationDetails);
 	}
 	
@@ -104,17 +99,13 @@ public class OrganizationService {
 		int randomPasswordLen = random.nextInt((MAX_PASS_LEN - 2 - MIN_PASS_LEN) + 1) + MIN_PASS_LEN;
 		
 		StringBuilder password = new StringBuilder().append(fName.charAt(0)).append(lName.charAt(0));
-		
-		System.err.println("TEst.generateUserPassWord()\nUser name: " + user.getFirstName() + "\nfirst letters: " + password );
-		
+				
 		for(int i = 0; i < randomPasswordLen; i++) {
 			password.append(Integer.toString(random.nextInt(10)));
 		}
 		
 		user.setPassword(password.toString());
-		
-		System.err.println("\n\nUser: " + user + "\n");
-		
+				
 	}
 	
 	private void generateUserName(FakeUser fakeUser, String emailPostfix) {
@@ -130,7 +121,6 @@ public class OrganizationService {
 		 
 		fakeUser.setUserName(userName.toString());
 		
-		System.err.println("\n\nUser after setUserName: " + fakeUser + "\n");
 	}
 	
 	private void setCommonCredentialsList(String emailPostfix) {

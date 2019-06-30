@@ -47,21 +47,18 @@ public class TrapManagementConnection {
 	
 	@PostConstruct
 	public void configRestTemplate() {
-		System.out.println("TrapManagementConnection.configRestTemplate()");
 		this.restTemplate = new RestTemplate();
 	}
 	
 	
 	
 	public void sendOrganizationDetailsToTrapManagement(OrganizationDetails details) {
-		System.err.println("TrapManagementConnection.sendOrganizationDetailsToTrapManagement()");
 		String url = this.protocol + 
 					 "://" + 
 					 this.hostName + 
 					 ":" + 
 					 this.hostPort +
 					 this.hostPath;
-		System.err.println("\n\nURL: " + url + "\n\n");
 		this.restTemplate.postForObject(url, details, OrganizationDetails.class);		
 	}
 	
@@ -73,7 +70,6 @@ public class TrapManagementConnection {
 				 	 ":" + 
 				 	 this.hostPort +
 				 	 this.env.getProperty("trapManagement.download.path");
-		System.err.println("\n\nURL: " + url + "\n\n");
 		return this.restTemplate.getForObject(url, String.class);
 	}
 

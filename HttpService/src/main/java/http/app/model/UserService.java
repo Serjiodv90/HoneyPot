@@ -1,7 +1,6 @@
 package http.app.model;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Vector;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.userdetails.UserDetails;
-//import org.springframework.security.core.userdetails.UserDetailsService;
-//import org.springframework.security.core.userdetails.UsernameNotFoundException;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import http.app.MyUserPrincipal;
@@ -34,7 +27,6 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	public UserService(UserDao dao, BCryptPasswordEncoder encoder) {
-		//this.users = new Vector<User>();
 		this.dao = dao;
 		this.encoder = encoder;
 	}
@@ -42,7 +34,6 @@ public class UserService implements UserDetailsService {
 	public String login(User user) {
 		String username = user.getUserName(); 
 		User theUser = dao.findById(username).orElse(null);
-		System.err.println("In Login");
 		if(theUser != null)
 			if(theUser.getPassword().toString().equals(user.getPassword())) {
 				return "AfterLogin.jsp";
@@ -52,12 +43,10 @@ public class UserService implements UserDetailsService {
 	}
 
 	public User[] save(User[] users) {
-		System.err.println("UserService");
 		this.users = new Vector<User>(Arrays.asList(users));
 		for(User u : this.users) {
 			save(u);
 		}
-		//		dao.saveAll(this.users);
 		return users;
 
 	}
@@ -70,9 +59,7 @@ public class UserService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		System.err.println("loadUserByUsername");
 		User user = dao.findByUserName(userName);
-		System.out.println("userName= " + userName + "user is " + user);
 		if (user == null) {
             throw new UsernameNotFoundException("No user found with username: " + userName);
         }

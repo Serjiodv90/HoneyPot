@@ -53,7 +53,6 @@ public class HoneyFtpConfigure {
 	{
 
 		File fhd = new File (ftpHomeDir);
-		System.out.println("\n\nIN CreateFtpServer, ftmHome: " + fhd);
 		if (!fhd.exists())
 			fhd.mkdirs();
 
@@ -64,7 +63,6 @@ public class HoneyFtpConfigure {
 		userManagerFactory.setPasswordEncryptor (new SaltedPasswordEncryptor ());
 		if (ftpUsersPropsFile != null && ftpUsersPropsFile.trim (). length ()> 0) {
 			File upf = new File (ftpUsersPropsFile);
-			System.out.println("\n\nFile Name: " + upf.getName());
 			File containingFolder = new File(ftpUsersPropsFile.replace(upf.getName(), ""));
 			
 			if(!containingFolder.exists())
@@ -99,7 +97,6 @@ public class HoneyFtpConfigure {
 			try {
 				addFtpUser(ftpUser);
 			} catch (FtpException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -109,7 +106,6 @@ public class HoneyFtpConfigure {
 
 	public void addFtpUser(FtpUser ftpUser) throws FtpException {
 		UserManager userManager = userManagerFactory.createUserManager ();
-		System.out.println("\n\nAdding new user to ftp: " + ftpUser);
 		
 		List <Authority> authorities = new ArrayList <Authority> ();
 		authorities.add (new WritePermission ());

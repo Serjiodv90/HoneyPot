@@ -6,9 +6,7 @@ public interface JsonSave {
 	public static String getJsonPath() {
 		return JSON_PATH;
 	}
-	
-//	public abstract void logToJson();
-	
+		
 	public abstract void registerObserver(JsonObserver obs);
 	public abstract void sendToJsonDelegator();
 }

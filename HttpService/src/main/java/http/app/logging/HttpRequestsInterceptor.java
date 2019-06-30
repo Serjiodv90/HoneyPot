@@ -52,8 +52,6 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 
 		StringBuffer requestBody = new StringBuffer();
 
-		System.out.println("in preHandle");
-
 		requestBody.append("\tHTTP --> ");
 		requestBody.append(request.getMethod() + " ");
 		
@@ -103,14 +101,12 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 				fileHandler.setFormatter(new LoggerFormatter());
 				LOGGER.addHandler(fileHandler);
 			} catch (SecurityException | IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	}
 
 	@Override
 	public void registerObserver(JsonObserver obs) {
-		System.out.println("in httptequestinter- register");
 		observers.add(obs);
 
 	}
@@ -123,7 +119,6 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 
 	public void saveUserNameAndPassword() {
 		StringBuffer requestBody = new StringBuffer();
-		System.err.println("saveUserNameAndPassword");
 		Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if(user instanceof MyUserPrincipal) {
 			System.err.println(((MyUserPrincipal)user).getUsername());
@@ -133,9 +128,7 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 					+ " password: " + ((MyUserPrincipal)user).getPassword());
 		}
 		LOGGER.info(requestBody.toString());
-		reqArrList.add(new RequestFormat(DateFormatter.getCurrentDateTimeForLog()
-				/*LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))*/,
-				requestBody.toString()));
+		reqArrList.add(new RequestFormat(DateFormatter.getCurrentDateTimeForLog(),	requestBody.toString()));
 		
 	}
 }

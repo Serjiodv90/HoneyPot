@@ -1,8 +1,6 @@
 package monitorServer.storage;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -11,9 +9,6 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.databind.ser.std.IterableSerializer;
-
 import monitorServer.RequestFormat;
 import monitorServer.dal.ReportDao;
 import monitorServer.parser.FTP_Parser;
@@ -53,8 +48,6 @@ public class ReportStorage {
 		if(true == typeMatcher.find()) {
 			serverReqType = typeMatcher.group();
 		}
-		
-		System.out.println("ReportStorage.setParser()\nType: " + serverReqType);
 		
 		if(serverReqType.equalsIgnoreCase(ServerType.HTTP.name()))
 			this.parser = new HTTP_Parser();
