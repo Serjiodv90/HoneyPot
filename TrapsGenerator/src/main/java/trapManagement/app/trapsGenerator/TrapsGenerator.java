@@ -130,13 +130,23 @@ public class TrapsGenerator {
 		pw.print(doc.toString());
 		pw.close();
 	}
-
+	
 	//open the original html file, parse it with Jsoup, change the element - input.
 	private Document manipulateUserNameInHtmlFileById(String srcFileName, String id) throws IOException, URISyntaxException {
 		InputStream inputHtml = TrapsGenerator.class.getResourceAsStream(srcFileName);
 		Document doc = Jsoup.parse(inputHtml, "UTF-8", TrapsGenerator.class.getResource(srcFileName).toURI().toString());
 		Element username = doc.getElementById(id);
 		username.attr("value", getFakeUser(ServerType.HTTP).getUserName());
+		
+		String urlFormat = "%s://%s:%s/%s";
+		String hostName = env.getProperty("http.server");
+		String protocol = env.getProperty("http.protocol");
+		String hostPort = env.getProperty("http.port");
+		String hostPath = env.getProperty("http.trap.forgetPasswordPath");
+		String url = String.format(urlFormat, protocol, hostName, hostPort, hostPath);
+		
+		Element resetPasswordLinkA = doc.selectFirst("#credentials_table_header a");
+		resetPasswordLinkA.attr("href", url);
 		inputHtml.close();
 		return doc;
 	}

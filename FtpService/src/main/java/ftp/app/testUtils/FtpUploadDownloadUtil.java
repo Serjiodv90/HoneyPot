@@ -90,7 +90,6 @@ public class FtpUploadDownloadUtil {
 	   
 	   try {
 		   client.connect(host, port);
-		   result &= client.login(usr, pwd);
 	   } catch (IOException e) {
 		e.printStackTrace();
 	}
