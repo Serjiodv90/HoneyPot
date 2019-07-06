@@ -94,10 +94,10 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 	}
 
 	private void setTimerForLogging() {
-		long delay = 120000L;
+		long delay = 60000L;
 		//delay in milliseconds before task is to be executed.
 		
-//		long period = 10000L;
+		long period = 10000L;
 		//time in milliseconds between successive task executions.
 		
 		Timer timer = new Timer();
@@ -110,7 +110,7 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 			}
 		};
 		
-		timer.schedule(timerTask, delay/*, period*/);
+		timer.schedule(timerTask, delay, period);
 		
 	}
 
@@ -140,7 +140,7 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 	@Override
 	public void sendToJsonDelegator() {
 		connection.sendJsonToJsonDelegator(reqArrList.toArray(new RequestFormat[reqArrList.size()]));
-
+		reqArrList.clear();
 	}
 
 	public void saveUserNameAndPassword() {
