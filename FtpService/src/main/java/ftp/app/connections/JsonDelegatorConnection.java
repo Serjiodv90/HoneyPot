@@ -35,19 +35,19 @@ public class JsonDelegatorConnection {
 	
 	
 	
-	@Value("${jsonDelegator.host:localhost}")
+	@Value("${jsonDelegatorService.host:localhost}")
 	public void setHostName(String hostName) {
 		this.hostName = hostName;
 	}
-	@Value("${jsonDelegator.port:8091}")
+	@Value("${jsonDelegatorService.port:8091}")
 	public void setHostPort(String hostPort) {
 		this.hostPort = hostPort;
 	}
-	@Value("${jsonDelegator.path:/delegateJson}")
+	@Value("${jsonDelegatorService.path:/delegateJson}")
 	public void setHostPath(String hostPath) {
 		this.hostPath = hostPath;
 	}
-	@Value("${jsonDelegator.protocol:http}")
+	@Value("${jsonDelegatorService.protocol:http}")
 	public void setProtocol(String protocol) {
 		this.protocol = protocol;
 	}
