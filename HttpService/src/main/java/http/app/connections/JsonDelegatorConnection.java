@@ -23,25 +23,29 @@ public class JsonDelegatorConnection {
 		this.restTemplate = new RestTemplate();
 	}
 	
-	@Value("${jsonDelegator.host:localhost}")
+	@Value("${jsonDelegatorService.server:localhost}")
 	public void setHostName(String hostName) {
 		this.hostName = hostName;
 	}
-	@Value("${jsonDelegator.port:8091}")
+	@Value("${jsonDelegatorService.port:8091}")
 	public void setHostPort(String hostPort) {
 		this.hostPort = hostPort;
 	}
-	@Value("${jsonDelegator.path:/delegateJson}")
+	@Value("${jsonDelegatorService.path:/delegateJson}")
 	public void setHostPath(String hostPath) {
 		this.hostPath = hostPath;
 	}
-	@Value("${jsonDelegator.protocol:http}")
+	@Value("${jsonDelegatorService.protocol:http}")
 	public void setProtocol(String protocol) {
 		this.protocol = protocol;
 	}
 	
 	public RequestFormat[] sendJsonToJsonDelegator(RequestFormat[] requestArr) {
 		String url = this.protocol + "://" + this.hostName + ":" + this.hostPort + this.hostPath;
+		System.err.println("protocol: " + this.protocol);
+		System.err.println("hostName: " + this.hostName);
+		System.err.println("hostPort: " + this.hostPort);
+		System.err.println("hostPath: " + this.hostPath);
 		return restTemplate.postForObject(url, requestArr, RequestFormat[].class);
 	}
 	

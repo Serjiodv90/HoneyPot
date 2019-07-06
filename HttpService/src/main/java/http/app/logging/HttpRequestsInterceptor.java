@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Logger;
@@ -64,6 +66,9 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 			if(this.ipAddress.isEmpty() || !tmpIpAddress.equals(this.ipAddress)) {
 				this.ipAddress = tmpIpAddress;
 				requestBody.append("New connection request from: " + ipAddress);
+				
+				if(!env.getProperty("service.machine").equalsIgnoreCase("localhost"))
+					setTimerForLogging();
 			}
 		}
 		
@@ -86,6 +91,27 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 				requestBody.toString()));
 
 		return true;
+	}
+
+	private void setTimerForLogging() {
+		long delay = 120000L;
+		//delay in milliseconds before task is to be executed.
+		
+//		long period = 10000L;
+		//time in milliseconds between successive task executions.
+		
+		Timer timer = new Timer();
+		
+		TimerTask timerTask = new TimerTask() {
+			
+			@Override
+			public void run() {
+				sendToJsonDelegator();
+			}
+		};
+		
+		timer.schedule(timerTask, delay/*, period*/);
+		
 	}
 
 	private void setLogger(String clientIp, String date) {
