@@ -21,7 +21,7 @@ TrapManagement/Logs/
 *.jar
 *.tar
 .jar
-*.class
+.class
 
 
 # External tool builders

@@ -37,15 +37,16 @@ public class HoneyFtpConfigure {
 	private FtpServerFactory serverFactory;
 	private PropertiesUserManagerFactory userManagerFactory;
 	private Environment env;
-	
-	
+	private final int MAX_FTP_LOGINS = 10;
+
+
 	@Autowired
 	public HoneyFtpConfigure(FtpServerFactory serverFactory, PropertiesUserManagerFactory userManagerFactory, Environment env) {
 		this.serverFactory = serverFactory;
 		this.userManagerFactory = userManagerFactory;
 		this.env = env;
 	}
-	
+
 
 	public FtpServer createFtpServer (int ftpPort, String ftpHomeDir,
 			String readUserName, String readUserPwd, String writeUserName, String writeUserPwd,
@@ -64,26 +65,27 @@ public class HoneyFtpConfigure {
 		if (ftpUsersPropsFile != null && ftpUsersPropsFile.trim (). length ()> 0) {
 			File upf = new File (ftpUsersPropsFile);
 			File containingFolder = new File(ftpUsersPropsFile.replace(upf.getName(), ""));
-			
+
 			if(!containingFolder.exists())
 				containingFolder.mkdir();
 			if (!upf.exists()) 
 				upf.createNewFile();
-			
-				
+
+
 			userManagerFactory.setFile(upf);
 		}
-		
-				serverFactory.addListener ("default", listenerFactory.createListener());
-				serverFactory.setUserManager (userManager);
 
+		serverFactory.addListener ("default", listenerFactory.createListener());
+		serverFactory.setUserManager (userManager);
 
-		if (maxLogins > 0) {
-			ConnectionConfigFactory ccf = new ConnectionConfigFactory ();
+		ConnectionConfigFactory ccf = new ConnectionConfigFactory ();
+
+		if (maxLogins > 0 && maxLogins < MAX_FTP_LOGINS) 
 			ccf.setMaxLogins (maxLogins);
-			serverFactory.setConnectionConfig (ccf.createConnectionConfig ());
-		}
+		else
+			ccf.setMaxLogins (MAX_FTP_LOGINS);
 
+		serverFactory.setConnectionConfig (ccf.createConnectionConfig ());
 
 		serverFactory.setFtplets(Collections.singletonMap("MyFtpLet", new HoneyFtpLet()));
 
@@ -93,23 +95,23 @@ public class HoneyFtpConfigure {
 	public void addFtpUsers(List<FtpUser> users)  {
 
 		for (FtpUser ftpUser : users) {
-			
+
 			try {
 				addFtpUser(ftpUser);
 			} catch (FtpException e) {
 				e.printStackTrace();
 			}
-			
+
 		}
 
 	}
 
 	public void addFtpUser(FtpUser ftpUser) throws FtpException {
 		UserManager userManager = userManagerFactory.createUserManager ();
-		
+
 		List <Authority> authorities = new ArrayList <Authority> ();
 		authorities.add (new WritePermission ());
-		
+
 		BaseUser newUSer = new BaseUser();
 		newUSer.setName(ftpUser.getUserName());
 		newUSer.setPassword(ftpUser.getPassword());
