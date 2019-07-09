@@ -24,19 +24,15 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import http.app.MyUserPrincipal;
 import http.app.connections.DateFormatter;
 import http.app.connections.JsonDelegatorConnection;
-import http.app.connections.JsonObserver;
-import http.app.connections.JsonSave;
 import http.app.connections.RequestFormat;
 
 
 @Component
-public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implements JsonSave {
+public class HttpRequestsInterceptor extends HandlerInterceptorAdapter {
 
-	private final String LOGGER_PATH = "./httpLogFiles/";
 	private final static Logger LOGGER = Logger.getLogger("HTTP Log");
 	ArrayList<RequestFormat> reqArrList = new ArrayList<RequestFormat>();
 	private static Handler fileHandler;
-	private List<JsonObserver> observers = new ArrayList<JsonObserver>();
 	private String ipAddress = "";
 	
 	private JsonDelegatorConnection connection;
@@ -66,9 +62,6 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 			if(this.ipAddress.isEmpty() || !tmpIpAddress.equals(this.ipAddress)) {
 				this.ipAddress = tmpIpAddress;
 				requestBody.append("New connection request from: " + ipAddress);
-				
-				if(!env.getProperty("service.machine").equalsIgnoreCase("localhost"))
-					setTimerForLogging();
 			}
 		}
 		
@@ -93,27 +86,6 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 		return true;
 	}
 
-	private void setTimerForLogging() {
-		long delay = 60000L;
-		//delay in milliseconds before task is to be executed.
-		
-		long period = 10000L;
-		//time in milliseconds between successive task executions.
-		
-		Timer timer = new Timer();
-		
-		TimerTask timerTask = new TimerTask() {
-			
-			@Override
-			public void run() {
-				sendToJsonDelegator();
-			}
-		};
-		
-		timer.schedule(timerTask, delay, period);
-		
-	}
-
 	private void setLogger(String clientIp, String date) {
 		String loggerPath = env.getProperty("http.log.files");
 		File logDir = new File(loggerPath);
@@ -131,13 +103,6 @@ public class HttpRequestsInterceptor extends HandlerInterceptorAdapter implement
 			}
 	}
 
-	@Override
-	public void registerObserver(JsonObserver obs) {
-		observers.add(obs);
-
-	}
-
-	@Override
 	public void sendToJsonDelegator() {
 		connection.sendJsonToJsonDelegator(reqArrList.toArray(new RequestFormat[reqArrList.size()]));
 		reqArrList.clear();

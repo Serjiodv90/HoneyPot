@@ -36,9 +36,7 @@ public class HttpSessionConfig {
 			}
 			@Override
 			public void sessionDestroyed(HttpSessionEvent se) {   
-				// This method will be automatically called when session destroyed
-				if(env.getProperty("service.machine").equalsIgnoreCase("localhost"))
-					httpRequestInterceptor.sendToJsonDelegator();/*logToJson();*/
+				httpRequestInterceptor.sendToJsonDelegator();
 			}
 		};
 	}
@@ -47,7 +45,6 @@ public class HttpSessionConfig {
 		return new HttpSessionAttributeListener() {
 			@Override
 			public void attributeAdded(HttpSessionBindingEvent se) {            // This method will be automatically called when session attribute added
-
 				if(se.getName().equals("userName")) { 
 					httpRequestInterceptor.saveUserNameAndPassword();
 				}
