@@ -15,10 +15,10 @@ public class SMTP_Config {
 	private SMTPServer smtpServer;
 	private int SMTP_Port;
 	private String SMTP_Host;
+	private final int MAX_IDLE_TIME = 60000;	// 1 min for session timeout in idle state 
 
 	@Autowired
 	public  SMTP_Config(SMTPServer smtpServer) {
-		System.out.println("SMTP_Config.SMTP_Config()");
 		this.smtpServer = smtpServer;
 	}
 	
@@ -38,6 +38,7 @@ public class SMTP_Config {
 	public void run() {
 		this.smtpServer.setHostName(SMTP_Host);
 		this.smtpServer.setPort(SMTP_Port);
+		this.smtpServer.setConnectionTimeout(this.MAX_IDLE_TIME);
 		this.smtpServer.start();
 	}
 

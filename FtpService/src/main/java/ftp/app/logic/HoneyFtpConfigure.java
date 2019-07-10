@@ -38,7 +38,7 @@ public class HoneyFtpConfigure {
 	private PropertiesUserManagerFactory userManagerFactory;
 	private Environment env;
 	private final int MAX_FTP_LOGINS = 10;
-
+	private final int MAX_USER_IDLE_TIME = 300; //300 secs before disonnect
 
 	@Autowired
 	public HoneyFtpConfigure(FtpServerFactory serverFactory, PropertiesUserManagerFactory userManagerFactory, Environment env) {
@@ -119,6 +119,7 @@ public class HoneyFtpConfigure {
 		if(ftpUser.getUserPermission() == null || ftpUser.getUserPermission().equals(FtpUser.FtpPermission.WRITE))
 			newUSer.setAuthorities(authorities);
 
+		newUSer.setMaxIdleTime(this.MAX_USER_IDLE_TIME);
 		userManager.save(newUSer);
 		serverFactory.setUserManager (userManager);
 

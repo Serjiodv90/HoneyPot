@@ -1,0 +1,34 @@
+[ 10/07/2019 20:05:30 ] INFO	New SMTP connection request from client: 127.0.0.1
+[ 10/07/2019 20:05:30 ] INFO	FROM: fileTester@gmail.com
+[ 10/07/2019 20:05:30 ] INFO	TO: fileRcpt@gmail.com
+[ 10/07/2019 20:05:30 ] INFO	Email Content:
+Received: from Serioga ([127.0.0.1])
+        by localhost
+        with SMTP (SubEthaSMTP 3.1.7) id JXXHV2G8
+        for fileRcpt@gmail.com;
+        Wed, 10 Jul 2019 20:05:30 +0300 (IDT)
+From: fileTester@gmail.com
+To: fileRcpt@gmail.com
+Message-ID: <1970377948.2.1562778321703.JavaMail.sergei@Serioga>
+Subject: Testing Subject
+MIME-Version: 1.0
+Content-Type: multipart/mixed; 
+	boundary="----=_Part_1_1612496268.1562778320469"
+
+------=_Part_1_1612496268.1562778320469
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+This is message body
+------=_Part_1_1612496268.1562778320469
+Content-Type: application/octet-stream; 
+	name="./SMTP_Test/Universal-USB-Installer-1.9.8.7.exe"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; 
+	filename="./SMTP_Test/Universal-USB-Installer-1.9.8.7.exe"
+
+[ 10/07/2019 20:06:33 ] INFO	New SMTP connection request from client: 127.0.0.1
+[ 10/07/2019 20:06:33 ] INFO	FROM: serjio@gmail.com
+[ 10/07/2019 20:08:43 ] INFO	New SMTP connection request from client: 127.0.0.1
+[ 10/07/2019 20:08:43 ] INFO	FROM: serjio@gmail.com
+[ 10/07/2019 20:08:51 ] INFO	TO: tair@gmail.com
