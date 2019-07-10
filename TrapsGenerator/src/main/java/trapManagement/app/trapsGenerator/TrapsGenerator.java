@@ -3,8 +3,9 @@ package trapManagement.app.trapsGenerator;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import javax.imageio.ImageIO;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -47,8 +49,10 @@ public class TrapsGenerator {
 
 	private final String HTML_TRAP = "htmlTrap/afekaLogin.html";
 	private final String USERNAME_URL_FILE = "login.txt";
+	private final String BASE64_FILE = "conFile.txt";
 	private final String HTML_PWD_TYPE_TRAP = "htmlPwdTypeTrap/loginPage.html";
-
+	
+	private final String ENCODED_IMAGE_NAME = "connPic.jpg";
 	private final String ZIPPED_IMAGE_PATH = "zippedImage/";
 	private final String ZIP_PWD_FILE = "z_crypt.txt";
 	private final String ZIP_PWD_IMG = "ftp_creds.png";
@@ -108,6 +112,8 @@ public class TrapsGenerator {
 			userNameUrlTextFile();
 			createLockedZipWithImage();
 			createFtpConnectionBatFile();
+			createBase64TextFile();
+			createEncodedImage();
 			createTrapsZipFile();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -320,6 +326,49 @@ public class TrapsGenerator {
 		String userPassword = "PWD " + ftpUser.getPassword();
 
 		writeToTextFile(this.targetDir + this.FTP_BATCH_FILE, openFtpConnection, userName, userPassword);
+	}
+	
+	private void createBase64TextFile() throws IOException {
+		String fileName = this.targetDir + this.BASE64_FILE; 
+		FakeUser ftpUser = getFakeUser(ServerType.FTP);
+		String service = this.env.getProperty("ftp.trap.protocol");
+		String userName = "email: " + ftpUser.getUserName();
+		String userPassword = "password: " + ftpUser.getPassword();
+		String credentialsToEncode = service  + "; " + userName + ", " + userPassword;
+		String base64_creds = Base64.encode(credentialsToEncode.getBytes());
+		writeToTextFile(fileName, base64_creds);
+	}
+	
+	private void createEncodedImage() throws IOException {
+		String inputImagePath = this.sourcerDir + this.ENCODED_IMAGE_NAME;
+		String outputImagePath = getTargetTrapsContainingDirectory( this.targetDir + this.ENCODED_IMAGE_NAME);
+		
+		FakeUser httpUser = getFakeUser(ServerType.HTTP);
+		String userName = "email: " + httpUser.getUserName();
+		String userPassword = "password: " + httpUser.getPassword();
+		String credentialsToEncode = userName + ", " + userPassword;
+		int credentialsToEncodeLen = credentialsToEncode.getBytes().length;
+		
+		InputStream inputImage = TrapsGenerator.class.getResourceAsStream(inputImagePath);
+		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+		byte[] buffer = new byte[4096];
+		int readPos = 0;
+		while((readPos = inputImage.read(buffer)) != -1)
+			outStream.write(buffer, 0, readPos);
+		byte[] imageStream = outStream.toByteArray();
+		
+		File newImageFile = new File(outputImagePath);
+		if(!newImageFile.exists())
+			newImageFile.createNewFile();
+		FileOutputStream imageOutStream = new FileOutputStream(newImageFile);
+
+		
+		imageOutStream.write(imageStream, 0, imageStream.length);
+		imageOutStream.write(credentialsToEncode.getBytes(), 0, credentialsToEncodeLen);
+		
+		outStream.close();
+		imageOutStream.close();		
+		inputImage.close();
 	}
 
 	private void createTrapsZipFile() throws ZipException, URISyntaxException, IOException {

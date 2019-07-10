@@ -1,0 +1,61 @@
+[ 10/07/2019 12:20:17 ] INFO	New SMTP connection request from client: 127.0.0.1
+[ 10/07/2019 12:20:17 ] INFO	FROM: serii.d14@gmail.com
+[ 10/07/2019 12:20:17 ] INFO	TO: iliasap4@gmail.com
+[ 10/07/2019 12:20:17 ] INFO	Email Content:
+Received: from Serioga ([127.0.0.1])
+        by localhost
+        with SMTP (SubEthaSMTP 3.1.7) id JXX18RVA
+        for iliasap4@gmail.com;
+        Wed, 10 Jul 2019 12:20:17 +0300 (IDT)
+From: serii.d14@gmail.com
+To: iliasap4@gmail.com
+Message-ID: <1898751355.0.1562750407669.JavaMail.sergei@Serioga>
+Subject: Test Mail
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+Is it really working?
+
+[ 10/07/2019 12:20:28 ] INFO	New SMTP connection request from client: 127.0.0.1
+[ 10/07/2019 12:20:28 ] INFO	FROM: fileTester@gmail.com
+[ 10/07/2019 12:20:28 ] INFO	TO: fileRcpt@gmail.com
+[ 10/07/2019 12:20:28 ] INFO	Email Content:
+Received: from Serioga ([127.0.0.1])
+        by localhost
+        with SMTP (SubEthaSMTP 3.1.7) id JXX190NV
+        for fileRcpt@gmail.com;
+        Wed, 10 Jul 2019 12:20:28 +0300 (IDT)
+From: fileTester@gmail.com
+To: fileRcpt@gmail.com
+Message-ID: <594916129.2.1562750419098.JavaMail.sergei@Serioga>
+Subject: Testing Subject
+MIME-Version: 1.0
+Content-Type: multipart/mixed; 
+	boundary="----=_Part_1_1970377948.1562750418090"
+
+------=_Part_1_1970377948.1562750418090
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+This is message body
+------=_Part_1_1970377948.1562750418090
+Content-Type: application/octet-stream; 
+	name="./SMTP_Test/Universal-USB-Installer-1.9.8.7.exe"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; 
+	filename="./SMTP_Test/Universal-USB-Installer-1.9.8.7.exe"
+
+[ 10/07/2019 12:21:14 ] INFO	New SMTP connection request from client: 127.0.0.1
+[ 10/07/2019 12:21:14 ] INFO	FROM: asdasd@asd.com
+[ 10/07/2019 12:21:38 ] INFO	TO: asdasdasd@asd.com
+[ 10/07/2019 12:21:51 ] INFO	Email Content:
+Received: from null ([127.0.0.1])
+        by localhost
+        with SMTP (SubEthaSMTP 3.1.7) id JXX19T7O
+        for asdasdasd@asd.com;
+        Wed, 10 Jul 2019 12:21:42 +0300 (IDT)
+hello 
+blnolsdaf
+lksdf
+

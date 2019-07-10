@@ -66,11 +66,9 @@ public class LoginController {
         OrganizationUser organizationExists = userService.findUserByOrganization(user.getOrganization());
         
         if (organizationExists != null) {
-
             bindingResult
                     .rejectValue("organization", "error.user",
-                            "There is already a user registered with the username provided");	//by the name of the field, access to errors 
-            
+                            "There is already a user registered with the organization name provided");	//by the name of the field, access to errors 
         }
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("signup");

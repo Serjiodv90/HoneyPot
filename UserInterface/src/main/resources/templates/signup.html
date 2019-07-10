@@ -136,7 +136,6 @@ a {
 				<div class="errorField generalError alert alert-danger"></div>
 				<hr>
 				
-				<div th:if="${#fields.hasErrors('email')}"  th:errors="*{email}" th:utext="#{errorMessage}" class="text-danger"></div>
 				<div th:if="${#fields.hasErrors('organization')}" th:errors="*{organization}"  th:utext="#{errorMessage}" class="alert alert-danger"></div>
 
 				<label for="organization" class="control-label"><b>Organization Name</b></label> 
@@ -144,6 +143,7 @@ a {
 				<input id="organization" type="text" placeholder="Organization" name="organization" class="form-control" required> 
 				<hr>
 				<div class="errorField emailError alert alert-danger"></div>
+				<div th:if="${#fields.hasErrors('email')}"  th:errors="*{email}" th:utext="#{errorMessage}" class="text-danger"></div>
 				<label for="email" class="control-label"><b>Email</b></label>
 				<br>
 				<input th:field="*{email}" id="email" type="email" placeholder="Enter Email" name="email" class="form-control" required>
